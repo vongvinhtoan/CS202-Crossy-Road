@@ -10,7 +10,8 @@
 
 1. Add the following path to your project:
     ```
-    <derectory of project>/bin/helpers
+    <derectory of project>\bin\helpers
+    <derectory of project>\libs\SFML-2.5.1\bin
     ```
 2. To create or delete:
    - Run `newact <ActivityIDName>` to create new Activity  
