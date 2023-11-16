@@ -3,8 +3,9 @@
 ## How to build
 
 1. Clone the repository
-2. Run `make` in the root directory
-3. Run `make run` or `.\bin\game.exe` to run the game
+2. Download Make for Windows from [here](http://gnuwin32.sourceforge.net/packages/make.htm) (I used Copilot so I don't know if it works).
+3. Run `make` in the root directory
+4. Run `make run` or `.\bin\game.exe` to run the game
 
 ## How to create new Activity and View
 
