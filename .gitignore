@@ -1,4 +1,5 @@
 bin/obj
+bin/release
 bin/*.exe
 ActivityMake.cpp
 ActivityDelete.cpp
