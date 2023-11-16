@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ViewList.hpp>
 #include <ViewNode.hpp>
 #include <Command.hpp>
 

@@ -13,7 +13,7 @@ SRCS := $(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
 # Library cpp files
 LIB_SRCS := $(wildcard libs/jsoncpp/*.cpp)
 # Executable name
-MAIN := .\bin\RoadCrossing.exe
+MAIN := .\bin\game.exe
 # Object files directory
 OBJ_DIR := .\bin\obj
 # Object files
