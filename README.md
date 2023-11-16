@@ -9,7 +9,7 @@
 
 ## How to create new Activity and View
 
-1. Add the following path to your project:
+1. Add the following to your `PATH`:
     ```
     <derectory of project>\bin\helpers
     <derectory of project>\libs\SFML-2.5.1\bin
