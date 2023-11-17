@@ -2,25 +2,23 @@
 
 #include <ViewNode.hpp>
 
-class TextView : public ViewNode
+class RectangleView : public ViewNode
 {
 public:
-	TextView();
-	TextView(const sf::Text& text);
-	virtual ~TextView() final;
+	RectangleView();
+	RectangleView(const sf::RectangleShape& rectangle);
+	virtual ~RectangleView() final;
 
 private:
 	virtual void update(sf::Time dt) final override;
 	virtual void handleEvent(sf::Event& event) final override;
 	virtual void handleRealtimeInput() final override;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final override;
-
+	
 public:
     virtual bool contains(sf::Vector2f point) const final override;
-
-public:
-	sf::Text& get();
+	sf::RectangleShape& get();
 
 private:
-	sf::Text m_text;
+	sf::RectangleShape m_rectangle;
 };

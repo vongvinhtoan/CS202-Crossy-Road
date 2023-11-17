@@ -6,13 +6,21 @@ MenuActivity::MenuActivity(ActivityStack& stack, int requestCode, Extra& intent)
     ViewNode* layer0 = getLayer(0);
     auto window = getContext()->getWindow();
 	auto moving = std::make_unique<MovingSquare>(sf::FloatRect(0.f, 0.f, window->getSize().x, window->getSize().y));
-	moving->setOnClick([this](ViewNode& node) {
-		requestActivity(ActivityID::Setting);
+	auto* p_moving = moving.get();
+	
+	moving->setOnClick([this, p_moving](ViewNode& node) {
+		Extra* extra = new Extra();
+		extra->putExtra<sf::Vector2f>("moving_position", p_moving->getPosition());
+		extra->putExtra<sf::Vector2f>("moving_velocity", p_moving->getVelocity());
+		requestActivity(ActivityID::Setting, 1, extra);
 	});
 
 	auto text_goToSetting = std::make_unique<TextView>(sf::Text("Go to Setting", getContext()->getFonts()->get(FontID::Main), 30));
-	text_goToSetting->setOnClick([this](ViewNode& node) {
-		requestActivity(ActivityID::Setting);
+	text_goToSetting->setOnClick([this, p_moving](ViewNode& node) {
+		Extra* extra = new Extra();
+		extra->putExtra<sf::Vector2f>("moving_position", p_moving->getPosition());
+		extra->putExtra<sf::Vector2f>("moving_velocity", p_moving->getVelocity());
+		requestActivity(ActivityID::Setting, 1, extra);
 	});
 
 	moving->attachChild(std::move(text_goToSetting));

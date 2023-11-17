@@ -1,3 +1,5 @@
+#include <iostream>
+
 template<typename T>
 void Extra::putExtra(const std::string& key, const T& value)
 {

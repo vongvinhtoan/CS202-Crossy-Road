@@ -48,6 +48,11 @@ ViewNode* Activity::getLayer(int layer)
     return m_layers[layer];
 }
 
+ViewNode* Activity::getViewRoot()
+{
+    return m_viewTree->getRoot();
+}
+
 Context* Activity::getContext() const
 {
     return m_context;

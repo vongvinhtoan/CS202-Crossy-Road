@@ -16,6 +16,8 @@ private:
 
 public:
     virtual bool contains(sf::Vector2f point) const final;
+    sf::Vector2f getVelocity() const;
+    void setVelocity(const sf::Vector2f& velocity);
 
 private:
     std::unique_ptr<sf::RectangleShape> m_square;

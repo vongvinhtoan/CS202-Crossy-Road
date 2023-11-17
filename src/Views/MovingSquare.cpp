@@ -60,3 +60,13 @@ bool MovingSquare::contains(sf::Vector2f point) const
     // std::cout << "Checking if square contains point" << std::endl;
     return m_square->getGlobalBounds().contains(point);
 }
+
+sf::Vector2f MovingSquare::getVelocity() const
+{
+    return m_velocity;
+}
+
+void MovingSquare::setVelocity(const sf::Vector2f& velocity)
+{
+    m_velocity = velocity;
+}

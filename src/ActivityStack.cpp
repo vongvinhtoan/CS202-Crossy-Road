@@ -117,6 +117,7 @@ void ActivityStack::applyPendingChanges()
                 applyBack(change);
                 break;
         }
+        delete change.getExtra();
     }
     m_pendingList.clear();
 }

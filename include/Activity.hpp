@@ -35,6 +35,7 @@ protected:
 
 protected:
     ViewNode* getLayer(int layer);
+    ViewNode* getViewRoot();
     Context* getContext() const;
 
 private:

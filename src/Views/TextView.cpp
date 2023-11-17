@@ -13,7 +13,7 @@ TextView::~TextView()
 {
 }
 
-sf::Text& TextView::text()
+sf::Text& TextView::get()
 {
     return m_text;
 }
