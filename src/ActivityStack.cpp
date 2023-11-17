@@ -46,9 +46,9 @@ void ActivityStack::update(sf::Time dt)
 
 void ActivityStack::draw()
 {
-    for(auto it = m_stack.rbegin(); it != m_stack.rend(); ++it)
+    for(auto it = m_stack.begin(); it != m_stack.end(); ++it)
     {
-        if(!(*it)->draw()) break;
+        (*it)->draw();
     }
 
     applyPendingChanges();
@@ -99,49 +99,61 @@ void ActivityStack::clearActivities()
 
 void ActivityStack::applyPendingChanges()
 {
-    for(auto& change : m_pendingList)
+    for(size_t i = 0; i < m_pendingList.size(); ++i)
     {
+        PendingChange& change = m_pendingList[i];
         switch(change.getAction())
         {
             case Action::Push:
-            {
-                ActivityID activityID = change.getActivityID();
-                int requestCode = change.getRequestCode();
-                Extra* extra = change.getExtra();
-
-                if (m_factory.find(activityID) == m_factory.end())
-                    throw std::runtime_error("ActivityStack::applyPendingChanges() : activity not registered");
-
-                std::unique_ptr<Activity> activity = m_factory[activityID](*this, requestCode, *extra);
-
-                m_stack.push_back(std::move(activity));
-
+                applyPush(change);
                 break;
-            }
             case Action::Pop:
-            {
-                if(m_stack.empty())
-                    throw std::runtime_error("ActivityStack::applyPendingChanges() : stack is empty, cannot pop");
-                m_stack.pop_back();
+                applyPop(change);
                 break;
-            }
             case Action::Clear:
-            {
-                m_stack.clear();
+                applyClear(change);
                 break;
-            }
             case Action::Back:
-            {
-                if(m_stack.empty())
-                    throw std::runtime_error("ActivityStack::applyPendingChanges() : stack is empty, cannot pop");
-                m_stack.pop_back();
-
-                if(m_stack.empty())
-                    throw std::runtime_error("ActivityStack::applyPendingChanges() : stack is empty, cannot back");
-                m_stack.back()->onActivityResult(change.getResultCode(), change.getExtra());
+                applyBack(change);
                 break;
-            }
         }
     }
     m_pendingList.clear();
+}
+
+void ActivityStack::applyPush(PendingChange& change)
+{
+    ActivityID activityID = change.getActivityID();
+    int requestCode = change.getRequestCode();
+    Extra* extra = change.getExtra();
+
+    if (m_factory.find(activityID) == m_factory.end())
+        throw std::runtime_error("ActivityStack::applyPendingChanges() : activity not registered");
+
+    std::unique_ptr<Activity> activity = m_factory[activityID](*this, requestCode, *extra);
+
+    m_stack.push_back(std::move(activity));
+}
+
+void ActivityStack::applyPop(PendingChange& change)
+{
+    if(m_stack.empty())
+        throw std::runtime_error("ActivityStack::applyPendingChanges() : stack is empty, cannot pop");
+    m_stack.pop_back();
+}
+
+void ActivityStack::applyClear(PendingChange& change)
+{
+    m_stack.clear();
+}
+
+void ActivityStack::applyBack(PendingChange& change)
+{
+    if(m_stack.empty())
+        throw std::runtime_error("ActivityStack::applyPendingChanges() : stack is empty, cannot pop");
+    m_stack.pop_back();
+
+    if(m_stack.empty())
+        throw std::runtime_error("ActivityStack::applyPendingChanges() : stack is empty, cannot back");
+    m_stack.back()->onActivityResult(change.getResultCode(), change.getExtra());
 }

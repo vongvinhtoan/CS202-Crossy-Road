@@ -84,8 +84,8 @@ void ViewTree::draw(sf::RenderTarget& target, sf::RenderStates states, const Vie
 {
     states.transform *= node.getTransform();
     
+    node.drawIfEnabled(target, states);
+
     for (auto& child : node.m_children)
         draw(target, states, *child);
-
-    node.drawIfEnabled(target, states);
 }

@@ -28,7 +28,7 @@ Application::Application()
     m_context->setConfigs(&m_configs);
     
     registerActivities();
-    m_activityStack->pushActivity(ActivityID::Empty);
+    m_activityStack->pushActivity(ActivityID::Main);
     m_activityStack->applyPendingChanges();
 }
 

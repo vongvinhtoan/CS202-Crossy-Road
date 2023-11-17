@@ -44,6 +44,12 @@ public:
     void applyPendingChanges();
 
 private:
+    void applyPush(PendingChange& change);
+    void applyPop(PendingChange& change);
+    void applyClear(PendingChange& change);
+    void applyBack(PendingChange& change);
+
+private:
     std::vector<std::unique_ptr<Activity>>  m_stack;
     std::vector<PendingChange>              m_pendingList;
     

@@ -33,7 +33,6 @@ bool Activity::update(sf::Time dt)
 
 bool Activity::draw()
 {
-    m_context->getWindow()->clear();
     m_context->getWindow()->draw(*m_viewTree);
     return true;
 }

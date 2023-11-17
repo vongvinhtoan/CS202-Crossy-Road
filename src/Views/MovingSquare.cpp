@@ -14,7 +14,7 @@ MovingSquare::~MovingSquare()
 
 void MovingSquare::update(sf::Time dt)
 {
-    sf::Vector2f position = m_square->getPosition(); 
+    sf::Vector2f position = this->getPosition(); 
     position += m_velocity * dt.asSeconds();
 
     if (position.x + m_square->getSize().x >= m_bounds.left + m_bounds.width)
@@ -39,7 +39,7 @@ void MovingSquare::update(sf::Time dt)
         m_velocity.y = -m_velocity.y;
     }
 
-    m_square->setPosition(position);
+    this->setPosition(position);
 }
 
 void MovingSquare::handleEvent(sf::Event& event)

@@ -3,5 +3,7 @@
 enum ActivityID
 {
     Null
-    , Empty
+	, Main
+	, Menu
+	, Setting
 };

@@ -78,8 +78,10 @@ void ViewNode::handleEventWithCommand(sf::Event& event, Command& command)
             m_isHolding = true;
             m_holdClock.restart();
 
-            if(m_onClick)
+            if(command.isOnClicked() && m_onClick)
                 m_onClick(*this);
+
+            command.remove(Command::OnClick);
         }
         else
         {
