@@ -31,7 +31,7 @@ private:
     void loadConfig();
 
 private:
-    void processInput();
+    bool processInput();
     void update(sf::Time dt);
     void draw();
 
