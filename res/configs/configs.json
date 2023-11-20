@@ -1,8 +1,8 @@
 {
     "fps": 60,
     "window": {
-        "width": 800,
-        "height": 600,
+        "width": 1600,
+        "height": 900,
         "title": "Game"
     },
     "hide_statistic": true
