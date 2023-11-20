@@ -2,13 +2,17 @@
 
 #include <Activity.hpp>
 
-class SettingActivity : public Activity
+class LoadingActivity : public Activity
 {
 public:
-	SettingActivity(ActivityStack& stack, int requestCode, Extra& intent);
-	virtual ~SettingActivity() final override;
+	LoadingActivity(ActivityStack& stack, int requestCode, Extra& intent);
+	virtual ~LoadingActivity() final override;
 	virtual bool handleEvent(sf::Event& event) final override;
 	virtual bool handleRealtimeInput() final override;
 	virtual bool update(sf::Time dt) final override;
 	virtual bool draw() final override;
+
+private:
+	sf::Time m_time;
+	const sf::Time m_duration = sf::seconds(3.0f);
 };

@@ -4,6 +4,12 @@ enum ActivityID
 {
     Null
 	, Main
-	, Menu
+	, Loading
+	, Home
+	, Instruction
+	, Character
 	, Setting
+	, Playground
+	, Pause
+	, GameOver
 };

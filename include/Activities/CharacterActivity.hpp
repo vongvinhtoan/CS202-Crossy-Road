@@ -2,11 +2,11 @@
 
 #include <Activity.hpp>
 
-class SettingActivity : public Activity
+class CharacterActivity : public Activity
 {
 public:
-	SettingActivity(ActivityStack& stack, int requestCode, Extra& intent);
-	virtual ~SettingActivity() final override;
+	CharacterActivity(ActivityStack& stack, int requestCode, Extra& intent);
+	virtual ~CharacterActivity() final override;
 	virtual bool handleEvent(sf::Event& event) final override;
 	virtual bool handleRealtimeInput() final override;
 	virtual bool update(sf::Time dt) final override;

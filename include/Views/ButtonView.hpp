@@ -2,23 +2,24 @@
 
 #include <ViewNode.hpp>
 
-class RectangleView : public ViewNode
+class ButtonView : public ViewNode
 {
 public:
-	RectangleView();
-	RectangleView(const sf::RectangleShape& rectangle);
-	virtual ~RectangleView() final;
+	ButtonView();
+	virtual ~ButtonView() final;
 
 private:
 	virtual void update(sf::Time dt) final override;
 	virtual void handleEvent(sf::Event& event) final override;
 	virtual void handleRealtimeInput() final override;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final override;
-	
+
 public:
-    virtual bool contains(sf::Vector2f point) const final override;
-	sf::RectangleShape& get();
+	virtual bool contains(sf::Vector2f point) const final override;
+
+public:
+	// Getters
 
 private:
-	sf::RectangleShape m_rectangle;
+	// Variables
 };

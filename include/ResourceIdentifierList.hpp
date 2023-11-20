@@ -11,5 +11,7 @@ namespace FontID
     enum ID
     {
         Main,
+        Tourney,
+        Tourney_Bold,
     };
 }

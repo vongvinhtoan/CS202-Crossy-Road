@@ -6,7 +6,12 @@ class TextView : public ViewNode
 {
 public:
 	TextView();
-	TextView(const sf::Text& text);
+
+	template<typename... Args>
+	TextView(Args&&... args)
+		: m_text(std::forward<Args>(args)...)
+	{
+	}
 	virtual ~TextView() final;
 
 private:

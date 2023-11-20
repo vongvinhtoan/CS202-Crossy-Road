@@ -3,7 +3,7 @@
 MainActivity::MainActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	: Activity(stack, requestCode, intent)
 {
-	requestActivity(ActivityID::Menu);
+	requestActivity(ActivityID::Loading);
 }
 
 MainActivity::~MainActivity()
