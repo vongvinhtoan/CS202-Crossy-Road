@@ -7,6 +7,7 @@ class Backend
 {
 public:
     void save();
+    void loadTextures(TextureHolder& textures);
     void loadFonts(FontHolder& fonts);
     void loadConfigs(Json::Value& configs);
 

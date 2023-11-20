@@ -5,5 +5,8 @@
         "height": 900,
         "title": "Game"
     },
-    "hide_statistic": true
+    "hide_statistic": true,
+    "loading_bar": {
+        "duration": 5.0
+    }
 }

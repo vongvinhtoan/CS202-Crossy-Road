@@ -2,7 +2,7 @@ namespace TextureID
 {
     enum ID
     {
-
+        LoadingScreen
     };
 }
 

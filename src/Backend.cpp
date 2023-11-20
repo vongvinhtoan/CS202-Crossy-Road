@@ -1,5 +1,6 @@
 #include <Backend.hpp>
 #include <fstream>
+#include <iostream>
 
 Backend::Backend()
 {
@@ -17,6 +18,11 @@ Backend& Backend::getInstance()
 
 void Backend::save()
 {
+}
+
+void Backend::loadTextures(TextureHolder& textures)
+{
+    textures.load(TextureID::LoadingScreen, "res/textures/LoadingScreen.png");
 }
 
 void Backend::loadFonts(FontHolder& fonts)

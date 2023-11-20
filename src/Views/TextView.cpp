@@ -4,11 +4,6 @@ TextView::TextView()
 {
 }
 
-// TextView::TextView(const sf::Text& text)
-//     : m_text(text)
-// {
-// }
-
 TextView::~TextView()
 {
 }

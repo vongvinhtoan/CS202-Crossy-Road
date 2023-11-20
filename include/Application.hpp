@@ -27,6 +27,7 @@ public:
 private:
     void registerActivities();
     void loadData();
+    void loadTextures();
     void loadFonts();
     void loadConfig();
 

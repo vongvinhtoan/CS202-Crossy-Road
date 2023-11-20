@@ -6,6 +6,7 @@ Application::Application()
 : m_backend(&Backend::getInstance())
 , m_context(&Context::getInstance())
 , m_fontHolder(std::make_unique<FontHolder>())
+, m_textureHolder(std::make_unique<TextureHolder>())
 {
     loadData();
 
@@ -70,8 +71,14 @@ void Application::run()
 
 void Application::loadData()
 {
+    loadTextures();
     loadFonts();
     loadConfig();
+}
+
+void Application::loadTextures()
+{
+    m_backend->loadTextures(*m_textureHolder);
 }
 
 void Application::loadFonts()

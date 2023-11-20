@@ -13,6 +13,7 @@ public:
 	virtual bool draw() final override;
 
 private:
+	LoadingBarView* m_loading_bar;
 	sf::Time m_time;
-	const sf::Time m_duration = sf::seconds(3.0f);
+	sf::Time m_duration;
 };
