@@ -12,8 +12,11 @@ class CharacterActivity : public Activity {
     virtual bool draw() final override;
 
    private:
-    std::vector<std::unique_ptr<sf::Texture>> mCharacter;
-
     void addCharacterTexture(TextureID::ID characterID);
     void setupCharacterVector();
+    void showCharacter(int index,ViewNode* ui_layer);
+
+    private:
+    int currentCharacterIndex = 0;
+    std::vector<std::unique_ptr<sf::Texture>> mCharacter;
 };

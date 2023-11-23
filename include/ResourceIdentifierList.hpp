@@ -1,5 +1,13 @@
 namespace TextureID {
-enum ID { LoadingScreen, Background, CharacterPenguin,CharacterChicken,CharacterMonkey };
+enum ID {
+    LoadingScreen,
+    Background,
+    CharacterPenguin,
+    CharacterChicken,
+    CharacterMonkey,
+    LeftArrow,
+    RightArrow,
+};
 }  // namespace TextureID
 
 namespace FontID {

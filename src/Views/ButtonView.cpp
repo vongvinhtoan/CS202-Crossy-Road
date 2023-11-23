@@ -22,9 +22,15 @@ void ButtonView::handleRealtimeInput()
 
 void ButtonView::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	target.draw(m_rectangle, states);
 }
 
 bool ButtonView::contains(sf::Vector2f point) const
 {
-	return false;
+	return m_rectangle.getGlobalBounds().contains(point);
+}
+
+sf::RectangleShape& ButtonView::get()
+{
+	return m_rectangle;
 }
