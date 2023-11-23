@@ -21,13 +21,20 @@ CharacterActivity::CharacterActivity(ActivityStack& stack, int requestCode, Extr
     showCharacter(currentCharacterIndex, ui_layer);
 
     // leftArrow
-    auto leftArrow = std::make_unique<ButtonView>(sf::Vector2f(115, 165));
+    auto leftArrow = std::make_unique<RectangleView>(sf::Vector2f(115, 165));
     leftArrow->get().setTexture(&getContext()->getTextures()->get(TextureID::LeftArrow));
     leftArrow->get().setPosition(sf::Vector2f(64.f, 383.f));
+
+    // std::unique_ptr<ViewNode> leftArrowPtr = static_cast<std::unique_ptr<ViewNode>>(leftArrow.get());
+    // leftArrowPtr->setOnClick([&](ViewNode& clickedNode) {
+    //     currentCharacterIndex--;
+    //     showCharacter(currentCharacterIndex, ui_layer);
+    // });
+
     ui_layer->attachChild(std::move(leftArrow));
 
     // rightArrow
-    auto rightArrow = std::make_unique<ButtonView>(sf::Vector2f(115, 165));
+    auto rightArrow = std::make_unique<RectangleView>(sf::Vector2f(115, 165));
     rightArrow->get().setTexture(&getContext()->getTextures()->get(TextureID::RightArrow)
     );
     rightArrow->get().setPosition(sf::Vector2f(1413.f, 383.f));
