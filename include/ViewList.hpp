@@ -6,3 +6,4 @@
 #include <Views/ButtonView.hpp>
 #include <Views/RectangleView.hpp>
 #include <Views/LoadingBarView.hpp>
+#include <Views/ProcessBarView.hpp>
