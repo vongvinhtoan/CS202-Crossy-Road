@@ -9,7 +9,7 @@ SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &i
 	ViewNode *background_layer = getLayer(0);
 	ViewNode *text_layer = getLayer(1);
 	ViewNode *ui_layer = getLayer(2);
-	ViewNode *peecent_layer = getLayer(3);
+	ViewNode *percent_layer = getLayer(3);
 
 	auto window = getContext()->getWindow();
 	sf::Vector2f window_size(window->getSize());
@@ -52,11 +52,44 @@ SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &i
 	// text_layer
 	auto effect_sound_percent = std::make_unique<TextView>(sf::Text("30%", getContext()->getFonts()->get(FontID::Tourney_Bold), 69));
 	effect_sound_percent->setPosition(sf::Vector2f(0, 350));
-	peecent_layer->attachChild(std::move(effect_sound_percent));
+	percent_layer->attachChild(std::move(effect_sound_percent));
 
 	auto background_music_percent = std::make_unique<TextView>(sf::Text("30%", getContext()->getFonts()->get(FontID::Tourney_Bold), 69));
 	background_music_percent->setPosition(sf::Vector2f(0, 570));
-	peecent_layer->attachChild(std::move(background_music_percent));
+	percent_layer->attachChild(std::move(background_music_percent));
+
+	// ui_layer
+	auto leftESButton = std::make_unique<RectangleView>(sf::Vector2f(55, 60));
+	leftESButton->get().setTexture(&getContext()->getTextures()->get(TextureID::IncreaseButton));
+	leftESButton->get().setPosition(sf::Vector2f(365, 360));
+	leftESButton->setOnClick([this](ViewNode& view) {
+		m_effect_sound_bar->setProgress(m_effect_sound_bar->getProgress() - 10.f);
+		});
+	ui_layer->attachChild(std::move(leftESButton));
+
+	auto rightESButton = std::make_unique<RectangleView>(sf::Vector2f(55, 60));
+	rightESButton->get().setTexture(&getContext()->getTextures()->get(TextureID::DecreaseButton));
+	rightESButton->get().setPosition(sf::Vector2f(1200, 360));
+	rightESButton->setOnClick([this](ViewNode& view) {
+		m_effect_sound_bar->setProgress(m_effect_sound_bar->getProgress() + 10.f);
+		});
+	ui_layer->attachChild(std::move(rightESButton));
+
+	auto leftBMButton = std::make_unique<RectangleView>(sf::Vector2f(55, 60));
+	leftBMButton->get().setTexture(&getContext()->getTextures()->get(TextureID::IncreaseButton));
+	leftBMButton->get().setPosition(sf::Vector2f(365, 575));
+	leftBMButton->setOnClick([this](ViewNode& view) {
+		m_background_music_bar->setProgress(m_background_music_bar->getProgress() - 10.f);
+		});
+	ui_layer->attachChild(std::move(leftBMButton));
+
+	auto rightBMButton = std::make_unique<RectangleView>(sf::Vector2f(55, 60));
+	rightBMButton->get().setTexture(&getContext()->getTextures()->get(TextureID::DecreaseButton));
+	rightBMButton->get().setPosition(sf::Vector2f(1200, 575));
+	rightBMButton->setOnClick([this](ViewNode& view) {
+		m_background_music_bar->setProgress(m_background_music_bar->getProgress() + 10.f);
+		});
+	ui_layer->attachChild(std::move(rightBMButton));
 }
 
 SettingActivity::~SettingActivity()

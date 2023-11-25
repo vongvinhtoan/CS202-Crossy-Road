@@ -40,6 +40,11 @@ void ProcessBarView::setProgress(float progress)
     m_text.setString(std::to_string(progress) + "%");
 }
 
+float ProcessBarView::getProgress() const
+{
+    return m_progressValue;
+}
+
 sf::Vector2f ProcessBarView::getSize() const
 {
     return m_bar.getSize();

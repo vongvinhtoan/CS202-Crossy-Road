@@ -18,7 +18,7 @@ public:
         m_progress.setOutlineColor(sf::Color(0, 0, 0, 0));
         m_progress.setOutlineThickness(-1.0f);
 
-        setProgress(0.0f);
+        setProgress(50.0f);
     }
 
     virtual ~ProcessBarView() final;
@@ -34,6 +34,7 @@ public:
 
 public:
     void setProgress(float progress);
+    float getProgress() const;
     sf::Vector2f getSize() const;
 
 private:
@@ -41,5 +42,5 @@ private:
     sf::RectangleShape m_progress;
     sf::Text m_text;
     sf::Text m_name;
-    float m_progressValue = 0.0f;
+    float m_progressValue;
 };
