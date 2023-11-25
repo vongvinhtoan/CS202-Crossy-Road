@@ -5,3 +5,5 @@
 #include <Views/TextView.hpp>
 #include <Views/RectangleView.hpp>
 #include <Views/LoadingBarView.hpp>
+#include <Views/CharacterPickerView.hpp>
+#include <Views/CharacterView.hpp>

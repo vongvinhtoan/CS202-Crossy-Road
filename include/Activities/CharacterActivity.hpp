@@ -3,7 +3,7 @@
 #include <Activity.hpp>
 
 class CharacterActivity : public Activity {
-   public:
+public:
     CharacterActivity(ActivityStack& stack, int requestCode, Extra& intent);
     virtual ~CharacterActivity() final override;
     virtual bool handleEvent(sf::Event& event) final override;
@@ -11,12 +11,6 @@ class CharacterActivity : public Activity {
     virtual bool update(sf::Time dt) final override;
     virtual bool draw() final override;
 
-   private:
-    void addCharacterTexture(TextureID::ID characterID);
-    void setupCharacterVector();
-    void showCharacter(int index,ViewNode* ui_layer);
-
-    private:
-    int currentCharacterIndex = 0;
-    std::vector<std::unique_ptr<sf::Texture>> mCharacter;
+private:
+    CharacterPickerView* mCharacterPickerView = nullptr;
 };
