@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ViewNode.hpp>
+#include <iostream>
 
 class ProcessBarView : public ViewNode
 {
@@ -18,7 +19,9 @@ public:
         m_progress.setOutlineColor(sf::Color(0, 0, 0, 0));
         m_progress.setOutlineThickness(-1.0f);
 
-        setProgress(50.0f);
+        m_text.setFillColor(sf::Color::Black);
+
+        setProgress(0.5f);
     }
 
     virtual ~ProcessBarView() final;
@@ -36,6 +39,14 @@ public:
     void setProgress(float progress);
     float getProgress() const;
     sf::Vector2f getSize() const;
+    void setTextFont(const sf::Font &font, unsigned int characterSize = 30);
+
+    template <typename... Args>
+    void setName(Args &&...args)
+    {
+        m_name = sf::Text(std::forward<Args>(args)...);
+        m_name.setFillColor(sf::Color::Black);
+    }
 
 private:
     sf::RectangleShape m_bar;

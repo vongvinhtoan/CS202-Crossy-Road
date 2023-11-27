@@ -3,15 +3,16 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
-namespace utils 
+namespace utils
 {
-    namespace anim {
+    namespace anim
+    {
         float linear(float t);
         float squared(float t);
         float square_root(float t);
         float quadratic_ease_out(float t);
 
-        template<int k>
+        template <int k>
         float parabola(float t)
         {
             return std::pow(4.0 * t * (1.0 - t), k);
@@ -23,7 +24,7 @@ namespace utils
     };
 
     template <typename T, typename F>
-    T lerp(T a, T b, float t, F&& func)
+    T lerp(T a, T b, float t, F &&func)
     {
         return a + func(t) * (b - a);
     }
@@ -31,8 +32,10 @@ namespace utils
     template <typename T>
     T lerp(T a, T b, float t)
     {
-        return lerp(a, b, t, [](float t) { return t; });
+        return lerp(a, b, t, [](float t)
+                    { return t; });
     }
 
     sf::Color hexToColor(std::string hex);
+    bool pointInTriangle(sf::Vector2f point, sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f p3);
 };

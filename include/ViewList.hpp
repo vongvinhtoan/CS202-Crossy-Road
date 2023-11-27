@@ -7,3 +7,4 @@
 #include <Views/RectangleView.hpp>
 #include <Views/LoadingBarView.hpp>
 #include <Views/ProcessBarView.hpp>
+#include <Views/VertexArrayView.hpp>
