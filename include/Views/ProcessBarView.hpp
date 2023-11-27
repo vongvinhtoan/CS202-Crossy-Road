@@ -3,26 +3,13 @@
 #include <ViewNode.hpp>
 #include <iostream>
 
+class VertexArrayView;
+
 class ProcessBarView : public ViewNode
 {
 public:
     ProcessBarView();
-    template <typename... Args>
-    ProcessBarView(Args &&...args)
-        : m_bar(std::forward<Args>(args)...)
-    {
-        m_bar.setFillColor(sf::Color::White);
-        m_bar.setOutlineColor(sf::Color::Black);
-        m_bar.setOutlineThickness(1.0f);
-
-        m_progress.setFillColor(sf::Color::Blue);
-        m_progress.setOutlineColor(sf::Color(0, 0, 0, 0));
-        m_progress.setOutlineThickness(-1.0f);
-
-        m_text.setFillColor(sf::Color::Black);
-
-        setProgress(0.5f);
-    }
+    ProcessBarView(const sf::Vector2f &size);
 
     virtual ~ProcessBarView() final;
 
@@ -53,5 +40,7 @@ private:
     sf::RectangleShape m_progress;
     sf::Text m_text;
     sf::Text m_name;
+    VertexArrayView *m_left_arrow;
+    VertexArrayView *m_right_arrow;
     float m_progressValue;
 };

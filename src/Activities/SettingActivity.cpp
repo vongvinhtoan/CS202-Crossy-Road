@@ -67,6 +67,7 @@ bool SettingActivity::update(sf::Time dt)
 
 bool SettingActivity::draw()
 {
+
 	getContext()->getWindow()->clear(utils::hexToColor("#9ae0a8"));
 	return Activity::draw();
 }

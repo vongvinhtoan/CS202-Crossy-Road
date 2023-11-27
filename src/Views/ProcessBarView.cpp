@@ -1,8 +1,36 @@
 #include <Views/ProcessBarView.hpp>
 #include <iostream>
+#include <Views/VertexArrayView.hpp>
 
 ProcessBarView::ProcessBarView()
 {
+    m_bar.setFillColor(sf::Color::White);
+    m_bar.setOutlineColor(sf::Color::Black);
+    m_bar.setOutlineThickness(1.0f);
+
+    m_progress.setFillColor(sf::Color::Blue);
+    m_progress.setOutlineColor(sf::Color(0, 0, 0, 0));
+    m_progress.setOutlineThickness(-1.0f);
+
+    m_text.setFillColor(sf::Color::Black);
+
+    auto left_arrow_view = std::make_unique<VertexArrayView>(sf::Triangles, 3);
+    m_left_arrow = left_arrow_view.get();
+
+    auto right_arrow_view = std::make_unique<VertexArrayView>(sf::Triangles, 3);
+    m_right_arrow = right_arrow_view.get();
+
+    attachChild(std::move(left_arrow_view));
+    attachChild(std::move(right_arrow_view));
+
+    setProgress(0.5f);
+}
+
+ProcessBarView::ProcessBarView(const sf::Vector2f &size)
+    : ProcessBarView()
+{
+    m_bar.setSize(size);
+    m_progress.setSize(size);
 }
 
 ProcessBarView::~ProcessBarView()
@@ -31,6 +59,8 @@ void ProcessBarView::update(sf::Time dt)
     m_name.setPosition(
         0,
         -32);
+
+    // TODO: update the arrows
 }
 
 void ProcessBarView::handleEvent(sf::Event &event)
@@ -73,5 +103,4 @@ void ProcessBarView::setTextFont(const sf::Font &font, unsigned int characterSiz
 {
     m_text.setFont(font);
     m_text.setCharacterSize(characterSize);
-    ;
 }

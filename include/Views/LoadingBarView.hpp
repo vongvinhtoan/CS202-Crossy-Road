@@ -5,7 +5,6 @@
 class LoadingBarView : public ViewNode
 {
 public:
-	LoadingBarView();
 	template <typename... Args>
 	LoadingBarView(Args &&...args)
 		: m_bar(std::forward<Args>(args)...)
