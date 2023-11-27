@@ -1,6 +1,8 @@
 #include <Views/VertexArrayView.hpp>
 #include <Utils.hpp>
 
+#include <iostream>
+
 VertexArrayView::~VertexArrayView()
 {
 }
@@ -24,6 +26,7 @@ void VertexArrayView::draw(sf::RenderTarget &target, sf::RenderStates states) co
 
 bool VertexArrayView::contains(sf::Vector2f point) const
 {
+    std::cout << "VertexArrayView::contains" << std::endl;
     bool result = false;
     for (int i = 1; i < m_array.getVertexCount() - 1; i++)
     {
@@ -37,6 +40,12 @@ bool VertexArrayView::contains(sf::Vector2f point) const
         }
     }
     return result;
+}
+
+void VertexArrayView::setFillColor(const sf::Color &color)
+{
+    for (int i = 0; i < m_array.getVertexCount(); i++)
+        m_array[i].color = color;
 }
 
 sf::VertexArray &VertexArrayView::get()

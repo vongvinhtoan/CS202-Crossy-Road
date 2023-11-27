@@ -21,6 +21,7 @@ private:
 
 public:
     virtual bool contains(sf::Vector2f point) const final override;
+    void setFillColor(const sf::Color &color);
     sf::VertexArray &get();
 
 private:

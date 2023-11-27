@@ -1,6 +1,7 @@
 #include <Views/ProcessBarView.hpp>
 #include <iostream>
 #include <Views/VertexArrayView.hpp>
+#include <cmath>
 
 ProcessBarView::ProcessBarView()
 {
@@ -16,9 +17,43 @@ ProcessBarView::ProcessBarView()
 
     auto left_arrow_view = std::make_unique<VertexArrayView>(sf::Triangles, 3);
     m_left_arrow = left_arrow_view.get();
+    m_left_arrow->setOnClick([this](ViewNode &node)
+                             {
+        std::cout << "left_arrow clicked" << std::endl;
+        setProgress(m_progressValue - 0.1f);
+        });
+
+    m_left_arrow->setOnHover([this](ViewNode &node)
+                             {
+        std::cout << "left_arrow hover" << std::endl;
+        m_left_arrow->setFillColor(sf::Color::Black);
+        });
+
+    m_left_arrow->setOnLostHover([this](ViewNode &node)
+                                 {
+        std::cout << "left_arrow lost hover" << std::endl;
+        m_left_arrow->setFillColor(sf::Color::White);
+        });
 
     auto right_arrow_view = std::make_unique<VertexArrayView>(sf::Triangles, 3);
     m_right_arrow = right_arrow_view.get();
+    m_right_arrow->setOnClick([this](ViewNode &node)
+                              {
+        std::cout << "right_arrow clicked" << std::endl;
+        setProgress(m_progressValue + 0.1f);
+        });
+        
+    m_right_arrow->setOnHover([this](ViewNode &node)
+                              {
+        std::cout << "right_arrow hover" << std::endl;
+        m_right_arrow->setFillColor(sf::Color::Black);
+        });
+
+    m_right_arrow->setOnLostHover([this](ViewNode &node)
+                                  {
+        std::cout << "right_arrow lost hover" << std::endl;
+        m_right_arrow->setFillColor(sf::Color::White);
+        });
 
     attachChild(std::move(left_arrow_view));
     attachChild(std::move(right_arrow_view));
@@ -60,7 +95,19 @@ void ProcessBarView::update(sf::Time dt)
         0,
         -32);
 
-    // TODO: update the arrows
+    float a = 0.55f * m_bar.getSize().y;
+    float b = std::sqrt(3.0f) / 2.0f * a;
+
+    auto &left_arrow = m_left_arrow->get();
+    left_arrow[0].position = sf::Vector2f(-b, 0);
+    left_arrow[1].position = sf::Vector2f(0, a / 2);
+    left_arrow[2].position = sf::Vector2f(0, -a / 2);
+    m_left_arrow->setPosition(-24.27f, m_bar.getSize().y / 2.0f);
+    auto &right_arrow = m_right_arrow->get();
+    right_arrow[0].position = sf::Vector2f(b, 0);
+    right_arrow[1].position = sf::Vector2f(0, a / 2);
+    right_arrow[2].position = sf::Vector2f(0, -a / 2);
+    m_right_arrow->setPosition(m_bar.getSize().x + 24.27f, m_bar.getSize().y / 2.0f);
 }
 
 void ProcessBarView::handleEvent(sf::Event &event)
@@ -86,6 +133,11 @@ bool ProcessBarView::contains(sf::Vector2f point) const
 
 void ProcessBarView::setProgress(float progress)
 {
+    if (progress < 0.0f)
+        progress = 0.0f;
+    else if (progress > 1.0f)
+        progress = 1.0f;
+        
     m_progressValue = progress;
 }
 
