@@ -3,7 +3,6 @@
 CharacterActivity::CharacterActivity(ActivityStack &stack, int requestCode, Extra &intent)
     : Activity(stack, requestCode, intent)
 {
-    std::cout << "CharacterActivity::CharacterActivity()" << std::endl;
     ViewNode *background_layer = getLayer(0);
     ViewNode *ui_layer = getLayer(1);
 
@@ -28,14 +27,19 @@ CharacterActivity::CharacterActivity(ActivityStack &stack, int requestCode, Extr
     ui_layer->attachChild(std::move(character_picker_view));
 }
 
-CharacterActivity::~CharacterActivity() {}
+CharacterActivity::~CharacterActivity() 
+{
+}
 
 bool CharacterActivity::handleEvent(sf::Event &event)
 {
     return Activity::handleEvent(event);
 }
 
-bool CharacterActivity::handleRealtimeInput() { return Activity::handleRealtimeInput(); }
+bool CharacterActivity::handleRealtimeInput() 
+{
+    return Activity::handleRealtimeInput(); 
+}
 
 bool CharacterActivity::update(sf::Time dt)
 {
@@ -43,4 +47,6 @@ bool CharacterActivity::update(sf::Time dt)
     return 0;
 }
 
-bool CharacterActivity::draw() { return Activity::draw(); }
+bool CharacterActivity::draw() {
+    return Activity::draw(); 
+}

@@ -4,6 +4,7 @@
 #include <Holders/CharacterHolder.hpp>
 
 CharacterPickerView::CharacterPickerView(const std::vector<CharacterHolder>& characters)
+    : m_currentCharacter(0)
 {
     auto leftArrow = std::make_unique<RectangleView>(sf::Vector2f(115, 165));
     leftArrow->get().setTexture(&getContext()->getTextures()->get(TextureID::LeftArrow));
@@ -63,7 +64,6 @@ bool CharacterPickerView::contains(sf::Vector2f point) const
 
 void CharacterPickerView::previousCharacter()
 {
-    std::cout << "previousCharacter()" << std::endl;
     m_characters[m_currentCharacter]->disable();
     if (m_currentCharacter == 0)
         m_currentCharacter = m_characters.size() - 1;
@@ -74,7 +74,6 @@ void CharacterPickerView::previousCharacter()
 
 void CharacterPickerView::nextCharacter()
 {
-    std::cout << "nextCharacter()" << std::endl;
     m_characters[m_currentCharacter]->disable();
     m_currentCharacter = (m_currentCharacter + 1) % m_characters.size();
     std::cout << m_currentCharacter << std::endl;
