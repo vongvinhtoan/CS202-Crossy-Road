@@ -19,6 +19,7 @@ Application::Application()
         , m_configs["window"]["title"].asString()
         , sf::Style::Close
     );
+    m_window->setFramerateLimit(m_configs["fps"].asFloat());
     m_activityStack = std::make_unique<ActivityStack>(); 
     m_viewTree = std::make_unique<ViewTree>(std::make_unique<StatisticsView>(m_fontHolder->get(FontID::Main)));
     m_statisticsView = dynamic_cast<StatisticsView*>(m_viewTree->getRoot());
