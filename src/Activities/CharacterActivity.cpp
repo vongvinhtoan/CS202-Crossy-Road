@@ -47,6 +47,8 @@ bool CharacterActivity::update(sf::Time dt)
     return 0;
 }
 
-bool CharacterActivity::draw() {
+bool CharacterActivity::draw() 
+{
+    
     return Activity::draw(); 
 }

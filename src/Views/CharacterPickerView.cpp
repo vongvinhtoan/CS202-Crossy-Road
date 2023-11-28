@@ -59,7 +59,7 @@ void CharacterPickerView::draw(sf::RenderTarget& target, sf::RenderStates states
 
 bool CharacterPickerView::contains(sf::Vector2f point) const
 {
-    return m_leftArrow->contains(point) || m_rightArrow->contains(point);
+    return false;
 }
 
 void CharacterPickerView::previousCharacter()
