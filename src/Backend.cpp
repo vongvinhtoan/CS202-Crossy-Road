@@ -24,8 +24,7 @@ void Backend::loadTextures(TextureHolder &textures)
 {
     textures.load(TextureID::LoadingScreen, "res/textures/LoadingScreen.png");
     textures.load(TextureID::BackGroundScreen, "res/textures/BackgroundScreen.png");
-    textures.load(TextureID::IncreaseButton, "res/textures/IncreaseButton.png");
-    textures.load(TextureID::DecreaseButton, "res/textures/DecreaseButton.png");
+    textures.load(TextureID::HomeButton, "res/textures/HomeButton.png");
 }
 
 void Backend::loadFonts(FontHolder &fonts)

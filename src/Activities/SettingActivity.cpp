@@ -44,6 +44,15 @@ SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &i
 	background_music_bar->setTextFont(getContext()->getFonts()->get(FontID::Tourney_Bold), 69);
 	m_background_music_bar = background_music_bar.get();
 	ui_layer->attachChild(std::move(background_music_bar));
+
+	auto home_button = std::make_unique<RectangleView>(sf::Vector2f(109, 139));
+	home_button->get().setTexture(&getContext()->getTextures()->get(TextureID::HomeButton));
+	home_button->get().setPosition(sf::Vector2f(67.f, 56.f));
+	home_button->setOnClick([this](ViewNode &view) {
+		finishActivity();
+		requestActivity(ActivityID::Home);
+	});
+	ui_layer->attachChild(std::move(home_button));
 }
 
 SettingActivity::~SettingActivity()

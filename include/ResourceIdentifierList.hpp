@@ -4,8 +4,7 @@ namespace TextureID
     {
         LoadingScreen,
         BackGroundScreen,
-        IncreaseButton,
-        DecreaseButton,
+        HomeButton,
     };
 }
 
