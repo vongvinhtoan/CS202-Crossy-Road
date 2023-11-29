@@ -1,4 +1,5 @@
 #include <Activities/CharacterActivity.hpp>
+#include <Utils.hpp>
 
 CharacterActivity::CharacterActivity(ActivityStack &stack, int requestCode, Extra &intent)
     : Activity(stack, requestCode, intent)
@@ -16,10 +17,13 @@ CharacterActivity::CharacterActivity(ActivityStack &stack, int requestCode, Extr
     background_layer->attachChild(std::move(background));
 
     // ui_layer
-    std::vector<CharacterHolder> characters(3);
+    std::vector<CharacterHolder> characters(6);
     characters[0].m_texture = &getContext()->getTextures()->get(TextureID::CharacterChicken);
     characters[1].m_texture = &getContext()->getTextures()->get(TextureID::CharacterMonkey);
     characters[2].m_texture = &getContext()->getTextures()->get(TextureID::CharacterPenguin);
+    characters[3].m_texture = &getContext()->getTextures()->get(TextureID::CharacterChicken);
+    characters[4].m_texture = &getContext()->getTextures()->get(TextureID::CharacterMonkey);
+    characters[5].m_texture = &getContext()->getTextures()->get(TextureID::CharacterPenguin);
 
     auto character_picker_view = std::make_unique<CharacterPickerView>(characters);
     mCharacterPickerView = character_picker_view.get();
@@ -49,6 +53,6 @@ bool CharacterActivity::update(sf::Time dt)
 
 bool CharacterActivity::draw() 
 {
-    
+	getContext()->getWindow()->clear(utils::hexToColor("#9ae0a8"));
     return Activity::draw(); 
 }

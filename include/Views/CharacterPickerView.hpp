@@ -5,6 +5,7 @@
 #include <Holders/CharacterHolder.hpp>
 
 class RectangleView;
+class CharacterView;
 
 class CharacterPickerView : public ViewNode
 {
@@ -26,8 +27,19 @@ private:
 	void nextCharacter();
 
 private:
+	inline static const sf::Vector2f MIDDLE_CHARACTER_POSITION = sf::Vector2f(800.f, 494.f);
+	inline static const sf::Vector2f LEFT_CHARACTER_POSITION = MIDDLE_CHARACTER_POSITION - sf::Vector2f(438.5f, 0.f) - sf::Vector2f(0.f, 28.f);
+	inline static const sf::Vector2f RIGHT_CHARACTER_POSITION = MIDDLE_CHARACTER_POSITION + sf::Vector2f(438.5f, 0.f) - sf::Vector2f(0.f, 28.f);
+	inline static const sf::Vector2f MIDDLE_CHARACTER_SIZE = sf::Vector2f(512.f, 512.f);
+	inline static const sf::Vector2f SIDE_CHARACTER_SIZE = sf::Vector2f(288.f, 288.f);
+    inline static const sf::Color opaque = sf::Color(255, 255, 255, 255);
+    inline static const sf::Color semiTransparent = sf::Color(255, 255, 255, 128);
+    inline static const sf::Color transparent = sf::Color(255, 255, 255, 0);
+
+private:
 	RectangleView* m_leftArrow;
 	RectangleView* m_rightArrow;
-	std::vector<ViewNode*> m_characters;
+	std::vector<std::unique_ptr<CharacterView>> m_characters;
 	int m_currentCharacter;
+	int m_currentViewCharacter;
 };

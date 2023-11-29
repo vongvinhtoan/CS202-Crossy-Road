@@ -25,10 +25,8 @@ CharacterPickerView::CharacterPickerView(const std::vector<CharacterHolder>& cha
     for (auto& character : characters)
     {
         auto characterView = std::make_unique<CharacterView>(character);
-        characterView->get().setPosition(sf::Vector2f(544.f, 238.f));
         characterView->disable();
-        m_characters.push_back(characterView.get());
-        attachChild(std::move(characterView));
+        m_characters.push_back(std::move(characterView));
     }
 
     attachChild(std::move(leftArrow));
@@ -42,7 +40,35 @@ CharacterPickerView::~CharacterPickerView()
 
 void CharacterPickerView::update(sf::Time dt)
 {
-    m_characters[m_currentCharacter]->enable();
+    for (auto& character : m_characters) {
+        character->update(dt);
+        character->setPosition(MIDDLE_CHARACTER_POSITION);
+        character->setSize(sf::Vector2f(0, 0));
+    }
+
+    int l_currentCharacter = m_currentCharacter - 1;
+    if (l_currentCharacter < 0)
+        l_currentCharacter = m_characters.size() - 1;
+    int r_currentCharacter = (m_currentCharacter + 1) % m_characters.size();
+
+    auto m_character = m_characters[m_currentCharacter].get();
+    auto l_character = m_characters[l_currentCharacter].get();
+    auto r_character = m_characters[r_currentCharacter].get();
+    m_character->enable();
+    l_character->enable();
+    r_character->enable();
+
+    m_character->get().setFillColor(opaque);
+    l_character->get().setFillColor(semiTransparent);
+    r_character->get().setFillColor(semiTransparent);
+
+    m_character->setSize(MIDDLE_CHARACTER_SIZE);
+    l_character->setSize(SIDE_CHARACTER_SIZE);
+    r_character->setSize(SIDE_CHARACTER_SIZE);
+
+    m_character->get().setPosition(MIDDLE_CHARACTER_POSITION);
+    l_character->get().setPosition(LEFT_CHARACTER_POSITION);
+    r_character->get().setPosition(RIGHT_CHARACTER_POSITION);
 }
 
 void CharacterPickerView::handleEvent(sf::Event& event)
@@ -55,6 +81,26 @@ void CharacterPickerView::handleRealtimeInput()
 
 void CharacterPickerView::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+    
+    int l_currentCharacter = m_currentCharacter - 1;
+    if (l_currentCharacter < 0)
+        l_currentCharacter = m_characters.size() - 1;
+    int r_currentCharacter = (m_currentCharacter + 1) % m_characters.size();
+
+    auto m_character = m_characters[m_currentCharacter].get();
+    auto l_character = m_characters[l_currentCharacter].get();
+    auto r_character = m_characters[r_currentCharacter].get();
+
+    for(int i = 0; i < m_characters.size(); i++)
+    {
+        if(i == m_currentCharacter || i == l_currentCharacter || i == r_currentCharacter)
+            continue;
+        m_characters[i]->draw(target, states);
+    }
+
+    target.draw(*l_character, states);
+    target.draw(*r_character, states);
+    target.draw(*m_character, states);
 }
 
 bool CharacterPickerView::contains(sf::Vector2f point) const
@@ -64,17 +110,17 @@ bool CharacterPickerView::contains(sf::Vector2f point) const
 
 void CharacterPickerView::previousCharacter()
 {
-    m_characters[m_currentCharacter]->disable();
+    for (auto& character : m_characters)
+        character->disable();
     if (m_currentCharacter == 0)
         m_currentCharacter = m_characters.size() - 1;
     else
         m_currentCharacter = (m_currentCharacter - 1) % m_characters.size();
-    std::cout << m_currentCharacter << std::endl;
 }
 
 void CharacterPickerView::nextCharacter()
 {
-    m_characters[m_currentCharacter]->disable();
+    for (auto& character : m_characters)
+        character->disable();
     m_currentCharacter = (m_currentCharacter + 1) % m_characters.size();
-    std::cout << m_currentCharacter << std::endl;
 }

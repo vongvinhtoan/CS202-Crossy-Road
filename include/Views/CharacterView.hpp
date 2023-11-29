@@ -5,8 +5,9 @@
 
 class CharacterView : public ViewNode
 {
+friend class CharacterPickerView;
 public:
-	CharacterView(const CharacterHolder& character);
+	CharacterView(const CharacterHolder& character, const sf::Vector2f& size = sf::Vector2f(0.f, 0.f));
 	virtual ~CharacterView() final;
 
 private:
@@ -18,6 +19,7 @@ private:
 public:
 	sf::RectangleShape& get() { return m_characterSprite; }
 	virtual bool contains(sf::Vector2f point) const final override;
+	void setSize(const sf::Vector2f& size);
 	
 private:
 	CharacterHolder 	m_character;
