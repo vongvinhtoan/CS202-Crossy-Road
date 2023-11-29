@@ -5,7 +5,6 @@ CharacterView::CharacterView(const CharacterHolder& character, const sf::Vector2
     : m_character(character)
     , m_characterSprite(size)
 {
-    std::cout << character.m_texture << std::endl;
 }
 
 CharacterView::~CharacterView()

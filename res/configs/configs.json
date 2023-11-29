@@ -8,5 +8,8 @@
     "hide_statistic": true,
     "loading_bar": {
         "duration": 0.5
+    },
+    "character_picker": {
+        "animation_time": 0.5
     }
 }

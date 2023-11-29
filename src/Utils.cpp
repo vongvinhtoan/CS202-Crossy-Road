@@ -64,6 +64,16 @@ namespace utils
     {
         return sf::Vector2f(a.x * b.x, a.y * b.y);
     }
+
+    sf::Color lerp(sf::Color a, sf::Color b, float t)
+    {
+        return sf::Color(
+            a.r + (b.r - a.r) * t,
+            a.g + (b.g - a.g) * t,
+            a.b + (b.b - a.b) * t,
+            a.a + (b.a - a.a) * t
+        );
+    }
 };
 
 namespace utils {

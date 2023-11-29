@@ -25,6 +25,8 @@ private:
 private:
 	void previousCharacter();
 	void nextCharacter();
+	void resetAnimFunction();
+	std::tuple<int, int, int, int> getCharacterIds() const;
 
 private:
 	inline static const sf::Vector2f MIDDLE_CHARACTER_POSITION = sf::Vector2f(800.f, 494.f);
@@ -41,5 +43,9 @@ private:
 	RectangleView* m_rightArrow;
 	std::vector<std::unique_ptr<CharacterView>> m_characters;
 	int m_currentCharacter;
-	int m_currentViewCharacter;
+	float m_currentViewCharacter;
+	sf::Time m_animTime;
+	sf::Time m_animElapsedTime;
+	std::function<float(float)> m_animFunction;
+	std::function<float(float)> m_animDerivativeFunction;
 };
