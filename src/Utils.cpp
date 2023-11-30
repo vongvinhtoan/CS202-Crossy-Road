@@ -41,6 +41,39 @@ namespace utils
         }
         return sf::Color::Black;
     }
+
+    float distance(sf::Vector2f a, sf::Vector2f b)
+    {
+        return std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2));
+    }
+
+    float sqrDistance(sf::Vector2f a, sf::Vector2f b)
+    {
+        return std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2);
+    }
+
+    sf::Vector2f unitVector(sf::Vector2f vector)
+    {
+        float length = std::sqrt(vector.x * vector.x + vector.y * vector.y);
+        if (length != 0)
+            return sf::Vector2f(vector.x / length, vector.y / length);
+        return vector;
+    }
+
+    sf::Vector2f dot(sf::Vector2f a, sf::Vector2f b)
+    {
+        return sf::Vector2f(a.x * b.x, a.y * b.y);
+    }
+
+    sf::Color lerp(sf::Color a, sf::Color b, float t)
+    {
+        return sf::Color(
+            a.r + (b.r - a.r) * t,
+            a.g + (b.g - a.g) * t,
+            a.b + (b.b - a.b) * t,
+            a.a + (b.a - a.a) * t
+        );
+    }
 };
 
 namespace utils {

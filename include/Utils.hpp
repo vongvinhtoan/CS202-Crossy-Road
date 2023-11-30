@@ -35,4 +35,9 @@ namespace utils
     }
 
     sf::Color hexToColor(std::string hex);
+    float distance(sf::Vector2f a, sf::Vector2f b);
+    float sqrDistance(sf::Vector2f a, sf::Vector2f b);
+    sf::Vector2f unitVector(sf::Vector2f vector);
+    sf::Vector2f dot(sf::Vector2f a, sf::Vector2f b);
+    sf::Color lerp(sf::Color a, sf::Color b, float t);
 };

@@ -2,11 +2,11 @@
 
 #include <ViewNode.hpp>
 
-class ButtonView : public ViewNode
+class ArrowView : public ViewNode
 {
 public:
-	ButtonView();
-	virtual ~ButtonView() final;
+	ArrowView(const sf::Vector2f& vector = sf::Vector2f(0, 0));
+	virtual ~ArrowView() final;
 
 private:
 	virtual void update(sf::Time dt) final override;
@@ -16,10 +16,16 @@ private:
 
 public:
 	virtual bool contains(sf::Vector2f point) const final override;
+	void setVector(const sf::Vector2f& vector);
+	void setColor(const sf::Color& color);
 
 public:
 	// Getters
 
 private:
-	// Variables
+	sf::Vector2f m_vector;
+    sf::VertexArray m_array;
+	sf::Color m_color = sf::Color::White;
+	float m_hat_thickness = 20.f;
+	float m_thickness = 10.f;
 };
