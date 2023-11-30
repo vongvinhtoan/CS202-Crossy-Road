@@ -3,6 +3,7 @@
 #include <ViewNode.hpp>
 #include <vector>
 #include <Holders/CharacterHolder.hpp>
+#include <SecondOrderDynamics.hpp>
 
 class RectangleView;
 class CharacterView;
@@ -26,7 +27,8 @@ private:
 	void previousCharacter();
 	void nextCharacter();
 	void resetAnimFunction();
-	std::tuple<int, int, int, int> getCharacterIds() const;
+	std::tuple<int, int, int, int> getCharacterIds(float T) const;
+	void updateCharacterPositions(float T);
 
 private:
 	inline static const sf::Vector2f MIDDLE_CHARACTER_POSITION = sf::Vector2f(800.f, 494.f);
@@ -47,5 +49,5 @@ private:
 	sf::Time m_animTime;
 	sf::Time m_animElapsedTime;
 	std::function<float(float)> m_animFunction;
-	std::function<float(float)> m_animDerivativeFunction;
+	std::unique_ptr<SecondOrderDynamics<float>> m_animDynamics;
 };

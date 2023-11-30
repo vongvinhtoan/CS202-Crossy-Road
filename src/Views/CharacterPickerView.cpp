@@ -9,11 +9,13 @@ CharacterPickerView::CharacterPickerView(const std::vector<CharacterHolder>& cha
     : m_currentCharacter(0)
     , m_currentViewCharacter(0.f)
     , m_animFunction([](float t) { return 0; })
-    , m_animDerivativeFunction([](float t) { return 0; })
     , m_animElapsedTime(sf::Time::Zero)
 {
-    std::cout << "CharacterPickerView::CharacterPickerView()" << std::endl;
-    m_animTime = sf::seconds((*getContext()->getConfigs())["character_picker"]["animation_time"].asFloat());
+    auto& configs = (*getContext()->getConfigs())["character_picker"];
+    m_animTime = sf::seconds(configs["animation_time"].asFloat());
+    auto& dynamics = configs["animation_dynamic"];
+    m_animDynamics = std::make_unique<SecondOrderDynamics<float>>(dynamics["f"].asFloat(), dynamics["z"].asFloat(), dynamics["r"].asFloat(), 0.f);
+
     auto leftArrow = std::make_unique<RectangleView>(sf::Vector2f(115, 165));
     leftArrow->get().setTexture(&getContext()->getTextures()->get(TextureID::LeftArrow));
     leftArrow->get().setPosition(sf::Vector2f(64.f, 383.f));
@@ -60,21 +62,27 @@ void CharacterPickerView::update(sf::Time dt)
     float t = m_animElapsedTime / m_animTime;
     m_currentViewCharacter = m_animFunction(t);
 
-    auto [l_id, m_id, r_id, f_id] = getCharacterIds();
+    updateCharacterPositions(m_animDynamics->update(dt.asSeconds(), m_currentViewCharacter));
+}
+
+void CharacterPickerView::updateCharacterPositions(float T)
+{
+    auto [l_id, m_id, r_id, f_id] = getCharacterIds(T);
+    std::cout << T << " " << m_currentViewCharacter << " " << m_currentCharacter << " " << m_id << std::endl;
 
     auto m_character = m_characters[m_id].get();
     auto l_character = m_characters[l_id].get();
     auto r_character = m_characters[r_id].get();
     auto f_character = m_characters[f_id].get();
 
-    t = m_currentViewCharacter - std::floor(m_currentViewCharacter);
+    float t = T - std::floor(T);
     
     // Animating the middle character
     m_character->get().setPosition(utils::lerp(MIDDLE_CHARACTER_POSITION, LEFT_CHARACTER_POSITION, t));
     m_character->setSize(utils::lerp(MIDDLE_CHARACTER_SIZE, SIDE_CHARACTER_SIZE, t));
     m_character->get().setFillColor(utils::lerp(opaque, semiTransparent, t));
 
-    // Animating the left character
+    // Animating the left character      
     l_character->get().setPosition(utils::lerp(LEFT_CHARACTER_POSITION, MIDDLE_CHARACTER_POSITION, t));
     l_character->setSize(utils::lerp(SIDE_CHARACTER_SIZE, sf::Vector2f(0, 0), t));
     l_character->get().setFillColor(utils::lerp(semiTransparent, transparent, t));
@@ -107,7 +115,7 @@ void CharacterPickerView::handleRealtimeInput()
 
 void CharacterPickerView::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    auto [l_id, m_id, r_id, f_id] = getCharacterIds();
+    auto [l_id, m_id, r_id, f_id] = getCharacterIds(m_currentViewCharacter);
 
     auto m_character = m_characters[m_id].get();
     auto l_character = m_characters[l_id].get();
@@ -147,21 +155,17 @@ void CharacterPickerView::nextCharacter()
 void CharacterPickerView::resetAnimFunction()
 {
     float t = m_animElapsedTime / m_animTime;
-    float a = m_animDerivativeFunction(t);
+    float a = m_animFunction(t);
     float b = m_currentCharacter;
-    float d = m_currentViewCharacter;
-    m_animFunction = [a, b, d](float t) -> float {
-        return (a-2*b+2*d)*t*t*t + (3*b-3*d-2*a)*t*t + a*t + d;
-    };
-    m_animDerivativeFunction = [a, b, d](float t) -> float {
-        return 3*(a-2*b+2*d)*t*t + 2*(3*b-3*d-2*a)*t + a;
+    m_animFunction = [a, b](float t) -> float {
+        return utils::lerp(a, b, t);
     };
     m_animElapsedTime = sf::Time::Zero;
 }
 
-std::tuple<int, int, int, int> CharacterPickerView::getCharacterIds() const
+std::tuple<int, int, int, int> CharacterPickerView::getCharacterIds(float T) const
 {
-    int m_id = int(std::floor(m_currentViewCharacter)) % int(m_characters.size());
+    int m_id = int(std::floor(T)) % int(m_characters.size());
     if (m_id < 0)
         m_id += m_characters.size();
     int l_id = m_id - 1;
