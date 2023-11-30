@@ -28,7 +28,7 @@ Application::Application()
     m_context->setWindow(m_window.get());
     m_context->setTextures(m_textureHolder.get());
     m_context->setFonts(m_fontHolder.get());
-    m_context->setBackend(m_backend.get());
+    m_context->setBackend(m_backend);
     m_context->setConfigs(&m_configs);
     
     registerActivities();
