@@ -68,7 +68,6 @@ void CharacterPickerView::update(sf::Time dt)
 void CharacterPickerView::updateCharacterPositions(float T)
 {
     auto [l_id, m_id, r_id, f_id] = getCharacterIds(T);
-    std::cout << T << " " << m_currentViewCharacter << " " << m_currentCharacter << " " << m_id << std::endl;
 
     auto m_character = m_characters[m_id].get();
     auto l_character = m_characters[l_id].get();
@@ -155,7 +154,7 @@ void CharacterPickerView::nextCharacter()
 void CharacterPickerView::resetAnimFunction()
 {
     float t = m_animElapsedTime / m_animTime;
-    float a = m_animFunction(t);
+    float a = m_animFunction(t);  
     float b = m_currentCharacter;
     m_animFunction = [a, b](float t) -> float {
         return utils::lerp(a, b, t);
