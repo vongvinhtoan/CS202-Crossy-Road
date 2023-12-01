@@ -20,7 +20,7 @@ public:
     TextureHolder*     getTextures();
     FontHolder*        getFonts();
     Backend*           getBackend();
-    Json::Value*        getConfigs();
+    Json::Value*       getConfigs();
 
     void setWindow(sf::RenderWindow* window);
     void setTextures(TextureHolder* textures);
