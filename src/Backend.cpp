@@ -22,6 +22,7 @@ void Backend::loadTextures(TextureHolder& textures) {
     textures.load(TextureID::LeftArrow, "res/textures/LeftArrow.png");
     textures.load(TextureID::RightArrow, "res/textures/RightArrow.png");
     textures.load(TextureID::Home, "res/textures/Home.png");
+    textures.load(TextureID::SelectCharacter, "res/textures/SelectCharacter.png");
 }
 
 void Backend::loadFonts(FontHolder& fonts) {

@@ -4,12 +4,39 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
     : Activity(stack, requestCode, intent) {
     std::cout << "HomeActivity::HomeActivity()" << std::endl;
 
-    ViewNode* textLayer = getLayer(0);
+    ViewNode *background_layer = getLayer(0);
+    ViewNode* textLayer = getLayer(1);
+    ViewNode *ui_layer = getLayer(2);
+
+    auto window = getContext()->getWindow();
+    sf::Vector2f window_size(window->getSize());
+
+    // background_layer
+    auto background = std::make_unique<RectangleView>(window_size);
+    background->get().setTexture(&getContext()->getTextures()->get(TextureID::Background));
+    
+    background_layer->attachChild(std::move(background));
+
+    //ui_layer
+    //text_layer
     auto text = std::make_unique<TextView>(
-        sf::Text("Home!!!", getContext()->getFonts()->get(FontID::Main), 30)
+        sf::Text("Crossy Road", getContext()->getFonts()->get(FontID::Tourney_Bold), 150)
     );
-    text->setPosition(100, 100);
+    sf::Vector2f textSize = text->getSize();
+    text->setPosition(sf::Vector2f((window_size.x - textSize.x) / 2,97));
     textLayer->attachChild(std::move(text));
+
+    //select_character_button
+    auto select_character_button = std::make_unique<RectangleView>(sf::Vector2f(319, 319));
+    select_character_button->get().setTexture(&getContext()->getTextures()->get(TextureID::SelectCharacter));
+    select_character_button->get().setPosition(sf::Vector2f(1216, 554));
+    select_character_button->setOnClick([this](ViewNode& view) {
+        finishActivity();
+        requestActivity(ActivityID::Character);
+    });
+    ui_layer->attachChild(std::move(select_character_button));
+
+    //requestActivity(ActivityID::Character);
 }
 
 HomeActivity::~HomeActivity() {}
@@ -20,8 +47,7 @@ bool HomeActivity::handleRealtimeInput() { return Activity::handleRealtimeInput(
 
 bool HomeActivity::update(sf::Time dt) {
     Activity::update(dt);
-    finishActivity();
-    requestActivity(ActivityID::Character);
+    // finishActivity();
     return 0;
 }
 

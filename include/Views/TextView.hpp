@@ -25,6 +25,7 @@ public:
 
 public:
 	sf::Text& get();
+	sf::Vector2f getSize() const;
 
 private:
 	sf::Text m_text;

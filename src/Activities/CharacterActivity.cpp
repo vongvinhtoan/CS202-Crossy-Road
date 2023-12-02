@@ -33,6 +33,7 @@ CharacterActivity::CharacterActivity(ActivityStack &stack, int requestCode, Extr
     homeButton->get().setPosition(sf::Vector2f(64.f, 64.f));
     homeButton->setOnClick([this](ViewNode& view) {
         finishActivity();
+        requestActivity(ActivityID::Home);
     });
 
     ui_layer->attachChild(std::move(homeButton));
