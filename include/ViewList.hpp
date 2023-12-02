@@ -8,3 +8,4 @@
 #include <Views/CharacterPickerView.hpp>
 #include <Views/CharacterView.hpp>
 #include <Views/ArrowView.hpp>
+#include <Views/RectangleButtonView.hpp>

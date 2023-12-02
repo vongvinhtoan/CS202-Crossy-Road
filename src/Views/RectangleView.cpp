@@ -34,3 +34,8 @@ sf::RectangleShape& RectangleView::get()
 {
 	return m_rectangle;
 }
+
+sf::RectangleShape RectangleView::getRectangle() const
+{
+	return m_rectangle;
+}
