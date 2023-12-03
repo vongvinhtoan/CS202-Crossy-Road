@@ -21,7 +21,7 @@ namespace utils
             tmp += hex[2];
             hex = tmp;
         }
-        if (hex.size() == 6)
+        if (hex.size() == 6 || hex.size() == 8)
         {
             for(char&c : hex)
                 if('0' <= c && c <= '9')
@@ -33,10 +33,12 @@ namespace utils
                 else
                     c = 0;
 
-            sf::Color color;;
+            sf::Color color;
             color.r = hex[0] * 16 + hex[1];
             color.g = hex[2] * 16 + hex[3];
             color.b = hex[4] * 16 + hex[5];
+            if (hex.size() == 8)
+                color.a = hex[6] * 16 + hex[7];
             return color;
         }
         return sf::Color::Black;

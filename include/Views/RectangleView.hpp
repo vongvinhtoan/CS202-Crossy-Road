@@ -13,7 +13,7 @@ public:
 	}
 	virtual ~RectangleView();
 
-private:
+protected:
 	virtual void update(sf::Time dt) final override;
 	virtual void handleEvent(sf::Event& event) final override;
 	virtual void handleRealtimeInput() final override;
@@ -26,6 +26,6 @@ public:
 	sf::RectangleShape& get();
 	sf::RectangleShape getRectangle() const;
 
-private:
+protected:
 	sf::RectangleShape m_rectangle;
 };

@@ -30,7 +30,7 @@ CharacterActivity::CharacterActivity(ActivityStack &stack, int requestCode, Extr
 
     auto homeButton = std::make_unique<RectangleButtonView>(sf::Vector2f(128, 128));
     homeButton->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
-    homeButton->get().setPosition(sf::Vector2f(64.f, 64.f));
+    homeButton->setPosition(sf::Vector2f(64.f, 64.f));
     homeButton->setOnClick([this](ViewNode& view) {
         finishActivity();
         requestActivity(ActivityID::Home);

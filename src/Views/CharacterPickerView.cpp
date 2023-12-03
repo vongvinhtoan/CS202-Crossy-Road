@@ -68,7 +68,6 @@ void CharacterPickerView::update(sf::Time dt)
 void CharacterPickerView::updateCharacterPositions(float T)
 {
     auto [l_id, m_id, r_id, f_id] = getCharacterIds(T);
-    std::cout << T << " " << m_currentViewCharacter << " " << m_currentCharacter << " " << m_id << std::endl;
 
     auto m_character = m_characters[m_id].get();
     auto l_character = m_characters[l_id].get();

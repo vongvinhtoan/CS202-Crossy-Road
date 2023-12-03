@@ -30,11 +30,11 @@ public:
     virtual bool                contains(sf::Vector2f point) const;
 
 public:
-    void setOnClick(std::function<void(ViewNode&)> onClick);
-    void setOnClickAway(std::function<void(ViewNode&)> onClickAway);
-    void setOnHover(std::function<void(ViewNode&)> onHover);
-    void setOnLostHover(std::function<void(ViewNode&)> onLostHover);
-    void setOnHold(std::function<void(ViewNode&)> onHold);
+    virtual void setOnClick(std::function<void(ViewNode&)> onClick);
+    virtual void setOnClickAway(std::function<void(ViewNode&)> onClickAway);
+    virtual void setOnHover(std::function<void(ViewNode&)> onHover);
+    virtual void setOnLostHover(std::function<void(ViewNode&)> onLostHover);
+    virtual void setOnHold(std::function<void(ViewNode&)> onHold);
 
 protected:
     virtual void update(sf::Time dt) = 0;
@@ -60,10 +60,12 @@ private:
     bool                                    m_isHolding = false;
     sf::Clock                               m_holdClock;
     sf::Time                                m_holdRequiredTime = sf::seconds(0.15f);
+    std::vector<std::unique_ptr<ViewNode>>  m_children;
+
+protected:
     std::function<void(ViewNode&)>          m_onClick;
     std::function<void(ViewNode&)>          m_onClickAway;
     std::function<void(ViewNode&)>          m_onHover;
     std::function<void(ViewNode&)>          m_onLostHover;
     std::function<void(ViewNode&)>          m_onHold;
-    std::vector<std::unique_ptr<ViewNode>>  m_children;
 };
