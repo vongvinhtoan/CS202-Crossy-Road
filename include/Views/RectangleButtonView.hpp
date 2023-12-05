@@ -10,10 +10,8 @@ public:
 	template <typename ...Args>
 	RectangleButtonView(Args&& ...args)
 		: RectangleView(std::forward<Args>(args)...),
-		  m_tmpRectangle(std::forward<Args>(args)...),
-		  m_isOnHover(false)
+		  m_tmpRectangle(std::forward<Args>(args)...)
 	{
-		m_tmpRectangle.setFillColor(sf::Color::Blue);
 		m_tmpRectangle.setOutlineColor(sf::Color::Transparent);
 		m_tmpRectangle.setOutlineThickness(0);
 
@@ -29,5 +27,4 @@ public:
 
 private:
 	sf::RectangleShape 					m_tmpRectangle;
-	bool 								m_isOnHover;
 };

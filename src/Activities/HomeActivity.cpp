@@ -27,9 +27,9 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
     textLayer->attachChild(std::move(text));
 
     //select_character_button
-    auto select_character_button = std::make_unique<RectangleView>(sf::Vector2f(319, 319));
+    auto select_character_button = std::make_unique<RectangleButtonView>(sf::Vector2f(319, 319));
     select_character_button->get().setTexture(&getContext()->getTextures()->get(TextureID::SelectCharacter));
-    select_character_button->get().setPosition(sf::Vector2f(1216, 554));
+    select_character_button->setPosition(sf::Vector2f(1216, 554));
     select_character_button->setOnClick([this](ViewNode& view) {
         finishActivity();
         requestActivity(ActivityID::Character);

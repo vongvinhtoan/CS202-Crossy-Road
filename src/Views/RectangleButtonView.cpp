@@ -3,10 +3,6 @@
 
 RectangleButtonView::RectangleButtonView()
 { 
-    m_tmpRectangle.setFillColor(sf::Color::Blue);
-    m_tmpRectangle.setOutlineColor(sf::Color::Transparent);
-    m_tmpRectangle.setOutlineThickness(0);
-    setHoverEffect();
 }
 
 RectangleButtonView::~RectangleButtonView()
