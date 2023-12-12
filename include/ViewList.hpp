@@ -9,3 +9,4 @@
 #include <Views/CharacterView.hpp>
 #include <Views/ArrowView.hpp>
 #include <Views/RectangleButtonView.hpp>
+#include <Views/RoundedCornerRectangleView.hpp>
