@@ -1,4 +1,5 @@
 #include <Activities/MainActivity.hpp>
+#include <Utils.hpp>
 
 MainActivity::MainActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	: Activity(stack, requestCode, intent)

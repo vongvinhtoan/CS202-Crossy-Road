@@ -7,6 +7,14 @@
     },
     "hide_statistic": true,
     "loading_bar": {
-        "duration": 5.0
+        "duration": 0.5
+    },
+    "character_picker": {
+        "animation_time": 0.1,
+        "animation_dynamic": {
+            "f": 2.5,
+            "z": 0.82,
+            "r": -0.45
+        }
     }
 }
