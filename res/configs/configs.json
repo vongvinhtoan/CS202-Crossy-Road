@@ -10,11 +10,11 @@
         "duration": 0.5
     },
     "character_picker": {
-        "animation_time": 0.25,
+        "animation_time": 0.1,
         "animation_dynamic": {
             "f": 2.5,
             "z": 0.75,
-            "r": -1
+            "r": -0.5
         }
     }
 }
