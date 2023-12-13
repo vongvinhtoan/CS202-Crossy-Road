@@ -5,9 +5,8 @@
 class LoadingBarView : public ViewNode
 {
 public:
-	LoadingBarView();
-	template <typename ... Args>
-	LoadingBarView(Args&& ... args)
+	template <typename... Args>
+	LoadingBarView(Args &&...args)
 		: m_bar(std::forward<Args>(args)...)
 	{
 		m_bar.setFillColor(sf::Color::White);
@@ -25,9 +24,9 @@ public:
 
 private:
 	virtual void update(sf::Time dt) final override;
-	virtual void handleEvent(sf::Event& event) final override;
+	virtual void handleEvent(sf::Event &event) final override;
 	virtual void handleRealtimeInput() final override;
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final override;
+	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const final override;
 
 public:
 	virtual bool contains(sf::Vector2f point) const final override;
