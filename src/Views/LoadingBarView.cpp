@@ -1,10 +1,6 @@
 #include <Views/LoadingBarView.hpp>
 #include <iostream>
 
-LoadingBarView::LoadingBarView()
-{
-}
-
 LoadingBarView::~LoadingBarView()
 {
 }
@@ -14,7 +10,7 @@ void LoadingBarView::update(sf::Time dt)
 	m_progress.setSize(sf::Vector2f(m_bar.getSize().x * m_progressValue, m_bar.getSize().y));
 }
 
-void LoadingBarView::handleEvent(sf::Event& event)
+void LoadingBarView::handleEvent(sf::Event &event)
 {
 }
 
@@ -22,7 +18,7 @@ void LoadingBarView::handleRealtimeInput()
 {
 }
 
-void LoadingBarView::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void LoadingBarView::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	target.draw(m_bar, states);
 	target.draw(m_progress, states);

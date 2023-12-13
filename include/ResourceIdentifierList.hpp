@@ -1,6 +1,8 @@
 namespace TextureID {
 enum ID {
     LoadingScreen,
+    BackGroundScreen,
+    HomeButton,
     Background,
     CharacterPenguin,
     CharacterChicken,

@@ -37,7 +37,7 @@ private:
 	inline static const sf::Vector2f MIDDLE_CHARACTER_SIZE = sf::Vector2f(512.f, 512.f);
 	inline static const sf::Vector2f SIDE_CHARACTER_SIZE = sf::Vector2f(288.f, 288.f);
     inline static const sf::Color opaque = sf::Color(255, 255, 255, 255);
-    inline static const sf::Color semiTransparent = sf::Color(255, 255, 255, 128);
+    inline static const sf::Color semiTransparent = sf::Color(255, 255, 255, 75);
     inline static const sf::Color transparent = sf::Color(255, 255, 255, 0);
 
 private:

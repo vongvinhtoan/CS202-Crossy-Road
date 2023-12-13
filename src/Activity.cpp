@@ -2,10 +2,8 @@
 #include <ActivityStack.hpp>
 #include <ViewList.hpp>
 
-Activity::Activity(ActivityStack& stack, int requestCode, Extra& extra)
-    : m_stack(&stack)
-    , m_viewTree(std::make_unique<ViewTree>())
-    , m_context(&Context::getInstance())
+Activity::Activity(ActivityStack &stack, int requestCode, Extra &extra)
+    : m_stack(&stack), m_viewTree(std::make_unique<ViewTree>()), m_context(&Context::getInstance())
 {
 }
 
@@ -13,7 +11,7 @@ Activity::~Activity()
 {
 }
 
-bool Activity::handleEvent(sf::Event& event)
+bool Activity::handleEvent(sf::Event &event)
 {
     m_viewTree->handleEvent(event);
     return true;
@@ -37,23 +35,24 @@ bool Activity::draw()
     return true;
 }
 
-ViewNode* Activity::getLayer(int layer)
+ViewNode *Activity::getLayer(int layer)
 {
-    while(m_layers.size() <= layer) {
+    while (m_layers.size() <= layer)
+    {
         std::unique_ptr<ViewNode> node = std::make_unique<EmptyView>();
         m_layers.push_back(node.get());
         m_viewTree->getRoot()->attachChild(std::move(node));
     }
-    
+
     return m_layers[layer];
 }
 
-ViewNode* Activity::getViewRoot()
+ViewNode *Activity::getViewRoot()
 {
     return m_viewTree->getRoot();
 }
 
-Context* Activity::getContext() const
+Context *Activity::getContext() const
 {
     return m_context;
 }
@@ -63,7 +62,7 @@ void Activity::requestActivity(ActivityID activityID)
     m_stack->pushActivity(activityID);
 }
 
-void Activity::requestActivity(ActivityID activityID, int requestCode, Extra* extra)
+void Activity::requestActivity(ActivityID activityID, int requestCode, Extra *extra)
 {
     m_stack->pushActivity(activityID, requestCode, extra);
 }
@@ -73,12 +72,11 @@ void Activity::finishActivity()
     m_stack->backActivity();
 }
 
-void Activity::finishActivity(int resultCode, Extra* extra)
+void Activity::finishActivity(int resultCode, Extra *extra)
 {
     m_stack->backActivity(resultCode, extra);
 }
 
-
-void Activity::onActivityResult(int resultCode, Extra* extra)
+void Activity::onActivityResult(int resultCode, Extra *extra)
 {
 }

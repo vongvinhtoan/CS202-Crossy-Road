@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cmath>
 
-namespace utils 
+namespace utils
 {
     sf::Color hexToColor(std::string hex)
     {
@@ -23,12 +23,12 @@ namespace utils
         }
         if (hex.size() == 6 || hex.size() == 8)
         {
-            for(char&c : hex)
-                if('0' <= c && c <= '9')
+            for (char &c : hex)
+                if ('0' <= c && c <= '9')
                     c -= '0';
-                else if('a' <= c && c <= 'f')
+                else if ('a' <= c && c <= 'f')
                     c -= 'a' - 10;
-                else if('A' <= c && c <= 'F')
+                else if ('A' <= c && c <= 'F')
                     c -= 'A' - 10;
                 else
                     c = 0;
@@ -76,10 +76,21 @@ namespace utils
             a.a + (b.a - a.a) * t
         );
     }
+
+    bool pointInTriangle(sf::Vector2f point, sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f p3)
+    {
+        float denominator = ((p2.y - p3.y) * (p1.x - p3.x) + (p3.x - p2.x) * (p1.y - p3.y));
+        float a = ((p2.y - p3.y) * (point.x - p3.x) + (p3.x - p2.x) * (point.y - p3.y)) / denominator;
+        float b = ((p3.y - p1.y) * (point.x - p3.x) + (p1.x - p3.x) * (point.y - p3.y)) / denominator;
+        float c = 1.0f - a - b;
+        return 0 <= a && a <= 1 && 0 <= b && b <= 1 && 0 <= c && c <= 1;
+    }
 };
 
-namespace utils {
-    namespace anim {
+namespace utils
+{
+    namespace anim
+    {
         float linear(float t)
         {
             return t;
@@ -116,13 +127,20 @@ namespace utils {
             const float nl = 7.5625;
             const float dl = 2.75;
 
-            if (t < 1.0 / dl) {
+            if (t < 1.0 / dl)
+            {
                 return nl * t * t;
-            } else if (t < 2.0 / dl) {
+            }
+            else if (t < 2.0 / dl)
+            {
                 return nl * (t -= 1.5 / dl) * t + 0.75;
-            } else if (t < 2.5 / dl) {
+            }
+            else if (t < 2.5 / dl)
+            {
                 return nl * (t -= 2.25 / dl) * t + 0.9375;
-            } else {
+            }
+            else
+            {
                 return nl * (t -= 2.625 / dl) * t + 0.984375;
             }
         }

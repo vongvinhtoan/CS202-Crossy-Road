@@ -154,7 +154,7 @@ void CharacterPickerView::nextCharacter()
 void CharacterPickerView::resetAnimFunction()
 {
     float t = m_animElapsedTime / m_animTime;
-    float a = m_animFunction(t);
+    float a = m_animFunction(t);  
     float b = m_currentCharacter;
     m_animFunction = [a, b](float t) -> float {
         return utils::lerp(a, b, t);
