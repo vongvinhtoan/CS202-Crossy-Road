@@ -17,43 +17,31 @@ ProcessBarView::ProcessBarView()
 
     auto left_arrow_view = std::make_unique<VertexArrayView>(sf::Triangles, 3);
     m_left_arrow = left_arrow_view.get();
-    m_left_arrow->setOnClick([this](ViewNode &node)
-                             {
-        std::cout << "left_arrow clicked" << std::endl;
+    m_left_arrow->setOnClick([this](ViewNode &node) {
         setProgress(m_progressValue - 0.1f);
-        });
+    });
 
-    m_left_arrow->setOnHover([this](ViewNode &node)
-                             {
-        std::cout << "left_arrow hover" << std::endl;
+    m_left_arrow->setOnHover([this](ViewNode &node) {
         m_left_arrow->setFillColor(sf::Color::Black);
-        });
+    });
 
-    m_left_arrow->setOnLostHover([this](ViewNode &node)
-                                 {
-        std::cout << "left_arrow lost hover" << std::endl;
+    m_left_arrow->setOnLostHover([this](ViewNode &node) {
         m_left_arrow->setFillColor(sf::Color::White);
-        });
+    });
 
     auto right_arrow_view = std::make_unique<VertexArrayView>(sf::Triangles, 3);
     m_right_arrow = right_arrow_view.get();
-    m_right_arrow->setOnClick([this](ViewNode &node)
-                              {
-        std::cout << "right_arrow clicked" << std::endl;
+    m_right_arrow->setOnClick([this](ViewNode &node) {
         setProgress(m_progressValue + 0.1f);
-        });
+    });
         
-    m_right_arrow->setOnHover([this](ViewNode &node)
-                              {
-        std::cout << "right_arrow hover" << std::endl;
+    m_right_arrow->setOnHover([this](ViewNode &node) {
         m_right_arrow->setFillColor(sf::Color::Black);
-        });
+    });
 
-    m_right_arrow->setOnLostHover([this](ViewNode &node)
-                                  {
-        std::cout << "right_arrow lost hover" << std::endl;
+    m_right_arrow->setOnLostHover([this](ViewNode &node) {
         m_right_arrow->setFillColor(sf::Color::White);
-        });
+    });
 
     attachChild(std::move(left_arrow_view));
     attachChild(std::move(right_arrow_view));

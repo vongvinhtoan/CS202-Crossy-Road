@@ -31,7 +31,6 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
     select_character_button->get().setTexture(&getContext()->getTextures()->get(TextureID::SelectCharacter));
     select_character_button->setPosition(sf::Vector2f(1216, 554));
     select_character_button->setOnClick([this](ViewNode& view) {
-        finishActivity();
         requestActivity(ActivityID::Character);
     });
     ui_layer->attachChild(std::move(select_character_button));
@@ -52,3 +51,7 @@ bool HomeActivity::update(sf::Time dt) {
 }
 
 bool HomeActivity::draw() { return Activity::draw(); }
+
+void HomeActivity::onActivityResult(int resultCode, Extra* extra) {
+    
+}

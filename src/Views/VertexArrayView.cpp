@@ -26,7 +26,6 @@ void VertexArrayView::draw(sf::RenderTarget &target, sf::RenderStates states) co
 
 bool VertexArrayView::contains(sf::Vector2f point) const
 {
-    std::cout << "VertexArrayView::contains" << std::endl;
     bool result = false;
     for (int i = 1; i < m_array.getVertexCount() - 1; i++)
     {
