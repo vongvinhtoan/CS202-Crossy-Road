@@ -10,3 +10,5 @@
 #include <Views/ArrowView.hpp>
 #include <Views/ProcessBarView.hpp>
 #include <Views/VertexArrayView.hpp>
+#include <Views/RectangleButtonView.hpp>
+#include <Views/RoundedCornerRectangleView.hpp>

@@ -13,6 +13,11 @@ sf::Text& TextView::get()
     return m_text;
 }
 
+sf::Vector2f TextView::getSize() const
+{
+    return sf::Vector2f(m_text.getGlobalBounds().width, m_text.getGlobalBounds().height);
+}
+
 void TextView::update(sf::Time dt)
 {
 }

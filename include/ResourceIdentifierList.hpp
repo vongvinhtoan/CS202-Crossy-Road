@@ -9,6 +9,8 @@ enum ID {
     CharacterMonkey,
     LeftArrow,
     RightArrow,
+    Home,
+    SelectCharacter
 };
 }  // namespace TextureID
 

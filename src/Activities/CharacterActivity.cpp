@@ -28,6 +28,15 @@ CharacterActivity::CharacterActivity(ActivityStack &stack, int requestCode, Extr
     auto character_picker_view = std::make_unique<CharacterPickerView>(characters);
     mCharacterPickerView = character_picker_view.get();
 
+    auto homeButton = std::make_unique<RectangleButtonView>(sf::Vector2f(128, 128));
+    homeButton->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
+    homeButton->setPosition(sf::Vector2f(64.f, 64.f));
+    homeButton->setOnClick([this](ViewNode& view) {
+        finishActivity();
+        requestActivity(ActivityID::Home);
+    });
+
+    ui_layer->attachChild(std::move(homeButton));
     ui_layer->attachChild(std::move(character_picker_view));
 }
 

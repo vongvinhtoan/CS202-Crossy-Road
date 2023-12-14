@@ -16,17 +16,17 @@ CharacterPickerView::CharacterPickerView(const std::vector<CharacterHolder>& cha
     auto& dynamics = configs["animation_dynamic"];
     m_animDynamics = std::make_unique<SecondOrderDynamics<float>>(dynamics["f"].asFloat(), dynamics["z"].asFloat(), dynamics["r"].asFloat(), 0.f);
 
-    auto leftArrow = std::make_unique<RectangleView>(sf::Vector2f(115, 165));
+    auto leftArrow = std::make_unique<RectangleButtonView>(sf::Vector2f(115, 165));
     leftArrow->get().setTexture(&getContext()->getTextures()->get(TextureID::LeftArrow));
-    leftArrow->get().setPosition(sf::Vector2f(64.f, 383.f));
+    leftArrow->setPosition(sf::Vector2f(64.f, 383.f));
     leftArrow->setOnClick([this](ViewNode& view) {
         previousCharacter();
     });
     m_leftArrow = leftArrow.get();
     
-    auto rightArrow = std::make_unique<RectangleView>(sf::Vector2f(115, 165));
+    auto rightArrow = std::make_unique<RectangleButtonView>(sf::Vector2f(115, 165));
     rightArrow->get().setTexture(&getContext()->getTextures()->get(TextureID::RightArrow));
-    rightArrow->get().setPosition(sf::Vector2f(1413.f, 383.f));
+    rightArrow->setPosition(sf::Vector2f(1413.f, 383.f));
     rightArrow->setOnClick([this](ViewNode& view) {
         nextCharacter();
     });
