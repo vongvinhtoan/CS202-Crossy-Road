@@ -76,6 +76,21 @@ namespace utils
             a.a + (b.a - a.a) * t
         );
     }
+    
+    auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine generator(seed);
+    
+    float random(float min, float max)
+    {
+        std::uniform_real_distribution<float> distribution(min, max);
+        return distribution(generator);
+    }
+
+    int random(int min, int max)
+    {
+        std::uniform_int_distribution<int> distribution(min, max);
+        return distribution(generator);
+    }
 
     bool pointInTriangle(sf::Vector2f point, sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f p3)
     {

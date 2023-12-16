@@ -16,5 +16,17 @@
             "z": 0.75,
             "r": -0.5
         }
+    },
+    "keyBinding": {
+        "moveUp": 22,
+        "moveDown": 18,
+        "moveLeft": 0,
+        "moveRight": 3
+    },
+    "playground": {
+        "bufferRange": 30,
+        "scrollAcceleration": 0.1,
+        "initialScrollSpeed": 0.5,
+        "tileSize": 75
     }
 }

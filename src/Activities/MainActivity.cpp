@@ -4,7 +4,8 @@
 MainActivity::MainActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	: Activity(stack, requestCode, intent)
 {
-	requestActivity(ActivityID::Setting);
+	std::cout << "MainActivity::MainActivity()" << std::endl;
+	requestActivity(ActivityID::Playground);
 }
 
 MainActivity::~MainActivity()

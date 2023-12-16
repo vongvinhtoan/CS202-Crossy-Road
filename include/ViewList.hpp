@@ -12,3 +12,6 @@
 #include <Views/VertexArrayView.hpp>
 #include <Views/RectangleButtonView.hpp>
 #include <Views/RoundedCornerRectangleView.hpp>
+#include <Views/PlaygroundView.hpp>
+#include <Views/PlayerView.hpp>
+#include <Views/LandView.hpp>
