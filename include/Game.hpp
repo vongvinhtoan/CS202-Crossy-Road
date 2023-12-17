@@ -14,10 +14,12 @@ public:
 public:
     void update(sf::Time dt);
     void handleEvent(sf::Event& event);
+    void handleRealtimeInput();
 public:
     Lane* getLane(int index);
     Player* getPlayer();
     int getBufferRange() const;
+    PlaygroundCamera* getCamera();
 
 private:
     std::vector<std::unique_ptr<Lane>>  m_lanes;

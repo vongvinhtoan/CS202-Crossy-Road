@@ -19,16 +19,11 @@ public:
 	virtual bool contains(sf::Vector2f point) const final override;
 
 public:
-	void bind(Player* player);
+	void bind(Player* player, float offset = 0.f);
 
 public:
 	sf::RectangleShape& get();
 
-	sf::Vector2f getPosition() const;
-
 private:
 	sf::RectangleShape mShape;
-
-private:
-	sf::Vector2f mPosition;
 };

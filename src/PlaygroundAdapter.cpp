@@ -27,6 +27,6 @@ LaneView* PlaygroundAdapter::getLane(int index)
 
 PlayerView* PlaygroundAdapter::getPlayer()
 {
-    m_player->bind(m_game->getPlayer());
+    m_player->bind(m_game->getPlayer(), m_game->getCamera()->getScrollPosition());
     return m_player.get();
 }

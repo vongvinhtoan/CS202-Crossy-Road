@@ -27,6 +27,7 @@ void PlayerView::handleRealtimeInput()
 
 void PlayerView::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	states.transform *= getTransform();
 	target.draw(mShape, states);
 }
 
@@ -40,11 +41,12 @@ sf::RectangleShape& PlayerView::get()
 	return mShape;
 }
 
-sf::Vector2f PlayerView::getPosition() const
+void PlayerView::bind(Player* player, float offset)
 {
-	return mPosition;
-}
-
-void PlayerView::bind(Player* player)
-{
+	auto rect = player->getBounds();
+	rect.top -= offset;
+	mShape.setSize(sf::Vector2f(rect.width, rect.height));
+	mShape.setOrigin(rect.width / 2, rect.height / 2);
+	rect.top = (*getContext()->getWindow()).getSize().y - rect.top;
+	setPosition(rect.left, rect.top);
 }

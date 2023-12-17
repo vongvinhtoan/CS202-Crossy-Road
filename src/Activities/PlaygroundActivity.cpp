@@ -27,6 +27,7 @@ bool PlaygroundActivity::handleEvent(sf::Event& event)
 bool PlaygroundActivity::handleRealtimeInput()
 {
 	Activity::handleRealtimeInput();
+	mGame->handleRealtimeInput();
 	return 0;
 }
 
