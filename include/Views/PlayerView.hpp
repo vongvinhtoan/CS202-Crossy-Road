@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ViewNode.hpp>
+#include <Player.hpp>
 
 class PlayerView : public ViewNode
 {
@@ -18,8 +19,16 @@ public:
 	virtual bool contains(sf::Vector2f point) const final override;
 
 public:
+	void bind(Player* player);
+
+public:
 	sf::RectangleShape& get();
+
+	sf::Vector2f getPosition() const;
 
 private:
 	sf::RectangleShape mShape;
+
+private:
+	sf::Vector2f mPosition;
 };

@@ -39,3 +39,12 @@ sf::RectangleShape& PlayerView::get()
 {
 	return mShape;
 }
+
+sf::Vector2f PlayerView::getPosition() const
+{
+	return mPosition;
+}
+
+void PlayerView::bind(Player* player)
+{
+}

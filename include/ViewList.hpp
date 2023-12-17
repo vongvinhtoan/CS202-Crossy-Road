@@ -14,4 +14,4 @@
 #include <Views/RoundedCornerRectangleView.hpp>
 #include <Views/PlaygroundView.hpp>
 #include <Views/PlayerView.hpp>
-#include <Views/LandView.hpp>
+#include <Views/LaneView.hpp>
