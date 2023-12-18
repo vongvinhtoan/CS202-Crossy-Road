@@ -25,12 +25,12 @@ void PlaygroundView::handleRealtimeInput()
 void PlaygroundView::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     int bufferRange = m_playgroundAdapter.getBufferRange();
-    for(int i = 0; i < bufferRange; ++i)
+    for(int i = 0; i < bufferRange * 2; ++i)
     {
         auto* lane = m_playgroundAdapter.getLane(i);
         if(lane == nullptr) continue;
-        target.draw(*lane, states);
+        lane->draw(target, states);
     };
     auto* player = m_playgroundAdapter.getPlayer();
-    target.draw(*player, states);
+    player->draw(target, states);
 }

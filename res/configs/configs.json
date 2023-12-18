@@ -24,11 +24,16 @@
         "moveRight": 3
     },
     "playground": {
-        "bufferRange": 32,
+        "bufferRange": 9,
         "tileSize": 75,
         "camera": {
-            "scrollAcceleration": 0.1,
-            "initialScrollSpeed": 0.5
+            "acceleration": 0.01,
+            "initialScrollSpeed": 80,
+            "dynamic": {
+                "f": 3,
+                "z": 0.75,
+                "r": 0
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 #include <Views/LaneView.hpp>
+#include <iostream>
 
 LaneView::LaneView(LaneType laneType)
 	: m_laneType(laneType)

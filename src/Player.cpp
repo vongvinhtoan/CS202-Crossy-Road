@@ -43,3 +43,8 @@ sf::FloatRect Player::getBounds() const
 {
     return m_bounds;
 }
+
+sf::Vector2f Player::getPosition() const
+{
+    return sf::Vector2f(m_bounds.left, m_bounds.top);
+}

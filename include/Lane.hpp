@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 enum class LaneType
 {
     Land,
@@ -9,9 +11,16 @@ enum class LaneType
 class Lane 
 {
 public:
-    Lane(LaneType laneType);
+    Lane(LaneType laneType, int id);
+
+public:
+    virtual void update(sf::Time dt) = 0;
+
 public:
     LaneType getLaneType() const;
+    int getIndex() const;
+
 private:
-    LaneType m_laneType;
+    int         m_index;
+    LaneType    m_laneType;
 };

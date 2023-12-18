@@ -2,6 +2,7 @@
 
 #include <ViewNode.hpp>
 #include <Lane.hpp>
+#include <PlaygroundCamera.hpp>
 
 class LaneView : public ViewNode
 {
@@ -9,7 +10,7 @@ public:
 	LaneView(LaneType laneType);
 	virtual ~LaneView();
 
-private:
+public:
 	virtual void update(sf::Time dt) override;
 	virtual void handleEvent(sf::Event& event) override;
 	virtual void handleRealtimeInput() override;
@@ -20,7 +21,7 @@ public:
 
 public:
 	LaneType getLaneType() const;
-	virtual void bind(Lane* lane) = 0;
+	virtual void bind(Lane* lane, PlaygroundCamera* camera) = 0;
 
 private:
 	LaneType m_laneType;

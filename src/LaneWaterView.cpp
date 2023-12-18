@@ -26,7 +26,7 @@ bool LaneWaterView::contains(sf::Vector2f point) const
 	return false;
 }
 
-void LaneWaterView::bind(Lane* lane)
+void LaneWaterView::bind(Lane* lane, PlaygroundCamera* camera)
 {
 }
 

@@ -18,5 +18,5 @@ public:
 	virtual bool contains(sf::Vector2f point) const override;
 
 public:
-    virtual void bind(Lane* lane) override;
+    virtual void bind(Lane* lane, PlaygroundCamera* camera) override;
 };

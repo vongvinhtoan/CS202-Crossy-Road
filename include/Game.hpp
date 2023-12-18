@@ -7,6 +7,7 @@
 #include <Player.hpp>
 #include <PlaygroundCamera.hpp>
 #include <LaneFactory.hpp>
+#include <Context.hpp>
 
 class Game {
 public:

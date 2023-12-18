@@ -5,5 +5,8 @@
 class LaneLand : public Lane
 {
 public:
-    LaneLand(LaneType laneType);
+    LaneLand(LaneType laneType, int id);
+
+public:
+    void update(sf::Time dt) override;
 };

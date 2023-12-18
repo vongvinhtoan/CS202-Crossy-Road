@@ -8,10 +8,10 @@
 class LaneFactory
 {
 private:
-    std::map<LaneType, std::function<std::unique_ptr<Lane>(LaneType)>> m_laneFactories;
+    std::map<LaneType, std::function<std::unique_ptr<Lane>(LaneType, int)>> m_laneFactories;
 
 public:
     LaneFactory();
 
-    std::unique_ptr<Lane> create(LaneType laneType);
+    std::unique_ptr<Lane> create(LaneType laneType, int id);
 };

@@ -41,10 +41,10 @@ sf::RectangleShape& PlayerView::get()
 	return mShape;
 }
 
-void PlayerView::bind(Player* player, float offset)
+void PlayerView::bind(Player* player, PlaygroundCamera* camera)
 {
 	auto rect = player->getBounds();
-	rect.top -= offset;
+	rect.top -= camera->getScrollPosition() - (*getContext()->getWindow()).getSize().y / 2;
 	mShape.setSize(sf::Vector2f(rect.width, rect.height));
 	mShape.setOrigin(rect.width / 2, rect.height / 2);
 	rect.top = (*getContext()->getWindow()).getSize().y - rect.top;

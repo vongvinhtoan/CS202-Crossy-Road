@@ -16,6 +16,7 @@ public:
 
 public:
     sf::FloatRect getBounds() const;
+    sf::Vector2f getPosition() const;
 
 private:
     sf::FloatRect m_bounds;
