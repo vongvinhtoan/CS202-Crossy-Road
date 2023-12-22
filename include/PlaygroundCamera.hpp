@@ -11,7 +11,8 @@ public:
 public:
 	void update(float playerPosition, sf::Time dt);
 	float getScrollPosition() const;
-	std::tuple<int, int> getVisibleRange(int bufferRange) const;
+	std::tuple<int, int> getVisibleRange() const;
+	void stop();
 private:
 	float   									mScrollSpeed;
 	float   									mScrollPositionTarget;
@@ -19,4 +20,5 @@ private:
 	float										mAcceleration;
 	float										mInitialScrollSpeed;
 	std::unique_ptr<SecondOrderDynamics<float>> mDynamics;
+	bool										mIsStopped;
 };

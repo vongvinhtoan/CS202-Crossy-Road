@@ -86,6 +86,12 @@ namespace utils
         return distribution(generator);
     }
 
+    double random(double min, double max)
+    {
+        std::uniform_real_distribution<double> distribution(min, max);
+        return distribution(generator);
+    }
+
     int random(int min, int max)
     {
         std::uniform_int_distribution<int> distribution(min, max);

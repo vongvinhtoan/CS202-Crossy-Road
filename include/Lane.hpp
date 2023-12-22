@@ -6,6 +6,7 @@ enum class LaneType
 {
     Land,
     Water,
+    Count
 };
 
 class Lane 

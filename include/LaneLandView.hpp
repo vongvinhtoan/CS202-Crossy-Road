@@ -21,5 +21,6 @@ public:
     virtual void bind(Lane* lane, PlaygroundCamera* camera) override;
 
 private:
-	sf::RectangleShape mShape;
+	sf::RectangleShape 				mShape;
+	std::vector<sf::RectangleShape>	mObstacles;
 };

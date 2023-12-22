@@ -25,7 +25,7 @@ void PlaygroundView::handleRealtimeInput()
 void PlaygroundView::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     int bufferRange = m_playgroundAdapter.getBufferRange();
-    for(int i = 0; i < bufferRange * 2; ++i)
+    for(int i = bufferRange * 2 - 1; i >= 0; --i)
     {
         auto* lane = m_playgroundAdapter.getLane(i);
         if(lane == nullptr) continue;

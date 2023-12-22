@@ -48,5 +48,6 @@ namespace utils
 
     // Random number generation
     float random(float min, float max);
+    double random(double min, double max);
     int random(int min, int max);
 };

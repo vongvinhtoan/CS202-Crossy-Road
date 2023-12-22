@@ -35,6 +35,14 @@ bool PlaygroundActivity::update(sf::Time dt)
 {
 	Activity::update(dt);
 	mGame->update(dt);
+
+	auto* gameOverStrategy = mGame->gameOver();
+	if(gameOverStrategy)
+	{
+		std::cout << "Game Over" << std::endl;
+		finishActivity();
+	}
+
 	return 0;
 }
 

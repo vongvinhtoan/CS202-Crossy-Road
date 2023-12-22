@@ -8,6 +8,7 @@
 #include <PlaygroundCamera.hpp>
 #include <LaneFactory.hpp>
 #include <Context.hpp>
+#include <GameOverStrategy.hpp>
 
 class Game {
 public:
@@ -21,11 +22,25 @@ public:
     Player* getPlayer();
     int getBufferRange() const;
     PlaygroundCamera* getCamera();
+    GameOverStategy* gameOver();
 
 private:
-    std::vector<std::unique_ptr<Lane>>  m_lanes;
-    std::unique_ptr<Player>             m_player;
-    std::unique_ptr<PlaygroundCamera>   m_camera;
-    std::unique_ptr<LaneFactory>        m_laneFactory;
-    int                                 m_bufferRange;
+    enum class Command {
+        MoveLeft,
+        MoveRight,
+        MoveUp,
+        MoveDown
+    };
+    void initializeCommandMap();
+    void solveCommand(Command command);
+    void setGameOverStrategy(GameOverStategy* gameOverStrategy);
+
+private:
+    std::unique_ptr<std::map<sf::Keyboard::Key, Command>>   mCommandMap;
+    std::vector<std::unique_ptr<Lane>>                      m_lanes;
+    std::unique_ptr<Player>                                 m_player;
+    std::unique_ptr<PlaygroundCamera>                       m_camera;
+    std::unique_ptr<LaneFactory>                            m_laneFactory;
+    std::unique_ptr<GameOverStategy>                        m_gameOverStrategy; 
+    int                                                     m_bufferRange;
 };
