@@ -12,8 +12,19 @@ public:
 
 public:
     void update(sf::Time dt) override;
-    std::vector<int> getObstacles() const;
+    GameOverStategy* checkCollision(Player* player, bool& isDone) override;
+    std::vector<float> getObstacles() const;
+
+public:
+    GameOverStategy* moveLeft(Player* player, bool& isDone) override;
+    GameOverStategy* moveRight(Player* player, bool& isDone) override;
+    GameOverStategy* enter(Player* player, bool& isDone) override;
 
 private:
-    std::vector<int>    mObstacles;
+    GameOverStategy* checkCollision(sf::FloatRect playerRect, bool& isDone);
+
+private:
+    std::vector<float>    mOriginalObstacles;
+    std::vector<float>    mObstacles;
+    sf::Time            mElapsedTime;
 };

@@ -33,4 +33,7 @@ void PlaygroundView::draw(sf::RenderTarget& target, sf::RenderStates states) con
     };
     auto* player = m_playgroundAdapter.getPlayer();
     player->draw(target, states);
+
+    auto* scoreView = m_playgroundAdapter.getScoreView();
+    target.draw(*scoreView, states);
 }

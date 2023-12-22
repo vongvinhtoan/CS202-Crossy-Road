@@ -48,4 +48,9 @@ void PlayerView::bind(Player* player, PlaygroundCamera* camera)
 	mShape.setSize(sf::Vector2f(rect.width, rect.height));
 	rect.top = (*getContext()->getWindow()).getSize().y - rect.top;
 	setPosition(rect.left, rect.top);
+
+	if(player->isInvincible())
+	{
+		mShape.setFillColor(sf::Color(0, 0, 0, 0));
+	}
 }

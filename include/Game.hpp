@@ -23,6 +23,8 @@ public:
     int getBufferRange() const;
     PlaygroundCamera* getCamera();
     GameOverStategy* gameOver();
+    bool isDone() const;
+    int getLaneCount() const;
 
 private:
     enum class Command {
@@ -36,6 +38,19 @@ private:
     void setGameOverStrategy(GameOverStategy* gameOverStrategy);
 
 private:
+    void playerMoveLeft();
+    void playerMoveRight();
+    void playerMoveUp();
+    void playerMoveDown();
+    Lane* getCurrentLane();
+    int getCurrentLaneIndex();
+
+private:
+    void updateLanes(int l, int r, sf::Time dt);
+    void checkPlayerPosition();
+    void updateLaneCount();
+
+private:
     std::unique_ptr<std::map<sf::Keyboard::Key, Command>>   mCommandMap;
     std::vector<std::unique_ptr<Lane>>                      m_lanes;
     std::unique_ptr<Player>                                 m_player;
@@ -43,4 +58,6 @@ private:
     std::unique_ptr<LaneFactory>                            m_laneFactory;
     std::unique_ptr<GameOverStategy>                        m_gameOverStrategy; 
     int                                                     m_bufferRange;
+    int                                                     m_laneCount;
+    bool                                                    m_isDone;
 };
