@@ -31,6 +31,8 @@ private:
     void loadFonts();
     void loadConfig();
 
+    void saveData();
+
 private:
     bool processInput();
     void update(sf::Time dt);

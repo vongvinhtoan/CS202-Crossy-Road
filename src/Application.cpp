@@ -45,6 +45,12 @@ Application& Application::getInstance()
 
 Application::~Application()
 {
+    saveData();
+}
+
+void Application::saveData()
+{
+    m_backend->saveConfig(m_configs);
 }
 
 void Application::run()
@@ -102,7 +108,6 @@ bool Application::processInput()
         switch (event.type)
         {
             case sf::Event::Closed:
-                m_backend->save();
                 m_window->close();
                 return false;
                 break;

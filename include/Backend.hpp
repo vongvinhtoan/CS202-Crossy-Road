@@ -6,10 +6,11 @@
 class Backend
 {
 public:
-    void save();
     void loadTextures(TextureHolder& textures);
     void loadFonts(FontHolder& fonts);
     void loadConfigs(Json::Value& configs);
+
+    void saveConfig(Json::Value& configs);
 
 public:
     static Backend& getInstance();
