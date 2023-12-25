@@ -4,9 +4,14 @@ PlaygroundActivity::PlaygroundActivity(ActivityStack& stack, int requestCode, Ex
 	: Activity(stack, requestCode, intent)
 {
 	std::cout << "PlaygroundActivity::PlaygroundActivity()" << std::endl;
-	ViewNode* game = getLayer(0);
-	std::unique_ptr<PlaygroundView> playgroundView = std::make_unique<PlaygroundView>();
-	game->attachChild(std::move(playgroundView));
+	
+	mGame = std::make_unique<Game>((*getContext()->getConfigs())["playground"]["bufferRange"].asInt());
+	mPlaygroundAdapter = std::make_unique<PlaygroundAdapter>(*mGame);
+	mGame->setAdapter(mPlaygroundAdapter.get());
+
+	ViewNode* playgroundLayer = getLayer(0);
+	std::unique_ptr<PlaygroundView> playgroundView = std::make_unique<PlaygroundView>(*mPlaygroundAdapter);
+	playgroundLayer->attachChild(std::move(playgroundView));
 }
 
 PlaygroundActivity::~PlaygroundActivity() 
@@ -15,20 +20,33 @@ PlaygroundActivity::~PlaygroundActivity()
 
 bool PlaygroundActivity::handleEvent(sf::Event& event)
 {
-	return Activity::handleEvent(event);
+	Activity::handleEvent(event);
+	mGame->handleEvent(event);
+	return 0;
 }
 
 bool PlaygroundActivity::handleRealtimeInput()
 {
-	return Activity::handleRealtimeInput();
+	Activity::handleRealtimeInput();
+	mGame->handleRealtimeInput();
+	return 0;
 }
 
 bool PlaygroundActivity::update(sf::Time dt)
 {
-	return Activity::update(dt);
+	Activity::update(dt);
+	mGame->update(dt);
+
+	if(mGame->isDone()) {
+		std::cout << "PlaygroundActivity::update() - Game is done" << std::endl;
+		finishActivity();
+	}
+
+	return 0;
 }
 
 bool PlaygroundActivity::draw()
 {
-	return Activity::draw();
+	Activity::draw();
+	return true;
 }

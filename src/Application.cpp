@@ -20,6 +20,7 @@ Application::Application()
         , sf::Style::Close
     );
     m_window->setFramerateLimit(m_configs["fps"].asFloat());
+    m_window->setKeyRepeatEnabled(false);
     m_activityStack = std::make_unique<ActivityStack>(); 
     m_viewTree = std::make_unique<ViewTree>(std::make_unique<StatisticsView>(m_fontHolder->get(FontID::Main)));
     m_statisticsView = dynamic_cast<StatisticsView*>(m_viewTree->getRoot());
@@ -44,6 +45,12 @@ Application& Application::getInstance()
 
 Application::~Application()
 {
+    saveData();
+}
+
+void Application::saveData()
+{
+    m_backend->saveConfig(m_configs);
 }
 
 void Application::run()
@@ -101,7 +108,6 @@ bool Application::processInput()
         switch (event.type)
         {
             case sf::Event::Closed:
-                m_backend->save();
                 m_window->close();
                 return false;
                 break;

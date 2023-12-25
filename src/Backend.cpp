@@ -11,8 +11,6 @@ Backend& Backend::getInstance() {
     return instance;
 }
 
-void Backend::save() {}
-
 void Backend::loadTextures(TextureHolder& textures) {
     textures.load(TextureID::LoadingScreen, "res/textures/LoadingScreen.png");
     textures.load(TextureID::Background, "res/textures/Background.png");
@@ -36,5 +34,11 @@ void Backend::loadFonts(FontHolder& fonts) {
 void Backend::loadConfigs(Json::Value& configs) {
     std::ifstream file("res/configs/configs.json");
     file >> configs;
+    file.close();
+}
+
+void Backend::saveConfig(Json::Value& configs) {
+    std::ofstream file("res/configs/configs.json");
+    file << configs;
     file.close();
 }
