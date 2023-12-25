@@ -5,7 +5,7 @@
 class LaneWater : public Lane
 {
 public:
-    LaneWater(LaneType laneType, int id);
+    LaneWater(LaneType laneType, int id, Game* game);
 
 public:
     GameOverStategy* moveLeft(Player* player, bool& isDone) override;

@@ -46,3 +46,8 @@ TextView* PlaygroundAdapter::getScoreView()
     m_scoreView->get().setString("Score: " + std::to_string(score));
     return m_scoreView.get();
 }
+
+Game* PlaygroundAdapter::getGame() const
+{
+    return m_game;
+}

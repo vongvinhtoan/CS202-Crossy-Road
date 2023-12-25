@@ -24,6 +24,7 @@ public:
 
 public:
 	sf::RectangleShape& get();
+	sf::RectangleShape getTransformed() const;
 
 private:
 	sf::RectangleShape mShape;

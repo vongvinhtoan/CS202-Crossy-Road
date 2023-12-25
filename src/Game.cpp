@@ -1,6 +1,7 @@
 #include <Game.hpp>
 #include <GameOver_TooSlowFromCamera.hpp>
 #include <iostream>
+#include <PlaygroundAdapter.hpp>
 
 Game::Game(int bufferRange)
     : m_bufferRange(bufferRange)
@@ -9,6 +10,7 @@ Game::Game(int bufferRange)
     , m_gameOverStrategy(nullptr)
     , m_isDone(false)
     , m_laneCount(0)
+    , m_playgroundAdapter(nullptr)
 {
     m_lanes.resize(2 * bufferRange);
     m_player = std::make_unique<Player>();
@@ -28,18 +30,34 @@ Game::Game(int bufferRange)
     initializeCommandMap();
 }
 
+Game::~Game()
+{
+    std::cout << "Game::~Game()" << std::endl;
+}
+
+void Game::setAdapter(PlaygroundAdapter* playgroundAdapter)
+{
+    m_playgroundAdapter = playgroundAdapter;
+}
+
+void Game::setDone(bool isDone)
+{
+    m_isDone = isDone;
+}
+
 void Game::update(sf::Time dt)
 {
     if(m_gameOverStrategy.get())
     {
         m_gameOverStrategy->update(dt);
-        return;
     }
     m_player->update(dt);
     m_camera->update(m_player->getPosition().y, dt);
 
     auto [l, r] = m_camera->getVisibleRange();
     updateLanes(l, r, dt);
+
+    if(m_gameOverStrategy.get()) return;
     auto* curLane = getCurrentLane();
     auto* result = curLane->checkCollision(m_player.get(), m_isDone);
     if(result)
@@ -56,7 +74,7 @@ void Game::updateLanes(int l, int r, sf::Time dt)
         int pre_i = (i - 1 + 2 * m_bufferRange) % (2 * m_bufferRange);
         if(!m_lanes[i] || m_lanes[i]->getIndex() != id)
         {
-            m_lanes[i] = m_laneFactory->createAfter(m_lanes[pre_i].get(), id);
+            m_lanes[i] = m_laneFactory->createAfter(m_lanes[pre_i].get(), id, this);
         }
         m_lanes[i]->update(dt);
     }
@@ -66,7 +84,7 @@ void Game::checkPlayerPosition()
 {
     if(m_player->getPosition().y - 100.f < m_camera->getScrollPosition() - Context::getInstance().getWindow()->getSize().y / 2.f)
     {
-        setGameOverStrategy(new GameOver_TooSlowFromCamera(m_isDone));
+        setGameOverStrategy(new GameOver_TooSlowFromCamera(this));
         m_player->setInvincible(true);
     }
 }
@@ -173,6 +191,11 @@ bool Game::isDone() const
 int Game::getLaneCount() const
 {
     return m_laneCount;
+}
+
+PlaygroundAdapter* Game::getAdapter() const
+{
+    return m_playgroundAdapter;
 }
 
 void Game::playerMoveLeft()

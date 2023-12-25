@@ -16,6 +16,7 @@ public:
     LaneView* getLane(int index);
     PlayerView* getPlayer();
     TextView* getScoreView();
+    Game* getGame() const;
 
 private:
     Game*                                   m_game;

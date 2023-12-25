@@ -1,11 +1,18 @@
 #include <GameOverStrategy.hpp>
+#include <Game.hpp>
 
-GameOverStategy::GameOverStategy(bool &isDone)
-: m_isDone(&isDone)
+GameOverStategy::GameOverStategy(Game* game)
+    : m_game(game)
 {
 }
 
 void GameOverStategy::done()
 {
-    *m_isDone = true;
+    std::cout << "Game Over" << std::endl;
+    m_game->setDone(true);
+}
+
+Game* GameOverStategy::getGame() const
+{
+    return m_game;
 }

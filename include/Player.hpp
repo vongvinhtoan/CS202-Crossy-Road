@@ -20,6 +20,9 @@ public:
 public:
     sf::FloatRect getBounds() const;
     sf::Vector2f getPosition() const;
+    sf::Vector2f getSize() const;
+    sf::Vector2f getVelocity() const;
+    sf::Color getFillColor() const;
 
 private:
     sf::FloatRect m_bounds;

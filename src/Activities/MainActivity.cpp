@@ -31,3 +31,8 @@ bool MainActivity::draw()
 {
 	return Activity::draw();
 }
+
+void MainActivity::onActivityResult(int resultCode, Extra* extra)
+{
+	requestActivity(ActivityID::Playground);
+}

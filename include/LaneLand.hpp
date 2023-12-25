@@ -8,7 +8,7 @@
 class LaneLand : public Lane
 {
 public:
-    LaneLand(LaneType laneType, int id);
+    LaneLand(LaneType laneType, int id, Game* game);
 
 public:
     void update(sf::Time dt) override;
@@ -19,9 +19,6 @@ public:
     GameOverStategy* moveLeft(Player* player, bool& isDone) override;
     GameOverStategy* moveRight(Player* player, bool& isDone) override;
     GameOverStategy* enter(Player* player, bool& isDone) override;
-
-private:
-    GameOverStategy* checkCollision(sf::FloatRect playerRect, bool& isDone);
 
 private:
     std::vector<float>    mOriginalObstacles;

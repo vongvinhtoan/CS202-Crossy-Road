@@ -64,3 +64,18 @@ sf::Vector2f Player::getPosition() const
 {
     return sf::Vector2f(m_bounds.left, m_bounds.top);
 }
+
+sf::Vector2f Player::getSize() const
+{
+    return sf::Vector2f(m_bounds.width, m_bounds.height);
+}
+
+sf::Vector2f Player::getVelocity() const
+{
+    return m_velocity;
+}
+
+sf::Color Player::getFillColor() const
+{
+    return sf::Color::Red;
+}

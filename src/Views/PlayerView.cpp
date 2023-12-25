@@ -41,6 +41,13 @@ sf::RectangleShape& PlayerView::get()
 	return mShape;
 }
 
+sf::RectangleShape PlayerView::getTransformed() const
+{
+	auto rect = mShape;
+	rect.setPosition(getPosition());
+	return rect;
+}
+
 void PlayerView::bind(Player* player, PlaygroundCamera* camera)
 {
 	auto rect = player->getBounds();

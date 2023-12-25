@@ -10,13 +10,21 @@
 #include <Context.hpp>
 #include <GameOverStrategy.hpp>
 
+class PlaygroundAdapter;
+
 class Game {
 public:
     Game(int bufferRange);
+    ~Game();
 public:
     void update(sf::Time dt);
     void handleEvent(sf::Event& event);
     void handleRealtimeInput();
+
+public:
+    void setAdapter(PlaygroundAdapter* playgroundAdapter);
+    void setDone(bool isDone);
+
 public:
     Lane* getLane(int index);
     Player* getPlayer();
@@ -25,6 +33,7 @@ public:
     GameOverStategy* gameOver();
     bool isDone() const;
     int getLaneCount() const;
+    PlaygroundAdapter* getAdapter() const;
 
 private:
     enum class Command {
@@ -57,6 +66,7 @@ private:
     std::unique_ptr<PlaygroundCamera>                       m_camera;
     std::unique_ptr<LaneFactory>                            m_laneFactory;
     std::unique_ptr<GameOverStategy>                        m_gameOverStrategy; 
+    PlaygroundAdapter*                                      m_playgroundAdapter;
     int                                                     m_bufferRange;
     int                                                     m_laneCount;
     bool                                                    m_isDone;

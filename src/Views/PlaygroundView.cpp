@@ -36,4 +36,10 @@ void PlaygroundView::draw(sf::RenderTarget& target, sf::RenderStates states) con
 
     auto* scoreView = m_playgroundAdapter.getScoreView();
     target.draw(*scoreView, states);
+
+    auto* gameOver = m_playgroundAdapter.getGame()->gameOver();
+    if(gameOver != nullptr)
+    {
+        gameOver->draw(target, states);
+    }
 }

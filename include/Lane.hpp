@@ -4,6 +4,8 @@
 #include <Player.hpp>
 #include <GameOverStrategy.hpp>
 
+class Game;
+
 enum class LaneType
 {
     Land,
@@ -14,7 +16,7 @@ enum class LaneType
 class Lane 
 {
 public:
-    Lane(LaneType laneType, int id);
+    Lane(LaneType laneType, int id, Game* game);
 
 public:
     virtual void update(sf::Time dt) = 0;
@@ -29,7 +31,11 @@ public:
     virtual GameOverStategy* moveRight(Player* player, bool& isDone) = 0;
     virtual GameOverStategy* enter(Player* player, bool& isDone) = 0;
 
+public:
+    Game* getGame() const;
+
 private:
     int         m_index;
     LaneType    m_laneType;
+    Game*       m_game;
 };

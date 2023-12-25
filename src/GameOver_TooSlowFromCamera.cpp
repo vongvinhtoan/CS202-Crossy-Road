@@ -1,13 +1,14 @@
 #include <GameOver_TooSlowFromCamera.hpp>
+#include <Game.hpp>
 
-GameOver_TooSlowFromCamera::GameOver_TooSlowFromCamera(bool &isDone)
-: GameOverStategy(isDone)
+GameOver_TooSlowFromCamera::GameOver_TooSlowFromCamera(Game* game)
+    : GameOverStategy(game)
 {
 }
 
 void GameOver_TooSlowFromCamera::update(sf::Time dt)
 {
-    // done();
+    getGame()->setDone(true);
 }
 
 void GameOver_TooSlowFromCamera::handleEvent(sf::Event& event)

@@ -6,6 +6,8 @@
 #include <functional>
 #include <vector>
 
+class Game;
+
 struct LaneProbabilities
 {
     std::vector<std::vector<double>> probabilities;
@@ -24,12 +26,12 @@ struct LaneProbabilities
 class LaneFactory
 {
 private:
-    std::map<LaneType, std::function<std::unique_ptr<Lane>(LaneType, int)>> m_laneFactories;
+    std::map<LaneType, std::function<std::unique_ptr<Lane>(LaneType, int, Game*)>> m_laneFactories;
     LaneProbabilities m_laneProbabilities;
 
 public:
     LaneFactory(std::vector<std::vector<double>> probabilities);
 
-    std::unique_ptr<Lane> create(LaneType laneType, int id);
-    std::unique_ptr<Lane> createAfter(Lane* lastLane, int id);
+    std::unique_ptr<Lane> create(LaneType laneType, int id, Game* game);
+    std::unique_ptr<Lane> createAfter(Lane* lastLane, int id, Game* game);
 };

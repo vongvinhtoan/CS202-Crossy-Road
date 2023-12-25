@@ -2,7 +2,8 @@
 #include <Player.hpp>
 #include <cmath>
 
-LaneWater::LaneWater(LaneType laneType, int id) : Lane(laneType, id)
+LaneWater::LaneWater(LaneType laneType, int id, Game* game)
+    : Lane(laneType, id, game)
 {
 }
 

@@ -7,6 +7,7 @@ PlaygroundActivity::PlaygroundActivity(ActivityStack& stack, int requestCode, Ex
 	
 	mGame = std::make_unique<Game>((*getContext()->getConfigs())["playground"]["bufferRange"].asInt());
 	mPlaygroundAdapter = std::make_unique<PlaygroundAdapter>(*mGame);
+	mGame->setAdapter(mPlaygroundAdapter.get());
 
 	ViewNode* playgroundLayer = getLayer(0);
 	std::unique_ptr<PlaygroundView> playgroundView = std::make_unique<PlaygroundView>(*mPlaygroundAdapter);
@@ -46,5 +47,6 @@ bool PlaygroundActivity::update(sf::Time dt)
 
 bool PlaygroundActivity::draw()
 {
-	return Activity::draw();
+	Activity::draw();
+	return true;
 }

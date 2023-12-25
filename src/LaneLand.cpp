@@ -4,7 +4,9 @@
 #include <Context.hpp>
 #include <GameOver_HitObstacleOnLand.hpp>
 
-LaneLand::LaneLand(LaneType laneType, int id) : Lane(laneType, id)
+LaneLand::LaneLand(LaneType laneType, int id, Game* game)
+    : Lane(laneType, id, game)
+    , mElapsedTime(sf::Time::Zero)
 {
     int obstacleCount = utils::random(1, 3);
     if(id == 0)
@@ -39,37 +41,36 @@ void LaneLand::update(sf::Time dt)
 GameOverStategy* LaneLand::checkCollision(Player* player, bool& isDone)
 {
     sf::FloatRect playerRect = player->getBounds();
-    auto* gameOverStrategy = checkCollision(playerRect, isDone);
-    if (gameOverStrategy)
+    for (int i = 0; i < mObstacles.size(); i++)
     {
-        return gameOverStrategy;
+        sf::FloatRect obstacleRect = sf::FloatRect(mObstacles[i] * 100.f + 25.f, getIndex() * 100.f + 25.f, 50.f, 50.f);
+        if (playerRect.intersects(obstacleRect))
+        {
+            return new GameOver_HitObstacleOnLand(getGame());
+        }
     }
     return nullptr;
 }
 
 GameOverStategy* LaneLand::moveLeft(Player* player, bool& isDone)
 {
-    sf::FloatRect playerRect = player->getBounds();
-    playerRect.left -= 100.f;
-    auto* gameOverStrategy = checkCollision(playerRect, isDone);
+    player->moveLeft();
+    auto* gameOverStrategy = checkCollision(player, isDone);
     if (gameOverStrategy)
     {
         return gameOverStrategy;
     }
-    player->moveLeft();
     return nullptr;
 }
 
 GameOverStategy* LaneLand::moveRight(Player* player, bool& isDone)
 {
-    sf::FloatRect playerRect = player->getBounds();
-    playerRect.left += 100.f;
-    auto* gameOverStrategy = checkCollision(playerRect, isDone);
+    player->moveRight();
+    auto* gameOverStrategy = checkCollision(player, isDone);
     if (gameOverStrategy)
     {
         return gameOverStrategy;
     }
-    player->moveRight();
     return nullptr;
 }
 
@@ -78,24 +79,11 @@ GameOverStategy* LaneLand::enter(Player* player, bool& isDone)
     sf::FloatRect playerRect = player->getBounds();
     playerRect.top = getIndex() * 100.f;
     playerRect.left = std::round(playerRect.left / 100.f) * 100.f;
-    auto* gameOverStrategy = checkCollision(playerRect, isDone);
+    player->moveTo({playerRect.left, playerRect.top});
+    auto* gameOverStrategy = checkCollision(player, isDone);
     if (gameOverStrategy)
     {
         return gameOverStrategy;
-    }
-    player->moveTo({playerRect.left, playerRect.top});
-    return nullptr;
-}
-
-GameOverStategy* LaneLand::checkCollision(sf::FloatRect playerRect, bool& isDone)
-{
-    for (int i = 0; i < mObstacles.size(); i++)
-    {
-        sf::FloatRect obstacleRect = sf::FloatRect(mObstacles[i] * 100.f + 25.f, getIndex() * 100.f + 25.f, 50.f, 50.f);
-        if (playerRect.intersects(obstacleRect))
-        {
-            return new GameOver_HitObstacleOnLand(isDone);
-        }
     }
     return nullptr;
 }
