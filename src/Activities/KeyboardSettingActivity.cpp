@@ -22,6 +22,7 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
 
     auto w_button = std::make_unique<RectangleButtonView>(sf::Vector2f(151, 151));
     w_button->setPosition(sf::Vector2f(714, 356));
+    w_button->setButtonColor(utils::hexToColor("D9D9D9"));
     ui_layer->attachChild(std::move(w_button));
 
     auto w_button_text = std::make_unique<TextView>(sf::Text("W", getContext()->getFonts()->get(FontID::Inter_Bold), 60));
@@ -34,6 +35,7 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
 
     auto a_button = std::make_unique<RectangleButtonView>(sf::Vector2f(151, 151));
     a_button->setPosition(sf::Vector2f(476, 561));
+    a_button->setButtonColor(utils::hexToColor("D9D9D9"));
     ui_layer->attachChild(std::move(a_button));
 
     auto a_button_text = std::make_unique<TextView>(sf::Text("A", getContext()->getFonts()->get(FontID::Inter_Bold), 60));
@@ -46,6 +48,7 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
 
     auto s_button = std::make_unique<RectangleButtonView>(sf::Vector2f(151, 151));
     s_button->setPosition(sf::Vector2f(714, 561));
+    s_button->setButtonColor(utils::hexToColor("D9D9D9"));
     ui_layer->attachChild(std::move(s_button));
 
     auto s_button_text = std::make_unique<TextView>(sf::Text("S", getContext()->getFonts()->get(FontID::Inter_Bold), 60));
@@ -58,6 +61,7 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
 
     auto d_button = std::make_unique<RectangleButtonView>(sf::Vector2f(151, 151));
     d_button->setPosition(sf::Vector2f(952, 561));
+    d_button->setButtonColor(utils::hexToColor("D9D9D9"));
     ui_layer->attachChild(std::move(d_button));
 
     auto d_button_text = std::make_unique<TextView>(sf::Text("D", getContext()->getFonts()->get(FontID::Inter_Bold), 60));
