@@ -19,5 +19,6 @@ enum ID {
     Main,
     Tourney,
     Tourney_Bold,
+    Inter_Bold,
 };
 }

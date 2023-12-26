@@ -9,6 +9,7 @@ enum ActivityID
 	, Instruction
 	, Character
 	, Setting
+	, KeyboardSetting
 	, Playground
 	, Pause
 	, GameOver
