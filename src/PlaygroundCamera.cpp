@@ -10,7 +10,6 @@ PlaygroundCamera::PlaygroundCamera(float scrollPosition)
     , mInitialScrollSpeed(0.f)
     , mIsStopped(false)
 {
-    std::cout << "sizeof(PlaygroundCamera) = " << sizeof(PlaygroundCamera) << std::endl;
     auto &cameraConfig = (*Context::getInstance().getConfigs())["playground"]["camera"];
 
     auto& dynamic = cameraConfig["dynamic"];
@@ -27,7 +26,7 @@ PlaygroundCamera::~PlaygroundCamera()
 void PlaygroundCamera::update(float playerPosition, sf::Time dt)
 {
     if(mIsStopped) return;
-    mScrollSpeed = mAcceleration * playerPosition;
+        mScrollSpeed = mAcceleration * playerPosition;
     if(playerPosition > 0.f)
         mScrollSpeed += mInitialScrollSpeed;
     mScrollPositionTarget += mScrollSpeed * dt.asSeconds();

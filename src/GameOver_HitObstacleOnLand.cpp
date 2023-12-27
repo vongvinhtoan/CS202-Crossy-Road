@@ -8,6 +8,7 @@ GameOver_HitObstacleOnLand::GameOver_HitObstacleOnLand(Game* game)
 , m_elapsedTime(sf::Time::Zero)
 , m_animationTime(sf::seconds(3.f))
 , m_velocity(sf::Vector2f(100.f, -300.f))
+, m_rotation_velocity(100.f)
 {
     std::cout << "GameOver_HitObstacleOnLand" << std::endl;
     auto* player = getGame()->getPlayer();
@@ -23,6 +24,8 @@ GameOver_HitObstacleOnLand::GameOver_HitObstacleOnLand(Game* game)
 
     if(utils::random(0, 1))
         m_velocity.x *= -1;
+    if(utils::random(0, 1))
+        m_rotation_velocity *= -1;
 }
 
 void GameOver_HitObstacleOnLand::update(sf::Time dt)
@@ -35,6 +38,7 @@ void GameOver_HitObstacleOnLand::update(sf::Time dt)
 
     m_velocity += m_acceleration * dt.asSeconds();
     m_overlay.move(m_velocity * dt.asSeconds());
+    m_overlay.rotate(m_rotation_velocity * dt.asSeconds());
 }
 
 void GameOver_HitObstacleOnLand::handleEvent(sf::Event& event)

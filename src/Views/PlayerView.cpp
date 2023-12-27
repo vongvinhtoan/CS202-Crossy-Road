@@ -3,7 +3,6 @@
 
 PlayerView::PlayerView()
 {
-	std::cout << "PlayerView::PlayerView()" << std::endl;
 	auto tileSize = (*getContext()->getConfigs())["playground"]["tileSize"].asInt();
 	mShape.setSize(sf::Vector2f(tileSize, tileSize));
 	mShape.setFillColor(sf::Color::Red);

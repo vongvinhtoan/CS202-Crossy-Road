@@ -10,7 +10,12 @@ enum ID {
     LeftArrow,
     RightArrow,
     Home,
-    SelectCharacter
+    SelectCharacter,
+    LaneLand_tile_0,
+    LaneLand_tile_1,
+    LaneLand_tile_2,
+    LaneLand_obstacle_0,
+    LaneLand_obstacle_1
 };
 }  // namespace TextureID
 

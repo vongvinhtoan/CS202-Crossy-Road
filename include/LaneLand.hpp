@@ -23,5 +23,5 @@ public:
 private:
     std::vector<float>    mOriginalObstacles;
     std::vector<float>    mObstacles;
-    sf::Time            mElapsedTime;
+    sf::Time              mElapsedTime;
 };

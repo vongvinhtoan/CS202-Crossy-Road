@@ -34,7 +34,7 @@ void LaneLand::update(sf::Time dt)
     {
         auto& obstacle = mObstacles[i];
         auto& originalObstacle = mOriginalObstacles[i];
-        obstacle = originalObstacle + mElapsedTime.asSeconds();
+        // obstacle = originalObstacle + mElapsedTime.asSeconds();
     }
 }
 
@@ -54,6 +54,9 @@ GameOverStategy* LaneLand::checkCollision(Player* player, bool& isDone)
 
 GameOverStategy* LaneLand::moveLeft(Player* player, bool& isDone)
 {
+    if(player->getPosition().x <= 0.f) 
+        return nullptr;
+
     player->moveLeft();
     auto* gameOverStrategy = checkCollision(player, isDone);
     if (gameOverStrategy)
@@ -65,6 +68,9 @@ GameOverStategy* LaneLand::moveLeft(Player* player, bool& isDone)
 
 GameOverStategy* LaneLand::moveRight(Player* player, bool& isDone)
 {
+    if(player->getPosition().x + 100.f >= Context::getInstance().getWindow()->getSize().x) 
+        return nullptr;
+    
     player->moveRight();
     auto* gameOverStrategy = checkCollision(player, isDone);
     if (gameOverStrategy)

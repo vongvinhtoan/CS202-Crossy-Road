@@ -23,6 +23,11 @@ void Backend::loadTextures(TextureHolder& textures) {
     textures.load(TextureID::HomeButton, "res/textures/HomeButton.png");
     textures.load(TextureID::Home, "res/textures/Home.png");
     textures.load(TextureID::SelectCharacter, "res/textures/SelectCharacter.png");
+    textures.load(TextureID::LaneLand_tile_0, "res/textures/Lanes/Land/LaneLand_tile_0.png");
+    textures.load(TextureID::LaneLand_tile_1, "res/textures/Lanes/Land/LaneLand_tile_1.png");
+    textures.load(TextureID::LaneLand_tile_2, "res/textures/Lanes/Land/LaneLand_tile_2.png");
+    textures.load(TextureID::LaneLand_obstacle_0, "res/textures/Lanes/Land/LaneLand_obstacle_0.png");
+    textures.load(TextureID::LaneLand_obstacle_1, "res/textures/Lanes/Land/LaneLand_obstacle_1.png");
 }
 
 void Backend::loadFonts(FontHolder& fonts) {

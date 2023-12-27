@@ -2,6 +2,8 @@
 
 #include <Views/LaneView.hpp>
 
+class LaneLand;
+
 class LaneLandView : public LaneView
 {
 public:
@@ -21,6 +23,11 @@ public:
     virtual void bind(Lane* lane, PlaygroundCamera* camera) override;
 
 private:
-	sf::RectangleShape 				mShape;
+	void renew_tiles();
+	void renew_obstacles();
+
+private:
+	Lane*						    mLastLane;
 	std::vector<sf::RectangleShape>	mObstacles;
+	std::vector<sf::RectangleShape>	mTiles;
 };

@@ -17,6 +17,7 @@ public:
     PlayerView* getPlayer();
     TextView* getScoreView();
     Game* getGame() const;
+    std::tuple<int, int> getDrawRange() const;
 
 private:
     Game*                                   m_game;
