@@ -26,68 +26,38 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
     sf::Vector2f buttonSize(151, 151);
     sf::Vector2f buttonPosition;
 
-    // W Button
-    buttonPosition = sf::Vector2f(714, 356);
-    buttons.push_back(std::make_unique<RectangleButtonView>(buttonSize));
-    buttons.back()->setPosition(buttonPosition);
-    buttons.back()->get().setFillColor(buttonColor);
-    ui_layer->attachChild(std::move(buttons.back()));
+    std::vector<sf::Vector2f> buttonPositions = {sf::Vector2f(714, 356), sf::Vector2f(476, 561), sf::Vector2f(714, 561), sf::Vector2f(952, 561)};
+    std::vector<std::string> buttonNames = {"W", "A", "S", "D"};
 
-    texts.push_back(std::make_unique<TextView>(sf::Text("W", getContext()->getFonts()->get(FontID::Inter_Bold), 60)));
-    texts.back()->setPosition(sf::Vector2f(757, 408));
-    texts.back()->get().setFillColor(textColor);
-    text_layer->attachChild(std::move(texts.back()));
+    for(int i = 0; i < 4; ++i) {
+        buttons.push_back(std::make_unique<RectangleButtonView>(buttonSize));
+        buttons.back()->setPosition(buttonPositions[i]);
+        buttons.back()->get().setFillColor(buttonColor);
+        ui_layer->attachChild(std::move(buttons.back()));
+
+        texts.push_back(std::make_unique<TextView>(sf::Text(buttonNames[i], getContext()->getFonts()->get(FontID::Inter_Bold), 60)));
+        sf::FloatRect textRect = texts.back()->get().getLocalBounds();
+        sf::Vector2f textPosition = sf::Vector2f(buttonPositions[i].x + (buttonSize.x - textRect.width) / 2.0f, buttonPositions[i].y + buttonSize.y / 2.0f);
+        texts.back()->setOrigin(textRect.left, textRect.top + textRect.height / 2.0f);
+        texts.back()->setPosition(textPosition);
+        texts.back()->get().setFillColor(textColor);
+        text_layer->attachChild(std::move(texts.back()));
+    }
 
     texts2.push_back(std::make_unique<TextView>(sf::Text("Move up", getContext()->getFonts()->get(FontID::Tourney_Bold), 69)));
-    texts2.back()->setPosition(sf::Vector2f(650, 260));
+    texts2.back()->setPosition(sf::Vector2f(660, 230));
     text_layer->attachChild(std::move(texts2.back()));
-
-    // A Button
-    buttonPosition = sf::Vector2f(476, 561);
-    buttons.push_back(std::make_unique<RectangleButtonView>(buttonSize));
-    buttons.back()->setPosition(buttonPosition);
-    buttons.back()->setButtonColor(buttonColor);
-    ui_layer->attachChild(std::move(buttons.back()));
-
-    texts.push_back(std::make_unique<TextView>(sf::Text("A", getContext()->getFonts()->get(FontID::Inter_Bold), 60)));
-    texts.back()->setPosition(sf::Vector2f(519, 613));
-    texts.back()->get().setFillColor(textColor);
-    text_layer->attachChild(std::move(texts.back()));
 
     texts2.push_back(std::make_unique<TextView>(sf::Text("Move left", getContext()->getFonts()->get(FontID::Tourney_Bold), 69)));
     texts2.back()->setPosition(sf::Vector2f(81, 616));
     text_layer->attachChild(std::move(texts2.back()));
 
-    // S Button
-    buttonPosition = sf::Vector2f(714, 561);
-    buttons.push_back(std::make_unique<RectangleButtonView>(buttonSize));
-    buttons.back()->setPosition(buttonPosition);
-    buttons.back()->setButtonColor(buttonColor);
-    ui_layer->attachChild(std::move(buttons.back()));
-
-    texts.push_back(std::make_unique<TextView>(sf::Text("S", getContext()->getFonts()->get(FontID::Inter_Bold), 60)));
-    texts.back()->setPosition(sf::Vector2f(757, 613));
-    texts.back()->get().setFillColor(textColor);
-    text_layer->attachChild(std::move(texts.back()));
-
     texts2.push_back(std::make_unique<TextView>(sf::Text("Move down", getContext()->getFonts()->get(FontID::Tourney_Bold), 69)));
-    texts2.back()->setPosition(sf::Vector2f(595, 771));
+    texts2.back()->setPosition(sf::Vector2f(600, 750));
     text_layer->attachChild(std::move(texts2.back()));
 
-    // D Button
-    buttonPosition = sf::Vector2f(952, 561);
-    buttons.push_back(std::make_unique<RectangleButtonView>(buttonSize));
-    buttons.back()->setPosition(buttonPosition);
-    buttons.back()->setButtonColor(buttonColor);
-    ui_layer->attachChild(std::move(buttons.back()));
-
-    texts.push_back(std::make_unique<TextView>(sf::Text("D", getContext()->getFonts()->get(FontID::Inter_Bold), 60)));
-    texts.back()->setPosition(sf::Vector2f(995, 613));
-    texts.back()->get().setFillColor(textColor);
-    text_layer->attachChild(std::move(texts.back()));
-
     texts2.push_back(std::make_unique<TextView>(sf::Text("Move right", getContext()->getFonts()->get(FontID::Tourney_Bold), 69)));
-    texts2.back()->setPosition(sf::Vector2f(1149, 618));
+    texts2.back()->setPosition(sf::Vector2f(1149, 616));
     text_layer->attachChild(std::move(texts2.back()));
 }
 
