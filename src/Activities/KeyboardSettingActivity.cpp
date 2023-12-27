@@ -7,6 +7,7 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
     ViewNode *background_layer = getLayer(0);
     ViewNode *ui_layer = getLayer(1);
     ViewNode *text_layer = getLayer(2);
+    ViewNode *key_layer = getLayer(3);
 
     auto window = getContext()->getWindow();
     sf::Vector2f window_size(window->getSize());
@@ -35,6 +36,13 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
         buttons.back()->setPosition(buttonPositions[i]);
         buttons.back()->get().setFillColor(buttonColor);
         ui_layer->attachChild(std::move(buttons.back()));
+
+        // TextureID::ID textureID = i == 0 ? TextureID::ID::UpKey : i == 1 ? TextureID::ID::LeftKey : i == 2 ? TextureID::ID::DownKey : TextureID::ID::RightKey;
+
+        // keys.push_back(std::make_unique<RectangleView>(buttonSize));
+        // keys.back()->get().setTexture(&getContext()->getTextures()->get(textureID));
+        // keys.back()->setPosition(buttonPositions[i]);
+        // key_layer->attachChild(std::move(keys.back()));
 
         texts.push_back(std::make_unique<TextView>(sf::Text(buttonNames[i], getContext()->getFonts()->get(FontID::Inter_Bold), 60)));
         sf::FloatRect textRect = texts.back()->get().getLocalBounds();
@@ -76,7 +84,7 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
     keyboard_button->get().setTexture(&getContext()->getTextures()->get(TextureID::KeyboardButton));
     keyboard_button->setPosition(sf::Vector2f(1414.f, 70.f));
     keyboard_button->setOnClick([this](ViewNode& view) {
-        finishActivity();
+        std::cout << "Keyboard button clicked" << std::endl;
     });
 
     ui_layer->attachChild(std::move(keyboard_button));

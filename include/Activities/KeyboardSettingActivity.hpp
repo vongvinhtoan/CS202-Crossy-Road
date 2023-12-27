@@ -15,6 +15,7 @@ public:
 
 private:
     std::vector<std::unique_ptr<RectangleButtonView>> buttons;
+    std::vector<std::unique_ptr<RectangleView>> keys;
     std::vector<std::unique_ptr<TextView>> texts;
     std::vector<std::unique_ptr<TextView>> texts2;
     std::set<char> m_usedAlphabets = {'W', 'S', 'A', 'D'};

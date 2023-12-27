@@ -10,7 +10,11 @@ enum ID {
     RightArrow,
     Home,
     KeyboardButton,
-    SelectCharacter
+    SelectCharacter,
+    UpKey,
+    LeftKey,
+    DownKey,
+    RightKey,
 };
 }  // namespace TextureID
 
