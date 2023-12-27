@@ -29,7 +29,8 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
     std::vector<sf::Vector2f> buttonPositions = {sf::Vector2f(714, 356), sf::Vector2f(476, 561), sf::Vector2f(714, 561), sf::Vector2f(952, 561)};
     std::vector<std::string> buttonNames = {"W", "A", "S", "D"};
 
-    for(int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 4; ++i)
+    {
         buttons.push_back(std::make_unique<RectangleButtonView>(buttonSize));
         buttons.back()->setPosition(buttonPositions[i]);
         buttons.back()->get().setFillColor(buttonColor);
@@ -59,6 +60,26 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
     texts2.push_back(std::make_unique<TextView>(sf::Text("Move right", getContext()->getFonts()->get(FontID::Tourney_Bold), 69)));
     texts2.back()->setPosition(sf::Vector2f(1149, 616));
     text_layer->attachChild(std::move(texts2.back()));
+
+    auto home_button = std::make_unique<RectangleView>(sf::Vector2f(128, 128));
+    home_button->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
+    home_button->setPosition(sf::Vector2f(64.f, 64.f));
+    home_button->setOnClick([this](ViewNode &view)
+    {
+        std::cout << "Home button clicked" << std::endl;
+        finishActivity(); 
+    });
+
+    ui_layer->attachChild(std::move(home_button));
+
+    auto keyboard_button = std::make_unique<RectangleView>(sf::Vector2f(128, 128));
+    keyboard_button->get().setTexture(&getContext()->getTextures()->get(TextureID::KeyboardButton));
+    keyboard_button->setPosition(sf::Vector2f(1414.f, 70.f));
+    keyboard_button->setOnClick([this](ViewNode& view) {
+        finishActivity();
+    });
+
+    ui_layer->attachChild(std::move(keyboard_button));
 }
 
 KeyboardSettingActivity::~KeyboardSettingActivity()
@@ -67,6 +88,7 @@ KeyboardSettingActivity::~KeyboardSettingActivity()
 
 bool KeyboardSettingActivity::handleEvent(sf::Event &event)
 {
+    return Activity::handleEvent(event);
 }
 
 bool KeyboardSettingActivity::handleRealtimeInput()

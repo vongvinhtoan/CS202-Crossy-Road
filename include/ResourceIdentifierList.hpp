@@ -3,13 +3,13 @@ enum ID {
     LoadingScreen,
     BackGroundScreen,
     HomeButton,
-    Background,
     CharacterPenguin,
     CharacterChicken,
     CharacterMonkey,
     LeftArrow,
     RightArrow,
     Home,
+    KeyboardButton,
     SelectCharacter
 };
 }  // namespace TextureID

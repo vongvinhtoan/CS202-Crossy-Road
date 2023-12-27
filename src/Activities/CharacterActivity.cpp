@@ -12,7 +12,7 @@ CharacterActivity::CharacterActivity(ActivityStack &stack, int requestCode, Extr
 
     // background_layer
     auto background = std::make_unique<RectangleView>(window_size);
-    background->get().setTexture(&getContext()->getTextures()->get(TextureID::Background));
+    background->get().setTexture(&getContext()->getTextures()->get(TextureID::BackGroundScreen));
     
     background_layer->attachChild(std::move(background));
 
