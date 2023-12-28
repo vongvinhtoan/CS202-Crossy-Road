@@ -59,9 +59,12 @@ Game* PlaygroundAdapter::getGame() const
 
 std::tuple<int, int> PlaygroundAdapter::getDrawRange() const
 {
-    auto bufferRange = m_game->getBufferRange();
-    auto playerPosition = m_game->getPlayer()->getPosition();
-    auto playerLane = playerPosition.y;
-    auto drawRange = std::make_tuple(playerLane - bufferRange, playerLane + bufferRange);
-    return drawRange;
+    auto camera_pos = m_game->getCamera()->getScrollPosition();
+    auto int_pos = camera_pos;
+    auto index = int_pos / 100;
+    auto window_height = Context::getInstance().getWindow()->getSize().y;
+    auto height_index_count = window_height / 100 + 4;
+    auto start_index = index - height_index_count / 2;
+    auto end_index = index + height_index_count / 2;
+    return std::make_tuple(start_index, end_index); 
 }

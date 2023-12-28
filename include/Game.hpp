@@ -34,6 +34,7 @@ public:
     bool isDone() const;
     int getLaneCount() const;
     PlaygroundAdapter* getAdapter() const;
+    int getCurrentLaneIndex();
 
 private:
     enum class Command {
@@ -52,7 +53,6 @@ private:
     void playerMoveUp();
     void playerMoveDown();
     Lane* getCurrentLane();
-    int getCurrentLaneIndex();
 
 private:
     void updateLanes(int l, int r, sf::Time dt);
