@@ -171,6 +171,7 @@ void Game::initializeCommandMap()
     (*mCommandMap)[sf::Keyboard::Key(commands["moveRight"].asInt())] = Command::MoveRight;
     (*mCommandMap)[sf::Keyboard::Key(commands["moveUp"].asInt())] = Command::MoveUp;
     (*mCommandMap)[sf::Keyboard::Key(commands["moveDown"].asInt())] = Command::MoveDown;
+    updateKeyBinding(Command::MoveLeft, sf::Keyboard::H);
 }
 
 GameOverStategy* Game::gameOver()
@@ -196,6 +197,19 @@ int Game::getLaneCount() const
 PlaygroundAdapter* Game::getAdapter() const
 {
     return m_playgroundAdapter;
+}
+
+void Game::updateKeyBinding(Command command, const sf::Keyboard::Key newKey)
+{
+    for(auto& [key, cmd] : *mCommandMap)
+    {
+        if(cmd == command)
+        {
+            (*mCommandMap)[newKey] = command;
+            mCommandMap->erase(key);
+            return;
+        }
+    }
 }
 
 void Game::playerMoveLeft()

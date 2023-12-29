@@ -5,9 +5,8 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
     : Activity(stack, requestCode, intent)
 {
     ViewNode *background_layer = getLayer(0);
-    ViewNode *ui_layer = getLayer(1);
-    ViewNode *text_layer = getLayer(2);
-    ViewNode *key_layer = getLayer(3);
+    ViewNode *text_layer = getLayer(1);
+    ViewNode *ui_layer = getLayer(2);
 
     auto window = getContext()->getWindow();
     sf::Vector2f window_size(window->getSize());
@@ -21,53 +20,32 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
     text->setPosition(sf::Vector2f((window_size.x - text->get().getLocalBounds().width) / 2, 56));
     text_layer->attachChild(std::move(text));
 
-    // Set button properties
-    sf::Color buttonColor = utils::hexToColor("D9D9D9");
-    sf::Color textColor = utils::hexToColor("000000");
-    sf::Vector2f buttonSize(151, 151);
-    sf::Vector2f buttonPosition;
+    auto shortcut = std::make_unique<ShortcutView>();
+    m_shortcutView = shortcut.get();
+    ui_layer->attachChild(std::move(shortcut));
 
-    std::vector<sf::Vector2f> buttonPositions = {sf::Vector2f(714, 356), sf::Vector2f(476, 561), sf::Vector2f(714, 561), sf::Vector2f(952, 561)};
-    std::vector<std::string> buttonNames = {"W", "A", "S", "D"};
+    auto shortcut_picture = std::make_unique<RectangleView>(sf::Vector2f(627, 356));
+    shortcut_picture->get().setTexture(&getContext()->getTextures()->get(TextureID::ShortcutPicture));
+    shortcut_picture->setPosition(sf::Vector2f(476, 356));
+    m_shortcutPicture = shortcut_picture.get();
+    text_layer->attachChild(std::move(shortcut_picture));
+    m_shortcutPicture->hide();
 
-    for (int i = 0; i < 4; ++i)
-    {
-        buttons.push_back(std::make_unique<RectangleButtonView>(buttonSize));
-        buttons.back()->setPosition(buttonPositions[i]);
-        buttons.back()->get().setFillColor(buttonColor);
-        ui_layer->attachChild(std::move(buttons.back()));
+    text = std::make_unique<TextView>(sf::Text("Move up", getContext()->getFonts()->get(FontID::Tourney_Bold), 69));
+    text->setPosition(sf::Vector2f(660, 230));
+    text_layer->attachChild(std::move(text));
 
-        // TextureID::ID textureID = i == 0 ? TextureID::ID::UpKey : i == 1 ? TextureID::ID::LeftKey : i == 2 ? TextureID::ID::DownKey : TextureID::ID::RightKey;
+    text = std::make_unique<TextView>(sf::Text("Move left", getContext()->getFonts()->get(FontID::Tourney_Bold), 69));
+    text->setPosition(sf::Vector2f(81, 616));
+    text_layer->attachChild(std::move(text));
 
-        // keys.push_back(std::make_unique<RectangleView>(buttonSize));
-        // keys.back()->get().setTexture(&getContext()->getTextures()->get(textureID));
-        // keys.back()->setPosition(buttonPositions[i]);
-        // key_layer->attachChild(std::move(keys.back()));
+    text = std::make_unique<TextView>(sf::Text("Move down", getContext()->getFonts()->get(FontID::Tourney_Bold), 69));
+    text->setPosition(sf::Vector2f(600, 750));
+    text_layer->attachChild(std::move(text));
 
-        texts.push_back(std::make_unique<TextView>(sf::Text(buttonNames[i], getContext()->getFonts()->get(FontID::Inter_Bold), 60)));
-        sf::FloatRect textRect = texts.back()->get().getLocalBounds();
-        sf::Vector2f textPosition = sf::Vector2f(buttonPositions[i].x + (buttonSize.x - textRect.width) / 2.0f, buttonPositions[i].y + buttonSize.y / 2.0f);
-        texts.back()->setOrigin(textRect.left, textRect.top + textRect.height / 2.0f);
-        texts.back()->setPosition(textPosition);
-        texts.back()->get().setFillColor(textColor);
-        text_layer->attachChild(std::move(texts.back()));
-    }
-
-    texts2.push_back(std::make_unique<TextView>(sf::Text("Move up", getContext()->getFonts()->get(FontID::Tourney_Bold), 69)));
-    texts2.back()->setPosition(sf::Vector2f(660, 230));
-    text_layer->attachChild(std::move(texts2.back()));
-
-    texts2.push_back(std::make_unique<TextView>(sf::Text("Move left", getContext()->getFonts()->get(FontID::Tourney_Bold), 69)));
-    texts2.back()->setPosition(sf::Vector2f(81, 616));
-    text_layer->attachChild(std::move(texts2.back()));
-
-    texts2.push_back(std::make_unique<TextView>(sf::Text("Move down", getContext()->getFonts()->get(FontID::Tourney_Bold), 69)));
-    texts2.back()->setPosition(sf::Vector2f(600, 750));
-    text_layer->attachChild(std::move(texts2.back()));
-
-    texts2.push_back(std::make_unique<TextView>(sf::Text("Move right", getContext()->getFonts()->get(FontID::Tourney_Bold), 69)));
-    texts2.back()->setPosition(sf::Vector2f(1149, 616));
-    text_layer->attachChild(std::move(texts2.back()));
+    text = std::make_unique<TextView>(sf::Text("Move right", getContext()->getFonts()->get(FontID::Tourney_Bold), 69));
+    text->setPosition(sf::Vector2f(1149, 616));
+    text_layer->attachChild(std::move(text));
 
     auto home_button = std::make_unique<RectangleView>(sf::Vector2f(128, 128));
     home_button->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
@@ -85,6 +63,13 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
     keyboard_button->setPosition(sf::Vector2f(1414.f, 70.f));
     keyboard_button->setOnClick([this](ViewNode& view) {
         std::cout << "Keyboard button clicked" << std::endl;
+        if(m_shortcutPicture->isHidden()) {
+            m_shortcutPicture->show();
+            m_shortcutView->hide();
+        } else {
+            m_shortcutPicture->hide();
+            m_shortcutView->show();
+        }
     });
 
     ui_layer->attachChild(std::move(keyboard_button));

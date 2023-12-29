@@ -22,7 +22,9 @@ void RectangleView::handleRealtimeInput()
 
 void RectangleView::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(m_rectangle, states);
+	if(!this->m_hidden) {
+		target.draw(m_rectangle, states);
+	}
 }
 
 bool RectangleView::contains(sf::Vector2f point) const

@@ -15,3 +15,4 @@
 #include <Views/PlaygroundView.hpp>
 #include <Views/PlayerView.hpp>
 #include <Views/LaneView.hpp>
+#include <Views/ShortcutView.hpp>

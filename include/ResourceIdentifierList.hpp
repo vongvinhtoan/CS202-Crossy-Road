@@ -11,10 +11,7 @@ enum ID {
     Home,
     KeyboardButton,
     SelectCharacter,
-    UpKey,
-    LeftKey,
-    DownKey,
-    RightKey,
+    ShortcutPicture,
 };
 }  // namespace TextureID
 

@@ -46,6 +46,9 @@ private:
     void solveCommand(Command command);
     void setGameOverStrategy(GameOverStategy* gameOverStrategy);
 
+public:
+    void updateKeyBinding(Command command, const sf::Keyboard::Key newKey);
+
 private:
     void playerMoveLeft();
     void playerMoveRight();
