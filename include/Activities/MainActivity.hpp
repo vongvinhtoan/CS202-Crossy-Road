@@ -25,4 +25,5 @@ private:
 	ArrowView* m_acceleration_arrow;
 	ArrowView* m_spring_force_arrow;
 	ArrowView* m_damping_force_arrow;
+
 };

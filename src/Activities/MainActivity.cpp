@@ -5,7 +5,19 @@ MainActivity::MainActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	: Activity(stack, requestCode, intent)
 {
 	std::cout << "MainActivity::MainActivity()" << std::endl;
-	requestActivity(ActivityID::Playground);
+	//requestActivity(ActivityID::Playground);
+
+	auto window = getContext()->getWindow();
+	sf::Vector2f window_size(window->getSize());
+
+	// covering_layer
+	ViewNode* covering_layer = getLayer(0);
+	//Game-over-screen
+	auto coveringRectangle = std::make_unique<RectangleView>(window_size);
+	coveringRectangle->get().setFillColor(utils::hexToColor("FF5631"));
+
+	covering_layer->attachChild(std::move(coveringRectangle));
+
 }
 
 MainActivity::~MainActivity()
@@ -24,7 +36,18 @@ bool MainActivity::handleRealtimeInput()
 
 bool MainActivity::update(sf::Time dt)
 {
-	return Activity::update(dt);
+	Activity::update(dt);
+	//Game-over
+	sf::Time m_duration = sf::seconds(0.5);
+	sf::Time m_time = sf::Time::Zero;
+	m_time += dt;
+	if (m_time >= m_duration)
+	{
+		finishActivity();
+	}
+
+	//return Activity::update(dt);
+	return 0;
 }
 
 bool MainActivity::draw()
