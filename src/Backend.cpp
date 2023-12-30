@@ -19,6 +19,7 @@ void Backend::loadTextures(TextureHolder& textures) {
     textures.load(TextureID::CharacterMonkey, "res/textures/Characters/Monkey.png");
     textures.load(TextureID::LeftArrow, "res/textures/LeftArrow.png");
     textures.load(TextureID::RightArrow, "res/textures/RightArrow.png");
+    textures.load(TextureID::PlayAgainArrow, "res/textures/PlayAgainArrow.png");
     textures.load(TextureID::BackGroundScreen, "res/textures/BackgroundScreen.png");
     textures.load(TextureID::HomeButton, "res/textures/HomeButton.png");
     textures.load(TextureID::Home, "res/textures/Home.png");
