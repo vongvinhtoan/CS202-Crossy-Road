@@ -40,7 +40,6 @@ namespace utils
 
     sf::Color hexToColor(std::string hex);
     bool pointInTriangle(sf::Vector2f point, sf::Vector2f p1, sf::Vector2f p2, sf::Vector2f p3);
-    std::string keyToString(sf::Keyboard::Key key);
     float distance(sf::Vector2f a, sf::Vector2f b);
     float sqrDistance(sf::Vector2f a, sf::Vector2f b);
     sf::Vector2f unitVector(sf::Vector2f vector);

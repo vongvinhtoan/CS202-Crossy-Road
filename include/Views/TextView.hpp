@@ -9,7 +9,7 @@ public:
 
 	template <typename... Args>
 	TextView(Args &&...args)
-		: m_text(std::forward<Args>(args)...), isEditable(false)
+		: m_text(std::forward<Args>(args)...)
 	{
 	}
 	virtual ~TextView() final;
@@ -29,5 +29,4 @@ public:
 
 private:
 	sf::Text m_text;
-	bool isEditable;
 };

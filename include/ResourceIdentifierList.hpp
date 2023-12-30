@@ -12,6 +12,8 @@ enum ID {
     KeyboardButton,
     SelectCharacter,
     ShortcutPicture,
+    CloseButton,
+    CloseButtonHover,
 };
 }  // namespace TextureID
 

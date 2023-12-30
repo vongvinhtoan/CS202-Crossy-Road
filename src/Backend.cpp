@@ -26,6 +26,8 @@ void Backend::loadTextures(TextureHolder &textures)
     textures.load(TextureID::KeyboardButton, "res/textures/KeyboardButton.png");
     textures.load(TextureID::SelectCharacter, "res/textures/SelectCharacter.png");
     textures.load(TextureID::ShortcutPicture, "res/textures/ShortcutPicture.png");
+    textures.load(TextureID::CloseButton, "res/textures/CloseButton.png");
+    textures.load(TextureID::CloseButtonHover, "res/textures/CloseButtonHover.png");
 }
 
 void Backend::loadFonts(FontHolder &fonts)

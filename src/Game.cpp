@@ -2,6 +2,9 @@
 #include <GameOver_TooSlowFromCamera.hpp>
 #include <iostream>
 #include <PlaygroundAdapter.hpp>
+#include <fstream>
+#include <Context.hpp>
+#include <ConfigManager.hpp>
 
 Game::Game(int bufferRange)
     : m_bufferRange(bufferRange)
@@ -171,7 +174,6 @@ void Game::initializeCommandMap()
     (*mCommandMap)[sf::Keyboard::Key(commands["moveRight"].asInt())] = Command::MoveRight;
     (*mCommandMap)[sf::Keyboard::Key(commands["moveUp"].asInt())] = Command::MoveUp;
     (*mCommandMap)[sf::Keyboard::Key(commands["moveDown"].asInt())] = Command::MoveDown;
-    updateKeyBinding(Command::MoveLeft, sf::Keyboard::H);
 }
 
 GameOverStategy* Game::gameOver()
@@ -207,9 +209,11 @@ void Game::updateKeyBinding(Command command, const sf::Keyboard::Key newKey)
         {
             (*mCommandMap)[newKey] = command;
             mCommandMap->erase(key);
+            updateConfigFile(command == Command::MoveLeft ? "moveLeft" : command == Command::MoveRight ? "moveRight" : command == Command::MoveUp ? "moveUp" : "moveDown", newKey);
             return;
         }
     }
+
 }
 
 void Game::playerMoveLeft()
