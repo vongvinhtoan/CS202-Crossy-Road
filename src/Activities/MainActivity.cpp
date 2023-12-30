@@ -14,7 +14,8 @@ MainActivity::MainActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	ViewNode* covering_layer = getLayer(0);
 	//Game-over-screen
 	auto coveringRectangle = std::make_unique<RectangleView>(window_size);
-	coveringRectangle->get().setFillColor(utils::hexToColor("FF5631"));
+	// coveringRectangle->get().setFillColor(utils::hexToColor("FF5631"));
+	coveringRectangle->get().setTexture(&getContext()->getTextures()->get(TextureID::BackGroundScreen));
 
 	covering_layer->attachChild(std::move(coveringRectangle));
 
