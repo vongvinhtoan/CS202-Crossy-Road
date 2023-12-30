@@ -2,6 +2,8 @@
 
 #include <ViewNode.hpp>
 
+class RectangleView;
+
 class ModalView : public ViewNode
 {
 public:
@@ -15,9 +17,11 @@ private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final override;
 
 public:
-    void setLetter(char letter);
+    void setButtonIndex(int index);
 
 private:
     sf::RectangleShape mBackground, mTextEdit;
+    RectangleView* mCloseButton;
     sf::Text mText, mIntroduction, mIntroduction2, mWarning;
+    int buttonClickedIndex;
 };
