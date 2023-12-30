@@ -30,7 +30,25 @@ GameOverActivity::GameOverActivity(ActivityStack& stack, int requestCode, Extra&
 	text.setPosition(sf::Vector2f(window_size.x / 2.0f, window_size.y / 2.0f));
 	m_gameOverText = gameOverText.get();
 
+	///home-button
+	m_homeButton = std::make_unique<RectangleButtonView>(sf::Vector2f(204, 204));
+    m_homeButton->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
+    m_homeButton->setPosition(sf::Vector2f(925.f, 318.f));
+    m_homeButton->setOnClick([this](ViewNode& view) {
+		requestActivity(ActivityID::Home);
+    });
+
+	//play-again-button
+	auto m_playAgainButton = std::make_unique<RectangleButtonView>(sf::Vector2f(204, 204));
+    m_playAgainButton->get().setTexture(&getContext()->getTextures()->get(TextureID::PlayAgainArrow));
+    m_playAgainButton->setPosition(sf::Vector2f(444.f, 324.f));
+    m_playAgainButton->setOnClick([this](ViewNode& view) {
+		finishActivity();
+    });
+
 	foreground_layer->attachChild(std::move(gameOverText));
+    foreground_layer->attachChild(std::move(m_homeButton));
+	foreground_layer->attachChild(std::move(m_playAgainButton));
 }
 
 GameOverActivity::~GameOverActivity()
