@@ -7,17 +7,16 @@ MainActivity::MainActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	std::cout << "MainActivity::MainActivity()" << std::endl;
 	//requestActivity(ActivityID::Playground);
 
-	// auto window = getContext()->getWindow();
-	// sf::Vector2f window_size(window->getSize());
+	auto window = getContext()->getWindow();
+	sf::Vector2f window_size(window->getSize());
 
-	// // covering_layer
-	// ViewNode* covering_layer = getLayer(0);
-	// //Game-over-screen
-	// auto coveringRectangle = std::make_unique<RectangleView>(window_size);
-	// // coveringRectangle->get().setFillColor(utils::hexToColor("FF5631"));
-	// coveringRectangle->get().setTexture(&getContext()->getTextures()->get(TextureID::BackGroundScreen));
+	// covering_layer
+	ViewNode* covering_layer = getLayer(0);
+	//Game-over-screen
+	auto coveringRectangle = std::make_unique<RectangleView>(window_size);
+	coveringRectangle->get().setFillColor(utils::hexToColor("FF5631"));
 
-	// covering_layer->attachChild(std::move(coveringRectangle));
+	covering_layer->attachChild(std::move(coveringRectangle));
 
 }
 
@@ -39,12 +38,12 @@ bool MainActivity::update(sf::Time dt)
 {
 	Activity::update(dt);
 	//Game-over
-	static const sf::Time m_duration = sf::seconds(1.f);
+	sf::Time m_duration = sf::seconds(0.5);
+	sf::Time m_time = sf::Time::Zero;
 	m_time += dt;
 	if (m_time >= m_duration)
 	{
-		requestActivity(ActivityID::GameOver);
-		m_time = sf::Time::Zero;
+		finishActivity();
 	}
 
 	//return Activity::update(dt);
