@@ -9,6 +9,7 @@ enum ID {
     CharacterMonkey,
     LeftArrow,
     RightArrow,
+    PlayAgainArrow,
     Home,
     SelectCharacter,
     LaneLand_tile_0,

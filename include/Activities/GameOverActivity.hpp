@@ -13,9 +13,9 @@ public:
 	virtual bool draw() final override;
 
 private:
-	sf::Time 				m_elapsedTime = sf::Time::Zero;
-	RectangleView* 			m_background = nullptr;
-	TextView* 				m_gameOverText = nullptr;
-	RectangleButtonView* 	m_playAgainButton = nullptr;
-	RectangleButtonView* 	m_homeButton = nullptr;
+	sf::Time 								m_elapsedTime = sf::Time::Zero;
+	RectangleView* 							m_background = nullptr;
+	TextView* 								m_gameOverText = nullptr;
+	std::unique_ptr<RectangleButtonView>	m_playAgainButton;
+	std::unique_ptr<RectangleButtonView> 	m_homeButton = nullptr;
 };
