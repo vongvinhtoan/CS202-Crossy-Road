@@ -38,12 +38,12 @@ bool MainActivity::update(sf::Time dt)
 {
 	Activity::update(dt);
 	//Game-over
-	sf::Time m_duration = sf::seconds(0.5);
-	sf::Time m_time = sf::Time::Zero;
+	static const sf::Time m_duration = sf::seconds(1.f);
 	m_time += dt;
 	if (m_time >= m_duration)
 	{
-		finishActivity();
+		requestActivity(ActivityID::GameOver);
+		m_time = sf::Time::Zero;
 	}
 
 	//return Activity::update(dt);
