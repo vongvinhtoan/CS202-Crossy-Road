@@ -4,6 +4,7 @@
 
 class TextView;
 class RectangleButtonView;
+class ModalView;
 
 class ShortcutView : public ViewNode
 {
@@ -22,4 +23,5 @@ public:
 private:
     std::vector<RectangleButtonView*> buttons;
     std::vector<TextView*> texts;
+    ModalView* modalView;
 };

@@ -26,8 +26,6 @@ public:
 public:
 	sf::Text &get();
 	sf::Vector2f getSize() const;
-	void setEditable(bool editable);
-	bool getEditable() const;
 
 private:
 	sf::Text m_text;

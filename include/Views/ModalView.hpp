@@ -6,7 +6,6 @@ class ModalView : public ViewNode
 {
 public:
     ModalView();
-    ModalView(char letter);
     virtual ~ModalView() final;
 
 private:
@@ -14,6 +13,9 @@ private:
     virtual void handleEvent(sf::Event& event) final override;
     virtual void handleRealtimeInput() final override;
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final override;
+
+public:
+    void setLetter(char letter);
 
 private:
     sf::RectangleShape mBackground, mTextEdit;

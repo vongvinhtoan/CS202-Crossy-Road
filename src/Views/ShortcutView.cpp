@@ -2,6 +2,8 @@
 #include <Utils.hpp>
 #include <Views/TextView.hpp>
 #include <Views/RectangleButtonView.hpp>
+#include <Views/ModalView.hpp>
+#include <Game.hpp>
 
 ShortcutView::ShortcutView()
 {
@@ -27,11 +29,27 @@ ShortcutView::ShortcutView()
         button->setPosition(buttonPositions[i]);
         button->get().setFillColor(buttonColor);
         button->setOnClick([this, i](ViewNode &view)
-                           { texts[i]->setEditable(true); });
+        {
+            modalView->show();
+        });
+        button->setOnHover([this, i](ViewNode &view)
+        {
+            buttons[i]->get().setFillColor(utils::hexToColor("A9A7A7"));
+        });
+        button->setOnLostHover([this, i, buttonColor](ViewNode &view)
+        {
+            buttons[i]->get().setFillColor(buttonColor);
+        });
 
         attachChild(std::move(button));
         attachChild(std::move(text));
     }
+
+    auto modal = std::make_unique<ModalView>();
+    modal->setPosition(sf::Vector2f(291, 286));
+    modalView = modal.get();
+    attachChild(std::move(modal));
+    modalView->hide();
 }
 
 ShortcutView::~ShortcutView()

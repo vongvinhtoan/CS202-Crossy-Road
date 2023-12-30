@@ -24,18 +24,6 @@ void TextView::update(sf::Time dt)
 
 void TextView::handleEvent(sf::Event &event)
 {
-    if (isEditable)
-    {
-        if (event.type == sf::Event::KeyPressed)
-        {
-            if (event.key.code >= sf::Keyboard::A && event.key.code <= sf::Keyboard::Z)
-            {
-                char letter = static_cast<char>(event.key.code + 65);
-                m_text.setString(std::string(1, letter));
-                isEditable = false;
-            }
-        }
-    }
 }
 
 void TextView::handleRealtimeInput()
@@ -50,14 +38,4 @@ void TextView::draw(sf::RenderTarget &target, sf::RenderStates states) const
 bool TextView::contains(sf::Vector2f point) const
 {
     return m_text.getGlobalBounds().contains(point);
-}
-
-void TextView::setEditable(bool editable)
-{
-    isEditable = editable;
-}
-
-bool TextView::getEditable() const
-{
-    return isEditable;
 }
