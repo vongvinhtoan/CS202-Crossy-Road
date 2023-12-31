@@ -4,6 +4,7 @@
 #include <Utils.hpp>
 #include <Context.hpp>
 #include <iostream>
+#include <GameOver_HitObstacleOnLand.hpp>
 
 LaneMovingWater::LaneMovingWater(LaneType laneType, int id, Game* game)
     : Lane(laneType, id, game)
@@ -41,6 +42,15 @@ void LaneMovingWater::update(sf::Time dt)
         wood.first += m_speed * dt.asSeconds();
         wood.second += m_speed * dt.asSeconds();
     }
+
+    // std::pair<float, float> closestWood = {0.f, 0.f};
+    // auto playerPos = getGame()->getPlayer()->getPosition().x;
+    // for(auto& wood : m_woodPositions)
+    // {
+    //     if(wood.first <= playerPos) closestWood = wood;
+    //     else break;
+    // }
+    // std::cout << closestWood.first << " " << closestWood.second << ": " << playerPos << std::endl;
 }
 
 void LaneMovingWater::removeOldWoods()
@@ -95,14 +105,46 @@ GameOverStategy* LaneMovingWater::enter(Player* player)
 {
     sf::FloatRect playerRect = player->getBounds();
     playerRect.top = getIndex() * 100.f;
-    playerRect.left = std::round(playerRect.left / 100.f) * 100.f;
+    
+    float pos = playerRect.left;
+
+    auto anyWood = m_woodPositions[0];
+    pos = std::round((pos - anyWood.first) / 100.f) * 100.f + anyWood.first;
+
+    playerRect.left = pos;
     player->moveTo({playerRect.left, playerRect.top});
+
     return nullptr;
 }
 
 GameOverStategy* LaneMovingWater::updatePlayer(Player* player, sf::Time dt)
 {
-    player->accelerate({m_speed * dt.asSeconds(), 0.f});
+    auto pos = player->getPosition().x;
+    pos += m_speed * dt.asSeconds();
+    pos = std::round((pos - m_woodPositions[0].first) / 100.f) * 100.f + m_woodPositions[0].first;
+    player->moveTo({pos, player->getPosition().y});
+    player->update(dt);
+
+    bool isOnWood = false;
+    for(auto& wood : m_woodPositions)
+    {
+        if(pos < wood.first-50.f) break;
+        if(wood.first-50.f <= pos && pos <= wood.second-50.f)
+        {
+            isOnWood = true;
+            break;
+        }
+    }
+    if(!isOnWood)
+    {
+        for(auto& wood : m_woodPositions)
+        return new GameOver_HitObstacleOnLand(getGame());
+    }
+
+    if(player->getPosition().x < - 50.f || player->getPosition().x + 50.f > Context::getInstance().getWindow()->getSize().x)
+    {
+        return new GameOver_HitObstacleOnLand(getGame());
+    }
     return nullptr;
 }
 
