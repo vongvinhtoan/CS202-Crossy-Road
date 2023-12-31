@@ -43,7 +43,7 @@ GameOverActivity::GameOverActivity(ActivityStack& stack, int requestCode, Extra&
     m_playAgainButton->get().setTexture(&getContext()->getTextures()->get(TextureID::PlayAgainArrow));
     m_playAgainButton->setPosition(sf::Vector2f(444.f, 324.f));
     m_playAgainButton->setOnClick([this](ViewNode& view) {
-		finishActivity();
+		//finishActivity();
     });
 
 	foreground_layer->attachChild(std::move(gameOverText));
