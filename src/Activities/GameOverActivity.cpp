@@ -37,21 +37,21 @@ GameOverActivity::GameOverActivity(ActivityStack& stack, int requestCode, Extra&
 
 	///home-button
 	auto homeButton = std::make_unique<RectangleButtonView>(sf::Vector2f(204, 204));
-    homeButton->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
     homeButton->setPosition(sf::Vector2f(925.f, 318.f));
     homeButton->setOnClick([this](ViewNode& view) {
 		requestActivity(ActivityID::Home);
     });
 	m_homeButton = homeButton.get();
+	homeButton->disable();
 
 	//play-again-button
 	auto playAgainButton = std::make_unique<RectangleButtonView>(sf::Vector2f(204, 204));
-    playAgainButton->get().setTexture(&getContext()->getTextures()->get(TextureID::PlayAgainArrow));
     playAgainButton->setPosition(sf::Vector2f(444.f, 324.f));
     playAgainButton->setOnClick([this](ViewNode& view) {
 		//finishActivity();
     });
 	m_playAgainButton = playAgainButton.get();
+	playAgainButton->disable();
 
 	std::vector<std::unique_ptr<TextView>> numberTexts;
 	numberTexts.resize(count_down_time);
@@ -98,19 +98,31 @@ bool GameOverActivity::update(sf::Time dt)
 
 	m_elapsedTime += dt;
 
-	if(m_elapsedTime <= sf::seconds(1.f))
+	if(m_elapsedTime <= sf::seconds(1.5f))
 	{
-		auto duration = 1.f;
+		auto duration = 1.5f;
 		auto color = m_background->get().getFillColor();
 		color.a = 0.81 * 255 * m_elapsedTime.asSeconds() / duration;
 		m_background->get().setFillColor(color);
 	}
-	if(sf::seconds(.5f) <= m_elapsedTime && m_elapsedTime <= sf::seconds(1.f))
+	if (sf::seconds(.5f) <= m_elapsedTime && m_elapsedTime <= sf::seconds(1.f))
 	{
 		auto duration = 0.5f;
 		auto color = m_gameOverText->get().getFillColor();
 		color.a = utils::lerp(0, 255, utils::anim::quadratic_ease_out((m_elapsedTime.asSeconds() - .5f) / duration));
 		m_gameOverText->get().setFillColor(color);
+	}
+	if (m_elapsedTime>= sf::seconds(2.5f))
+	{
+		//hide game over text
+		auto color = m_gameOverText->get().getFillColor();
+		color.a = 0;
+		m_gameOverText->get().setFillColor(color);
+
+		m_homeButton->enable();
+		m_homeButton->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
+		m_playAgainButton->enable();
+		m_playAgainButton->get().setTexture(&getContext()->getTextures()->get(TextureID::PlayAgainArrow));
 	}
 
 	return false;
