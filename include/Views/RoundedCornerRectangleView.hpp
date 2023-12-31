@@ -46,6 +46,7 @@ public:
 
 	void setFillColor(const sf::Color& color);
 	void setTexture(const sf::Texture* texture);
+	void setPosition(const sf::Vector2f& position);
 };
 
 class RoundedCornerRectangleView : public ViewNode
@@ -59,9 +60,9 @@ public:
 	virtual ~RoundedCornerRectangleView();
 
 protected:
-	virtual void update(sf::Time dt) final override;
-	virtual void handleEvent(sf::Event& event) final override;
-	virtual void handleRealtimeInput() final override;
+	virtual void update(sf::Time dt) override;
+	virtual void handleEvent(sf::Event& event) override;
+	virtual void handleRealtimeInput() override;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 public:
@@ -69,6 +70,7 @@ public:
 
 public:
 	RoundedCornerRectangleShape& get();
+	RoundedCornerRectangleShape getRectangle() const;
 
 protected:
 	RoundedCornerRectangleShape m_rounded_rectangle;
