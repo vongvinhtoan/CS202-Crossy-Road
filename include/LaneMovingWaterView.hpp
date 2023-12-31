@@ -2,11 +2,11 @@
 
 #include <Views/LaneView.hpp>
 
-class LaneWaterView : public LaneView
+class LaneMovingWaterView : public LaneView
 {
 public:
-	LaneWaterView(LaneType laneType);
-	virtual ~LaneWaterView();
+	LaneMovingWaterView(LaneType laneType);
+	virtual ~LaneMovingWaterView();
 
 private:
 	virtual void update(sf::Time dt) override;
@@ -19,4 +19,8 @@ public:
 
 public:
     virtual void bind(Lane* lane, PlaygroundCamera* camera) override;
+
+private:
+	std::vector<sf::RectangleShape> m_tiles;
+	std::vector<sf::RectangleShape> m_woods;
 };

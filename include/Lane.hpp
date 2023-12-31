@@ -9,7 +9,7 @@ class Game;
 enum class LaneType
 {
     Land,
-    Water,
+    MovingWater,
     Count
 };
 
@@ -20,16 +20,16 @@ public:
 
 public:
     virtual void update(sf::Time dt) = 0;
-    virtual GameOverStategy* checkCollision(Player* player, bool& isDone) = 0;
 
 public:
     LaneType getLaneType() const;
     int getIndex() const;
 
 public:
-    virtual GameOverStategy* moveLeft(Player* player, bool& isDone) = 0;
-    virtual GameOverStategy* moveRight(Player* player, bool& isDone) = 0;
-    virtual GameOverStategy* enter(Player* player, bool& isDone) = 0;
+    virtual GameOverStategy* moveLeft(Player* player) = 0;
+    virtual GameOverStategy* moveRight(Player* player) = 0;
+    virtual GameOverStategy* enter(Player* player) = 0;
+    virtual GameOverStategy* updatePlayer(Player* player, sf::Time dt) = 0;
 
 public:
     Game* getGame() const;

@@ -38,7 +38,7 @@ void LaneLand::update(sf::Time dt)
     }
 }
 
-GameOverStategy* LaneLand::checkCollision(Player* player, bool& isDone)
+GameOverStategy* LaneLand::updatePlayer(Player* player, sf::Time dt)
 {
     sf::FloatRect playerRect = player->getBounds();
     for (int i = 0; i < mObstacles.size(); i++)
@@ -52,13 +52,13 @@ GameOverStategy* LaneLand::checkCollision(Player* player, bool& isDone)
     return nullptr;
 }
 
-GameOverStategy* LaneLand::moveLeft(Player* player, bool& isDone)
+GameOverStategy* LaneLand::moveLeft(Player* player)
 {
     if(player->getPosition().x <= 0.f) 
         return nullptr;
 
     player->moveLeft();
-    auto* gameOverStrategy = checkCollision(player, isDone);
+    auto* gameOverStrategy = updatePlayer(player, sf::Time::Zero);
     if (gameOverStrategy)
     {
         return gameOverStrategy;
@@ -66,13 +66,13 @@ GameOverStategy* LaneLand::moveLeft(Player* player, bool& isDone)
     return nullptr;
 }
 
-GameOverStategy* LaneLand::moveRight(Player* player, bool& isDone)
+GameOverStategy* LaneLand::moveRight(Player* player)
 {
     if(player->getPosition().x + 100.f >= Context::getInstance().getWindow()->getSize().x) 
         return nullptr;
     
     player->moveRight();
-    auto* gameOverStrategy = checkCollision(player, isDone);
+    auto* gameOverStrategy = updatePlayer(player, sf::Time::Zero);
     if (gameOverStrategy)
     {
         return gameOverStrategy;
@@ -80,13 +80,13 @@ GameOverStategy* LaneLand::moveRight(Player* player, bool& isDone)
     return nullptr;
 }
 
-GameOverStategy* LaneLand::enter(Player* player, bool& isDone)
+GameOverStategy* LaneLand::enter(Player* player)
 {
     sf::FloatRect playerRect = player->getBounds();
     playerRect.top = getIndex() * 100.f;
     playerRect.left = std::round(playerRect.left / 100.f) * 100.f;
     player->moveTo({playerRect.left, playerRect.top});
-    auto* gameOverStrategy = checkCollision(player, isDone);
+    auto* gameOverStrategy = updatePlayer(player, sf::Time::Zero);
     if (gameOverStrategy)
     {
         return gameOverStrategy;

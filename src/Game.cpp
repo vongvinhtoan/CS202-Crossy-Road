@@ -59,7 +59,7 @@ void Game::update(sf::Time dt)
 
     if(m_gameOverStrategy.get()) return;
     auto* curLane = getCurrentLane();
-    auto* result = curLane->checkCollision(m_player.get(), m_isDone);
+    auto* result = curLane->updatePlayer(m_player.get(), dt);
     if(result)
         setGameOverStrategy(result);
     checkPlayerPosition();
@@ -207,7 +207,7 @@ void Game::playerMoveLeft()
     Lane* lane = getCurrentLane();
     if(!lane) return;
 
-    auto* result = lane->moveLeft(m_player.get(), m_isDone);
+    auto* result = lane->moveLeft(m_player.get());
     if(result)
         setGameOverStrategy(result);
 }
@@ -217,7 +217,7 @@ void Game::playerMoveRight()
     Lane* lane = getCurrentLane();
     if(!lane) return;
 
-    auto* result = lane->moveRight(m_player.get(), m_isDone);
+    auto* result = lane->moveRight(m_player.get());
     if(result)
         setGameOverStrategy(result);
 }
@@ -229,7 +229,7 @@ void Game::playerMoveUp()
     Lane* lane = m_lanes[index].get();
     if(!lane) return;
 
-    auto* result = lane->enter(m_player.get(), m_isDone);
+    auto* result = lane->enter(m_player.get());
     if(result)
         setGameOverStrategy(result);
 }
@@ -243,7 +243,7 @@ void Game::playerMoveDown()
     Lane* lane = m_lanes[index].get();
     if(!lane) return;
 
-    auto* result = lane->enter(m_player.get(), m_isDone);
+    auto* result = lane->enter(m_player.get());
     if(result)
         setGameOverStrategy(result);
 }
