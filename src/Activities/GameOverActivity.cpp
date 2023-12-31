@@ -8,6 +8,11 @@ GameOverActivity::GameOverActivity(ActivityStack& stack, int requestCode, Extra&
 	auto window = getContext()->getWindow();
 	sf::Vector2f window_size(window->getSize());
 
+	auto& configs = (*getContext()->getConfigs())["count_down_time"];
+	int count_down_time = configs.asInt();
+
+	m_numberTexts.resize(count_down_time);
+
 	// background_layer
 	ViewNode* background_layer = getLayer(0);
 	//Game-over-background
@@ -31,24 +36,46 @@ GameOverActivity::GameOverActivity(ActivityStack& stack, int requestCode, Extra&
 	m_gameOverText = gameOverText.get();
 
 	///home-button
-	m_homeButton = std::make_unique<RectangleButtonView>(sf::Vector2f(204, 204));
-    m_homeButton->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
-    m_homeButton->setPosition(sf::Vector2f(925.f, 318.f));
-    m_homeButton->setOnClick([this](ViewNode& view) {
+	auto homeButton = std::make_unique<RectangleButtonView>(sf::Vector2f(204, 204));
+    homeButton->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
+    homeButton->setPosition(sf::Vector2f(925.f, 318.f));
+    homeButton->setOnClick([this](ViewNode& view) {
 		requestActivity(ActivityID::Home);
     });
+	m_homeButton = homeButton.get();
 
 	//play-again-button
-	auto m_playAgainButton = std::make_unique<RectangleButtonView>(sf::Vector2f(204, 204));
-    m_playAgainButton->get().setTexture(&getContext()->getTextures()->get(TextureID::PlayAgainArrow));
-    m_playAgainButton->setPosition(sf::Vector2f(444.f, 324.f));
-    m_playAgainButton->setOnClick([this](ViewNode& view) {
+	auto playAgainButton = std::make_unique<RectangleButtonView>(sf::Vector2f(204, 204));
+    playAgainButton->get().setTexture(&getContext()->getTextures()->get(TextureID::PlayAgainArrow));
+    playAgainButton->setPosition(sf::Vector2f(444.f, 324.f));
+    playAgainButton->setOnClick([this](ViewNode& view) {
 		//finishActivity();
     });
+	m_playAgainButton = playAgainButton.get();
+
+	std::vector<std::unique_ptr<TextView>> numberTexts;
+	numberTexts.resize(count_down_time);
+
+	for (int i = 0; i < count_down_time; ++i)
+	{
+		numberTexts[i] = std::make_unique<TextView>(std::to_string(count_down_time - i), font, 250);
+		numberTexts[i]->get().setFillColor(utils::hexToColor("FFFFFF00"));
+		auto &tmp = numberTexts[i]->get();
+		sf::FloatRect textRect = tmp.getLocalBounds();
+		tmp.setOrigin(textRect.left + textRect.width / 2.0f,
+			textRect.top + textRect.height / 2.0f);
+		tmp.setPosition(sf::Vector2f(window_size.x / 2.0f, window_size.y / 2.0f));
+		m_numberTexts[i] = numberTexts[i].get();
+	}
 
 	foreground_layer->attachChild(std::move(gameOverText));
-    foreground_layer->attachChild(std::move(m_homeButton));
-	foreground_layer->attachChild(std::move(m_playAgainButton));
+    foreground_layer->attachChild(std::move(homeButton));
+	foreground_layer->attachChild(std::move(playAgainButton));
+
+	for (auto& numberText : numberTexts)
+	{
+		foreground_layer->attachChild(std::move(numberText));
+	}
 }
 
 GameOverActivity::~GameOverActivity()
