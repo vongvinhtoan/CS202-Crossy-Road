@@ -43,11 +43,11 @@ bool MainActivity::update(sf::Time dt)
 	m_time += dt;
 	if (m_time >= m_duration)
 	{
-		requestActivity(ActivityID::GameOver);
+		//requestActivity(ActivityID::GameOver);
+		requestActivity(ActivityID::Pause);
 		m_time = sf::Time::Zero;
 	}
 
-	//return Activity::update(dt);
 	return 0;
 }
 
