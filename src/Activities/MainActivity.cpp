@@ -7,17 +7,17 @@ MainActivity::MainActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	std::cout << "MainActivity::MainActivity()" << std::endl;
 	//requestActivity(ActivityID::Playground);
 
-	auto window = getContext()->getWindow();
-	sf::Vector2f window_size(window->getSize());
+	// auto window = getContext()->getWindow();
+	// sf::Vector2f window_size(window->getSize());
 
-	// covering_layer
-	ViewNode* covering_layer = getLayer(0);
-	//Game-over-screen
-	auto coveringRectangle = std::make_unique<RectangleView>(window_size);
-	// coveringRectangle->get().setFillColor(utils::hexToColor("FF5631"));
-	coveringRectangle->get().setTexture(&getContext()->getTextures()->get(TextureID::BackGroundScreen));
+	// // covering_layer
+	// ViewNode* covering_layer = getLayer(0);
+	// //Game-over-screen
+	// auto coveringRectangle = std::make_unique<RectangleView>(window_size);
+	// // coveringRectangle->get().setFillColor(utils::hexToColor("FF5631"));
+	// coveringRectangle->get().setTexture(&getContext()->getTextures()->get(TextureID::BackGroundScreen));
 
-	covering_layer->attachChild(std::move(coveringRectangle));
+	// covering_layer->attachChild(std::move(coveringRectangle));
 
 }
 
