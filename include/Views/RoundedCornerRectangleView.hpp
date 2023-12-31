@@ -2,7 +2,8 @@
 
 #include <ViewNode.hpp>
 
-class RoundedCornerRectangleShape{
+class RoundedCornerRectangleShape : public sf::RectangleShape
+{
 public:
 	template <typename ...Args>
 	RoundedCornerRectangleShape(Args&& ...args)
@@ -28,6 +29,7 @@ public:
 		m_bottomLeftCorner.setFillColor(sf::Color::White);
 		m_bottomRightCorner.setFillColor(sf::Color::White);
 
+		m_rectangle.setSize(m_rectangle.getSize() - sf::Vector2f(corner_radius, corner_radius));
 		m_topEdge.setSize(sf::Vector2f(m_rectangle.getSize().x, corner_radius));
 		m_bottomEdge.setSize(sf::Vector2f(m_rectangle.getSize().x, corner_radius));
 		m_leftEdge.setSize(sf::Vector2f(corner_radius, m_rectangle.getSize().y));
@@ -47,6 +49,8 @@ public:
 	void setFillColor(const sf::Color& color);
 	void setTexture(const sf::Texture* texture);
 	void setPosition(const sf::Vector2f& position);
+	sf::Vector2f getPosition() const;
+	sf::Vector2f getSize() const;
 };
 
 class RoundedCornerRectangleView : public ViewNode
@@ -71,6 +75,8 @@ public:
 public:
 	RoundedCornerRectangleShape& get();
 	RoundedCornerRectangleShape getRectangle() const;
+	sf::Vector2f getPosition() const;
+	sf::Vector2f getSize() const;
 
 protected:
 	RoundedCornerRectangleShape m_rounded_rectangle;

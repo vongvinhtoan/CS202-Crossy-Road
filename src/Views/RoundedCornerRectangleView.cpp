@@ -1,6 +1,7 @@
 #include <Views/RoundedCornerRectangleView.hpp>
 
-void RoundedCornerRectangleShape::setFillColor(const sf::Color& color) {
+void RoundedCornerRectangleShape::setFillColor(const sf::Color& color) 
+{
     m_rectangle.setFillColor(color);
     m_topLeftCorner.setFillColor(color);
     m_topRightCorner.setFillColor(color);
@@ -12,7 +13,8 @@ void RoundedCornerRectangleShape::setFillColor(const sf::Color& color) {
     m_rightEdge.setFillColor(color);
 }
 
-void RoundedCornerRectangleShape::setTexture(const sf::Texture* texture) {
+void RoundedCornerRectangleShape::setTexture(const sf::Texture* texture) 
+{
     m_rectangle.setTexture(texture);
     m_topLeftCorner.setFillColor(sf::Color::Transparent);
     m_topRightCorner.setFillColor(sf::Color::Transparent);
@@ -26,6 +28,8 @@ void RoundedCornerRectangleShape::setTexture(const sf::Texture* texture) {
 
 void RoundedCornerRectangleShape::setPosition(const sf::Vector2f& position) 
 {
+    m_rectangle.setPosition(position);
+
     m_topLeftCorner.setPosition(m_rectangle.getPosition());
     m_topRightCorner.setPosition(
         m_rectangle.getPosition().x + m_rectangle.getSize().x, m_rectangle.getPosition().y
@@ -52,18 +56,38 @@ void RoundedCornerRectangleShape::setPosition(const sf::Vector2f& position)
     );
 }
 
-RoundedCornerRectangleView::RoundedCornerRectangleView() {}
+sf::Vector2f RoundedCornerRectangleShape::getPosition() const 
+{
+    return m_rectangle.getPosition();
+}
 
-RoundedCornerRectangleView::~RoundedCornerRectangleView() {}
+sf::Vector2f RoundedCornerRectangleShape::getSize() const 
+{
+    return m_rectangle.getSize();
+}
 
-void RoundedCornerRectangleView::update(sf::Time dt) {}
+RoundedCornerRectangleView::RoundedCornerRectangleView() 
+{
+}
 
-void RoundedCornerRectangleView::handleEvent(sf::Event& event) {}
+RoundedCornerRectangleView::~RoundedCornerRectangleView() 
+{
+}
 
-void RoundedCornerRectangleView::handleRealtimeInput() {}
+void RoundedCornerRectangleView::update(sf::Time dt) 
+{
+}
 
-void RoundedCornerRectangleView::draw(sf::RenderTarget& target, sf::RenderStates states)
-    const {
+void RoundedCornerRectangleView::handleEvent(sf::Event& event) 
+{
+}
+
+void RoundedCornerRectangleView::handleRealtimeInput() 
+{
+}
+
+void RoundedCornerRectangleView::draw(sf::RenderTarget& target, sf::RenderStates states) const 
+{
     target.draw(m_rounded_rectangle.m_rectangle, states);
     target.draw(m_rounded_rectangle.m_topEdge, states);
     target.draw(m_rounded_rectangle.m_bottomEdge, states);
@@ -75,14 +99,27 @@ void RoundedCornerRectangleView::draw(sf::RenderTarget& target, sf::RenderStates
     target.draw(m_rounded_rectangle.m_bottomRightCorner, states);
 }
 
-bool RoundedCornerRectangleView::contains(sf::Vector2f point) const {
+bool RoundedCornerRectangleView::contains(sf::Vector2f point) const 
+{
     return m_rounded_rectangle.m_rectangle.getGlobalBounds().contains(point);
 }
 
-RoundedCornerRectangleShape& RoundedCornerRectangleView::get() {
+RoundedCornerRectangleShape& RoundedCornerRectangleView::get() 
+{
     return m_rounded_rectangle;
 }
 
-RoundedCornerRectangleShape RoundedCornerRectangleView::getRectangle() const {
+RoundedCornerRectangleShape RoundedCornerRectangleView::getRectangle() const 
+{
     return m_rounded_rectangle;
+}
+
+sf::Vector2f RoundedCornerRectangleView::getPosition() const 
+{
+    return m_rounded_rectangle.getPosition();
+}
+
+sf::Vector2f RoundedCornerRectangleView::getSize() const 
+{
+    return m_rounded_rectangle.getSize();
 }

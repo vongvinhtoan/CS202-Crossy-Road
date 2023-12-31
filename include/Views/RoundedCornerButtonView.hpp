@@ -2,6 +2,7 @@
 
 #include <Views/RoundedCornerRectangleView.hpp>
 #include <Utils.hpp>
+#include <iostream>
 
 class RoundedCornerButtonView : public RoundedCornerRectangleView
 {
@@ -14,6 +15,7 @@ public:
 	{
 		m_tmpRectangle.setOutlineColor(sf::Color::Transparent);
 		m_tmpRectangle.setOutlineThickness(0);
+		m_tmpRectangle.setPosition(RoundedCornerButtonView::getPosition());
 
 		setHoverEffect();
 	}
@@ -24,7 +26,9 @@ private:
 
 public:
 	void setHoverEffect(sf::Color hoverColor = utils::hexToColor("D9D9D9"));
+	sf::Vector2f getPosition() const;
+	sf::Vector2f getSize() const;
 
 private:
-	sf::RectangleShape 					m_tmpRectangle;
+	sf::RectangleShape 		m_tmpRectangle;
 };
