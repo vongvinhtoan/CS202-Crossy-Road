@@ -104,6 +104,7 @@ void ModalView::handleEvent(sf::Event &event)
                                                                                               : "",
                                  sf::Keyboard::Key(keyNum));
                 hide();
+                mText.setString("");
             }
         }
     }
