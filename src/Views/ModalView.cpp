@@ -75,6 +75,11 @@ void ModalView::update(sf::Time dt)
     sf::Vector2f textPosition = sf::Vector2f(mTextEdit.getPosition().x + (mTextEdit.getSize().x - textRect.width) / 2.0f, mTextEdit.getPosition().y + mTextEdit.getSize().y / 2.0f);
     mText.setOrigin(textRect.left, textRect.top + textRect.height / 2.0f);
     mText.setPosition(textPosition);
+
+    if(isHidden()) {
+        mText.setString("");
+        mWarning.setString("Change your shortcuts.");
+    }
 }
 
 void ModalView::handleEvent(sf::Event &event)
@@ -84,7 +89,7 @@ void ModalView::handleEvent(sf::Event &event)
         if (event.key.code >= sf::Keyboard::A && event.key.code <= sf::Keyboard::Z)
         {
             char letter = static_cast<char>(event.key.code + 65);
-            mText.setString(std::string(1, letter));
+            mText.setString(letter);
         }
 
         std::vector<char> keys = getKeysFromConfigFile();
@@ -104,7 +109,6 @@ void ModalView::handleEvent(sf::Event &event)
                                                                                               : "",
                                  sf::Keyboard::Key(keyNum));
                 hide();
-                mText.setString("");
             }
         }
     }

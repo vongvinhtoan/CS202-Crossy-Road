@@ -8,11 +8,6 @@
 
 ShortcutView::ShortcutView()
 {
-    std::cout << static_cast<int>(sf::Keyboard::Key::Up) << std::endl;
-    std::cout << static_cast<int>(sf::Keyboard::Key::Left) << std::endl;
-    std::cout << static_cast<int>(sf::Keyboard::Key::Down) << std::endl;
-    std::cout << static_cast<int>(sf::Keyboard::Key::Right) << std::endl;
-    std::cout << "-----------------" << std::endl;
     sf::Color buttonColor = utils::hexToColor("D9D9D9");
     sf::Color textColor = utils::hexToColor("000000");
     sf::Vector2f buttonSize(151, 151);
