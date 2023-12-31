@@ -26,3 +26,13 @@ void RoundedCornerButtonView::setHoverEffect(sf::Color hoverColor)
         m_tmpRectangle.setFillColor(sf::Color::Transparent);
     });
 }
+
+sf::Vector2f RoundedCornerButtonView::getPosition() const
+{
+   return RoundedCornerRectangleView::getPosition();
+}
+
+sf::Vector2f RoundedCornerButtonView::getSize() const
+{
+    return RoundedCornerRectangleView::getSize();
+}

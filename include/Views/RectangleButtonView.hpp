@@ -26,5 +26,5 @@ public:
 	void setHoverEffect(sf::Color hoverColor = utils::hexToColor("D9D9D9"));
 
 private:
-	sf::RectangleShape 					m_tmpRectangle;
+	sf::RectangleShape 		m_tmpRectangle;
 };
