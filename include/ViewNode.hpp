@@ -53,6 +53,7 @@ public:
     void toggle();
     void enable();
     void disable();
+    bool isEnabled();
 
 private:
     ViewNode*                               m_parent = nullptr;

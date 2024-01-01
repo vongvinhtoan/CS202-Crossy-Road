@@ -13,6 +13,7 @@ ViewNode::~ViewNode()
 void ViewNode::toggle() { m_enabled = !m_enabled; }
 void ViewNode::enable() { m_enabled = true; }
 void ViewNode::disable() { m_enabled = false; }
+bool ViewNode::isEnabled() { return m_enabled; }
 
 void ViewNode::attachChild(std::unique_ptr<ViewNode> child)
 {
