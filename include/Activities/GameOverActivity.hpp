@@ -17,7 +17,8 @@ private:
 	sf::Time 					m_elapsedTime = sf::Time::Zero;
 	RectangleView* 				m_background = nullptr;
 	TextView* 					m_gameOverText = nullptr;
-	std::vector<TextView*> 		m_numberTexts;
+	std::vector<int> 			m_numberTexts;
 	RectangleButtonView*		m_playAgainButton = nullptr;
 	RectangleButtonView*		m_homeButton = nullptr;
+	bool						m_isAnimationFinished = false;
 };
