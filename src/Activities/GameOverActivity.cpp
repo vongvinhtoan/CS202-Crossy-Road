@@ -48,10 +48,10 @@ GameOverActivity::GameOverActivity(ActivityStack& stack, int requestCode, Extra&
 	auto playAgainButton = std::make_unique<RectangleButtonView>(sf::Vector2f(204, 204));
     playAgainButton->setPosition(sf::Vector2f(444.f, 324.f));
     playAgainButton->setOnClick([this](ViewNode& view) {
-		//finishActivity();
+		replay();
     });
-	m_playAgainButton = playAgainButton.get();
 	playAgainButton->disable();
+	m_playAgainButton = playAgainButton.get();
 
 	std::vector<std::unique_ptr<TextView>> numberTexts;
 	numberTexts.resize(count_down_time);
@@ -112,7 +112,7 @@ bool GameOverActivity::update(sf::Time dt)
 		color.a = utils::lerp(0, 255, utils::anim::quadratic_ease_out((m_elapsedTime.asSeconds() - .5f) / duration));
 		m_gameOverText->get().setFillColor(color);
 	}
-	if (m_elapsedTime>= sf::seconds(2.5f))
+	if (m_elapsedTime >= sf::seconds(2.5f))
 	{
 		//hide game over text
 		auto color = m_gameOverText->get().getFillColor();
@@ -131,4 +131,13 @@ bool GameOverActivity::update(sf::Time dt)
 bool GameOverActivity::draw()
 {
 	return Activity::draw();
+}
+
+void GameOverActivity::replay()
+{
+	std::cout<<"GameOverActivity::replay()"<<std::endl;
+	m_gameOverText->get().setFillColor(utils::hexToColor("FFFFFF00"));
+
+	m_homeButton->disable();
+	m_playAgainButton->disable();
 }
