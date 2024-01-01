@@ -5,11 +5,15 @@
 #include <GameOverStrategy.hpp>
 
 class Game;
+class PlaygroundCamera;
 
 enum class LaneType
 {
     Land,
     MovingWater,
+    StillWater,
+    Car,
+    Train,
     Count
 };
 

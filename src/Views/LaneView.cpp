@@ -35,3 +35,10 @@ LaneType LaneView::getLaneType() const
 {
 	return m_laneType;
 }
+
+float LaneView::absolutePositionTransformation(float pos, PlaygroundCamera* camera) const
+{
+	pos -= camera->getScrollPosition() - (*getContext()->getWindow()).getSize().y / 2;
+	pos = (*getContext()->getWindow()).getSize().y - pos;
+    return pos;
+}

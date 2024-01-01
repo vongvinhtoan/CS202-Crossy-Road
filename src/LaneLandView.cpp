@@ -53,20 +53,15 @@ void LaneLandView::bind(Lane* _lane, PlaygroundCamera* camera)
 		renew_obstacles();
 	}
 
-	auto pos = lane->getIndex() * 100;
-	pos -= camera->getScrollPosition() - (*getContext()->getWindow()).getSize().y / 2;
-	pos = (*getContext()->getWindow()).getSize().y - pos;
-
+	auto pos = absolutePositionTransformation(lane->getIndex() * 100, camera);
 	for(int i = 0; i < mTiles.size(); ++i)
 	{
 		mTiles[i].setPosition(i * 100, pos);
 	}
 
+	pos =  absolutePositionTransformation(lane->getIndex() * 100 - 100, camera);
 	for(int i = 0; i < obstacles.size(); ++i)
 	{
-		auto pos = lane->getIndex() * 100 - 100;
-		pos -= camera->getScrollPosition() - (*getContext()->getWindow()).getSize().y / 2;
-		pos = (*getContext()->getWindow()).getSize().y - pos;
 		mObstacles[i].setPosition(obstacles[i] * 100 + 50, pos);
 	}
 }

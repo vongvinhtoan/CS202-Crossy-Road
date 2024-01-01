@@ -1,6 +1,9 @@
 #include <LaneFactory.hpp>
 #include <LaneLand.hpp>
 #include <LaneMovingWater.hpp>
+#include <LaneStillWater.hpp>
+#include <LaneCar.hpp>
+#include <LaneTrain.hpp>
 #include <Utils.hpp>
 #include <Game.hpp>
 
@@ -12,6 +15,15 @@ LaneFactory::LaneFactory(std::vector<std::vector<double>> probabilities)
     };
     m_laneFactories[LaneType::MovingWater] = [](LaneType laneType, int id, Game* game) -> std::unique_ptr<Lane> {
         return std::unique_ptr<Lane>(new LaneMovingWater(laneType, id, game));
+    };
+    m_laneFactories[LaneType::StillWater] = [](LaneType laneType, int id, Game* game) -> std::unique_ptr<Lane> {
+        return std::unique_ptr<Lane>(new LaneStillWater(laneType, id, game));
+    };
+    m_laneFactories[LaneType::Car] = [](LaneType laneType, int id, Game* game) -> std::unique_ptr<Lane> {
+        return std::unique_ptr<Lane>(new LaneCar(laneType, id, game));
+    };
+    m_laneFactories[LaneType::Train] = [](LaneType laneType, int id, Game* game) -> std::unique_ptr<Lane> {
+        return std::unique_ptr<Lane>(new LaneTrain(laneType, id, game));
     };
 }
 
