@@ -10,6 +10,12 @@ LaneStillWater::LaneStillWater(LaneType laneType, int id, Game* game)
 
 }
 
+LaneStillWater::LaneStillWater(LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes)
+    : Lane(laneType, id, game)
+{
+
+}
+
 void LaneStillWater::update(sf::Time dt)
 {
 
@@ -45,4 +51,9 @@ GameOverStategy* LaneStillWater::enter(Player* player)
     playerRect.left = std::round(playerRect.left / 100.f) * 100.f;
     player->moveTo({playerRect.left, playerRect.top});
     return nullptr;
+}
+
+std::vector<int> LaneStillWater::getSafeIndexes() const
+{
+    return m_leafs;
 }

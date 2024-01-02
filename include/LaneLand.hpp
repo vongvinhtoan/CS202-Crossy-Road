@@ -9,10 +9,11 @@ class LaneLand : public Lane
 {
 public:
     LaneLand(LaneType laneType, int id, Game* game);
+    LaneLand(LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes);
 
 public:
     void update(sf::Time dt) override;
-    std::vector<float> getObstacles() const;
+    std::vector<int> getObstacles() const;
 
 public:
     GameOverStategy* moveLeft(Player* player) override;
@@ -20,8 +21,9 @@ public:
     GameOverStategy* enter(Player* player) override;
     GameOverStategy* updatePlayer(Player* player, sf::Time dt) override;
 
+public:
+    std::vector<int> getSafeIndexes() const override;
+
 private:
-    std::vector<float>    mOriginalObstacles;
-    std::vector<float>    mObstacles;
-    sf::Time              mElapsedTime;
+    std::vector<int>      mObstacles;
 };

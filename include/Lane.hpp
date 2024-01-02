@@ -36,6 +36,9 @@ public:
     virtual GameOverStategy* updatePlayer(Player* player, sf::Time dt) = 0;
 
 public:
+    virtual std::vector<int> getSafeIndexes() const = 0;
+
+public:
     Game* getGame() const;
 
 private:

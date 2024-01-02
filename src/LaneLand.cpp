@@ -6,7 +6,6 @@
 
 LaneLand::LaneLand(LaneType laneType, int id, Game* game)
     : Lane(laneType, id, game)
-    , mElapsedTime(sf::Time::Zero)
 {
     int obstacleCount = utils::random(1, 3);
     if(id == 0)
@@ -15,27 +14,32 @@ LaneLand::LaneLand(LaneType laneType, int id, Game* game)
     for (int i = 0; i < obstacleCount; i++)
     {
         int obstacle = utils::random(0, maxIndex-1);
-        mOriginalObstacles.push_back(obstacle);
         mObstacles.push_back(obstacle);
     }
 }
 
-std::vector<float> LaneLand::getObstacles() const
+LaneLand::LaneLand(LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes)
+    : Lane(laneType, id, game)
+{
+    int obstacleCount = utils::random(1, 3);
+    if(id == 0)
+        obstacleCount = 0;
+    int maxIndex = (*Context::getInstance().getWindow()).getSize().x / 100.f;
+    for (int i = 0; i < obstacleCount; i++)
+    {
+        int obstacle = utils::random(0, maxIndex-1);
+        mObstacles.push_back(obstacle);
+    }
+}
+
+std::vector<int> LaneLand::getObstacles() const
 {
     return mObstacles;
 }
 
 void LaneLand::update(sf::Time dt)
 {
-    mElapsedTime += dt;
-    while (mElapsedTime.asSeconds() > 2.f)
-        mElapsedTime -= sf::seconds(2.f);
-    for(int i=0; i<mObstacles.size(); ++i)
-    {
-        auto& obstacle = mObstacles[i];
-        auto& originalObstacle = mOriginalObstacles[i];
-        // obstacle = originalObstacle + mElapsedTime.asSeconds();
-    }
+
 }
 
 GameOverStategy* LaneLand::updatePlayer(Player* player, sf::Time dt)
@@ -92,4 +96,20 @@ GameOverStategy* LaneLand::enter(Player* player)
         return gameOverStrategy;
     }
     return nullptr;
+}
+
+std::vector<int> LaneLand::getSafeIndexes() const
+{
+    std::vector<int> safeIndexes;
+    auto numIndexes = Context::getInstance().getWindow()->getSize().x / 100.f;
+    for(int i=0, j=0; i < mObstacles.size(); ++i)
+    {
+        while(j < numIndexes && j < mObstacles[i])
+        {
+            safeIndexes.push_back(j);
+            ++j;
+        }
+        ++j;
+    }
+    return safeIndexes;
 }
