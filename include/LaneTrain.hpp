@@ -8,14 +8,10 @@
 class LaneTrain : public Lane
 {
 public:
-    LaneTrain(LaneType laneType, int id, Game* game);
-    LaneTrain(LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes);
+    LaneTrain(LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes);
 
 public:
     void update(sf::Time dt) override;
-
-public:
-    std::vector<int> getSafeIndexes() const override;
 
 public:
     GameOverStategy* moveLeft(Player* player) override;

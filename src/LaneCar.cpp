@@ -7,7 +7,7 @@
 const sf::Time LaneCar::m_stopTime = sf::seconds(5.f);
 const sf::Time LaneCar::m_prepareTime = sf::seconds(2.5f);
 
-LaneCar::LaneCar(LaneType laneType, int id, Game* game)
+LaneCar::LaneCar(LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes)
     : Lane(laneType, id, game)
     , m_cars()
     , m_carSize(utils::random(1, 3))
@@ -22,22 +22,11 @@ LaneCar::LaneCar(LaneType laneType, int id, Game* game)
     {
         m_cars.push_back(m_cars.back() + (m_carSize + m_carSpace) * 100.f);
     }
-}
 
-LaneCar::LaneCar(LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes)
-    : Lane(laneType, id, game)
-    , m_cars()
-    , m_carSize(utils::random(1, 3))
-    , m_carSpace(utils::random(4, 6))
-    , m_carSpeed(utils::random(200.f, 400.f))
-{
-    if(utils::random(0, 1))
-        m_carSpeed *= -1.f;
-
-    m_cars.push_back(utils::random(-100.f, 100.f));
-    while(m_cars.back() + m_carSize * 100.f < Context::getInstance().getWindow()->getSize().x)
+    m_safeIndexes.resize(Context::getInstance().getWindow()->getSize().x / 100.f);
+    for(int i=0; i<m_safeIndexes.size(); i++)
     {
-        m_cars.push_back(m_cars.back() + (m_carSize + m_carSpace) * 100.f);
+        m_safeIndexes[i] = i;
     }
 }
 
@@ -163,15 +152,4 @@ int LaneCar::getCarSize() const
 int LaneCar::getCarSpace() const
 {
     return m_carSpace;
-}
-
-std::vector<int> LaneCar::getSafeIndexes() const
-{
-    std::vector<int> safeIndexes;
-    auto numIndexes = Context::getInstance().getWindow()->getSize().x / 100.f;
-    for(int i=0; i < numIndexes; ++i)
-    {
-        safeIndexes.push_back(i);
-    }
-    return safeIndexes;
 }

@@ -10,24 +10,24 @@
 LaneFactory::LaneFactory(std::vector<std::vector<double>> probabilities)
     : m_laneProbabilities(probabilities)
 {
-    m_laneFactories[LaneType::Land] = [](LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes) -> std::unique_ptr<Lane> {
+    m_laneFactories[LaneType::Land] = [](LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes) -> std::unique_ptr<Lane> {
         return std::unique_ptr<Lane>(new LaneLand(laneType, id, game, lastSafeIndexes));
     };
-    m_laneFactories[LaneType::MovingWater] = [](LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes) -> std::unique_ptr<Lane> {
+    m_laneFactories[LaneType::MovingWater] = [](LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes) -> std::unique_ptr<Lane> {
         return std::unique_ptr<Lane>(new LaneMovingWater(laneType, id, game, lastSafeIndexes));
     };
-    m_laneFactories[LaneType::StillWater] = [](LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes) -> std::unique_ptr<Lane> {
+    m_laneFactories[LaneType::StillWater] = [](LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes) -> std::unique_ptr<Lane> {
         return std::unique_ptr<Lane>(new LaneStillWater(laneType, id, game, lastSafeIndexes));
     };
-    m_laneFactories[LaneType::Car] = [](LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes) -> std::unique_ptr<Lane> {
+    m_laneFactories[LaneType::Car] = [](LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes) -> std::unique_ptr<Lane> {
         return std::unique_ptr<Lane>(new LaneCar(laneType, id, game, lastSafeIndexes));
     };
-    m_laneFactories[LaneType::Train] = [](LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes) -> std::unique_ptr<Lane> {
+    m_laneFactories[LaneType::Train] = [](LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes) -> std::unique_ptr<Lane> {
         return std::unique_ptr<Lane>(new LaneTrain(laneType, id, game, lastSafeIndexes));
     };
 }
 
-std::unique_ptr<Lane> LaneFactory::create(LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes)
+std::unique_ptr<Lane> LaneFactory::create(LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes)
 {
     return m_laneFactories[laneType](laneType, id, game, lastSafeIndexes);
 }
@@ -36,10 +36,10 @@ std::unique_ptr<Lane> LaneFactory::createAfter(Lane* lastLane, int id, Game* gam
 {
     if(!lastLane)
     {
-        std::vector<int> lastSafeIndexes;
+        std::vector<bool> lastSafeIndexes;
         for(int i=0; i<Context::getInstance().getWindow()->getSize().x / 100.f; ++i)
         {
-            lastSafeIndexes.push_back(i);
+            lastSafeIndexes.push_back(true);
         }
         return create(LaneType::Land, id, game, lastSafeIndexes);
     }

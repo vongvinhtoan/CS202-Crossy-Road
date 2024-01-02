@@ -6,17 +6,13 @@
 class LaneMovingWater : public Lane
 {
 public:
-    LaneMovingWater(LaneType laneType, int id, Game* game);
-    LaneMovingWater(LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes);
+    LaneMovingWater(LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes);
 
 public:
     GameOverStategy* moveLeft(Player* player) override;
     GameOverStategy* moveRight(Player* player) override;
     GameOverStategy* enter(Player* player) override;
     GameOverStategy* updatePlayer(Player* player, sf::Time dt) override;
-
-public:
-    std::vector<int> getSafeIndexes() const override;
 
 public:
     void update(sf::Time dt) override;

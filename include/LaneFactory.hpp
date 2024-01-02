@@ -26,12 +26,12 @@ struct LaneProbabilities
 class LaneFactory
 {
 private:
-    std::map<LaneType, std::function<std::unique_ptr<Lane>(LaneType, int, Game*, std::vector<int>)>> m_laneFactories;
+    std::map<LaneType, std::function<std::unique_ptr<Lane>(LaneType, int, Game*, std::vector<bool>)>> m_laneFactories;
     LaneProbabilities m_laneProbabilities;
 
 public:
     LaneFactory(std::vector<std::vector<double>> probabilities);
 
-    std::unique_ptr<Lane> create(LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes);
+    std::unique_ptr<Lane> create(LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes);
     std::unique_ptr<Lane> createAfter(Lane* lastLane, int id, Game* game);
 };

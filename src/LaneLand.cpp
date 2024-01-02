@@ -3,33 +3,35 @@
 #include <Utils.hpp>
 #include <Context.hpp>
 #include <GameOver_HitObstacleOnLand.hpp>
+#include <set>
 
-LaneLand::LaneLand(LaneType laneType, int id, Game* game)
+LaneLand::LaneLand(LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes)
     : Lane(laneType, id, game)
 {
     int obstacleCount = utils::random(1, 3);
     if(id == 0)
         obstacleCount = 0;
     int maxIndex = (*Context::getInstance().getWindow()).getSize().x / 100.f;
-    for (int i = 0; i < obstacleCount; i++)
+    
+    std::set<int> tmpObstacles;
+    for(int i=0; i<obstacleCount; ++i)
     {
-        int obstacle = utils::random(0, maxIndex-1);
-        mObstacles.push_back(obstacle);
+        int index = utils::random(0, maxIndex - 1);
+        while(tmpObstacles.find(index) != tmpObstacles.end())
+        {
+            index = utils::random(0, maxIndex - 1);
+        }
+        tmpObstacles.insert(index);
     }
-}
+    mObstacles = std::vector<int>(tmpObstacles.begin(), tmpObstacles.end());
 
-LaneLand::LaneLand(LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes)
-    : Lane(laneType, id, game)
-{
-    int obstacleCount = utils::random(1, 3);
-    if(id == 0)
-        obstacleCount = 0;
-    int maxIndex = (*Context::getInstance().getWindow()).getSize().x / 100.f;
-    for (int i = 0; i < obstacleCount; i++)
+    std::vector<bool> allowedIndexes;
+    allowedIndexes.resize(maxIndex, true);
+    for(auto& index : tmpObstacles)
     {
-        int obstacle = utils::random(0, maxIndex-1);
-        mObstacles.push_back(obstacle);
+        allowedIndexes[index] = false;
     }
+    m_safeIndexes = calculateSafeIndexes(allowedIndexes, lastSafeIndexes);
 }
 
 std::vector<int> LaneLand::getObstacles() const
@@ -96,20 +98,4 @@ GameOverStategy* LaneLand::enter(Player* player)
         return gameOverStrategy;
     }
     return nullptr;
-}
-
-std::vector<int> LaneLand::getSafeIndexes() const
-{
-    std::vector<int> safeIndexes;
-    auto numIndexes = Context::getInstance().getWindow()->getSize().x / 100.f;
-    for(int i=0, j=0; i < mObstacles.size(); ++i)
-    {
-        while(j < numIndexes && j < mObstacles[i])
-        {
-            safeIndexes.push_back(j);
-            ++j;
-        }
-        ++j;
-    }
-    return safeIndexes;
 }

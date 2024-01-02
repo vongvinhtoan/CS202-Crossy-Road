@@ -36,13 +36,18 @@ public:
     virtual GameOverStategy* updatePlayer(Player* player, sf::Time dt) = 0;
 
 public:
-    virtual std::vector<int> getSafeIndexes() const = 0;
+    std::vector<bool> getSafeIndexes() const;
+    std::vector<bool> calculateSafeIndexes(std::vector<bool> allowedIndexes, std::vector<bool> lastSafeIndexes);
+    bool isLegitIndexes(std::vector<bool> indexes) const;
 
 public:
     Game* getGame() const;
 
 private:
-    int         m_index;
-    LaneType    m_laneType;
-    Game*       m_game;
+    int                 m_index;
+    LaneType            m_laneType;
+    Game*               m_game;
+
+protected:
+    std::vector<bool>   m_safeIndexes;
 };

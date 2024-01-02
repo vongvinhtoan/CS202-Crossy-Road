@@ -4,16 +4,11 @@
 #include <Context.hpp>
 #include <GameOver_HitObstacleOnLand.hpp>
 
-LaneTrain::LaneTrain(LaneType laneType, int id, Game* game)
+LaneTrain::LaneTrain(LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes)
     : Lane(laneType, id, game)
 {
-
-}
-
-LaneTrain::LaneTrain(LaneType laneType, int id, Game* game, std::vector<int> lastSafeIndexes)
-    : Lane(laneType, id, game)
-{
-
+    m_safeIndexes.clear();
+    m_safeIndexes.resize(Context::getInstance().getWindow()->getSize().x / 100.f, true);
 }
 
 void LaneTrain::update(sf::Time dt)
@@ -51,15 +46,4 @@ GameOverStategy* LaneTrain::enter(Player* player)
     playerRect.left = std::round(playerRect.left / 100.f) * 100.f;
     player->moveTo({playerRect.left, playerRect.top});
     return nullptr;
-}
-
-std::vector<int> LaneTrain::getSafeIndexes() const
-{
-    std::vector<int> safeIndexes;
-    auto numIndexes = Context::getInstance().getWindow()->getSize().x / 100.f;
-    for(int i=0; i < numIndexes; ++i)
-    {
-        safeIndexes.push_back(i);
-    }
-    return safeIndexes;
 }
