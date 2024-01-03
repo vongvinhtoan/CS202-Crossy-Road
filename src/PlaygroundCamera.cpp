@@ -31,8 +31,8 @@ void PlaygroundCamera::update(float playerPosition, sf::Time dt)
         mScrollSpeed += mInitialScrollSpeed;
     mScrollPositionTarget += mScrollSpeed * dt.asSeconds();
 
-    if (mScrollPositionTarget < playerPosition + 100.f)
-        mScrollPositionTarget = playerPosition + 100.f;
+    if (mScrollPositionTarget < playerPosition + 50.f)
+        mScrollPositionTarget = playerPosition + 50.f;
 
     mScrollPosition = mDynamics->update(dt.asSeconds(), mScrollPositionTarget);
 }

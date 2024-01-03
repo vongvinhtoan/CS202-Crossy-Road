@@ -10,7 +10,7 @@ const sf::Time LaneCar::m_prepareTime = sf::seconds(2.5f);
 LaneCar::LaneCar(LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes)
     : Lane(laneType, id, game)
     , m_cars()
-    , m_carSize(utils::random(1, 3))
+    , m_carSize(utils::random(1, 2))
     , m_carSpace(utils::random(4, 6))
     , m_carSpeed(utils::random(200.f, 400.f))
 {

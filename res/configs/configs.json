@@ -66,14 +66,14 @@
 		"bufferRange" : 9,
 		"camera" : 
 		{
-			"acceleration" : 0.0050000000000000001,
+			"acceleration" : 0,
 			"dynamic" : 
 			{
 				"f" : 3,
 				"r" : 0,
 				"z" : 0.75
 			},
-			"initialScrollSpeed" : 80
+			"initialScrollSpeed" : 0
 		},
 		"tileSize" : 75
 	},
