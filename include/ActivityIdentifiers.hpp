@@ -12,4 +12,6 @@ enum ActivityID
 	, Playground
 	, Pause
 	, GameOver
+	, LoadGame
+	, SaveGame
 };

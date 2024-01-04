@@ -9,3 +9,5 @@
 #include <Activities/PlaygroundActivity.hpp>
 #include <Activities/PauseActivity.hpp>
 #include <Activities/GameOverActivity.hpp>
+#include <Activities/LoadGameActivity.hpp>
+#include <Activities/SaveGameActivity.hpp>
