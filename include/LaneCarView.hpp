@@ -23,4 +23,5 @@ public:
 private:
 	sf::RectangleShape 				m_background;
 	std::vector<sf::RectangleShape>	m_cars;
+	int 							m_carSize;
 };

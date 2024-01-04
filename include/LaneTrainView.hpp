@@ -21,6 +21,25 @@ public:
     virtual void bind(Lane* lane, PlaygroundCamera* camera) override;
 
 private:
+	void stepTexture();
+	void resetTexture();
+
+private:
+	const static float TRAIN_ANIMATION_TIME;
+
+private:
+	enum Direction
+	{
+		Left,
+		Right
+	};
+
+private:
 	sf::RectangleShape 				m_background;
 	std::vector<sf::RectangleShape>	m_trains;
+	std::vector<sf::Texture*>		m_trainTextures;
+	sf::Time						m_animElapsedTime;
+	int								m_trainTextureIndex;
+	Lane* 						 	m_lastLane;
+	Direction						m_direction;
 };

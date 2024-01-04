@@ -8,7 +8,7 @@ LaneStillWaterView::LaneStillWaterView(LaneType laneType)
 {
     float winsizex = getContext()->getWindow()->getSize().x;
     m_background.setSize({winsizex, 100.f});
-    m_background.setFillColor(sf::Color::Blue);
+    m_background.setFillColor(utils::hexToColor("#00B0F0"));
 }
 
 void LaneStillWaterView::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -47,9 +47,12 @@ void LaneStillWaterView::bind(Lane* _lane, PlaygroundCamera* camera)
     m_leafs.resize(leafs.size());
     for(int i=0; i<leafs.size(); ++i)
     {
-        m_leafs[i].setSize({50.f, 50.f});
-        m_leafs[i].setFillColor(sf::Color::Green);
-        m_leafs[i].setPosition(leafs[i] * 100.f + 25.f, pos + 25.f);
+        auto &texture = getContext()->getTextures()->get(TextureID::LaneStillWater_leaf);
+        m_leafs[i].setTexture(&texture);
+        sf::Vector2f size = {float(texture.getSize().x), float(texture.getSize().y)};
+        m_leafs[i].setSize(size);
+        m_leafs[i].setPosition({leafs[i] * 100.f + 50.f, pos + 50.f});
+        m_leafs[i].setOrigin(size / 2.f);
     }
 }
 

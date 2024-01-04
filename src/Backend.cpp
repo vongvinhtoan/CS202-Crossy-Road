@@ -28,6 +28,21 @@ void Backend::loadTextures(TextureHolder& textures) {
     textures.load(TextureID::LaneLand_tile_2, "res/textures/Lanes/Land/LaneLand_tile_2.png");
     textures.load(TextureID::LaneLand_obstacle_0, "res/textures/Lanes/Land/LaneLand_obstacle_0.png");
     textures.load(TextureID::LaneLand_obstacle_1, "res/textures/Lanes/Land/LaneLand_obstacle_1.png");
+    textures.load(TextureID::LaneStillWater_leaf, "res/textures/Lanes/StillWater/LaneStillWater_leaf.png");
+    textures.load(TextureID::LaneTrain_railway_section, "res/textures/Lanes/Train/LaneTrain_railway_section.png");
+    textures.load(TextureID::LaneTrain_train_1, "res/textures/Lanes/Train/LaneTrain_train_1.png");
+    textures.load(TextureID::LaneTrain_train_2, "res/textures/Lanes/Train/LaneTrain_train_2.png");
+    textures.load(TextureID::LaneTrain_train_3, "res/textures/Lanes/Train/LaneTrain_train_3.png");
+    textures.load(TextureID::LaneTrain_train_4, "res/textures/Lanes/Train/LaneTrain_train_4.png");
+    textures.load(TextureID::LaneTrain_train_5, "res/textures/Lanes/Train/LaneTrain_train_5.png");
+    textures.load(TextureID::LaneTrain_train_6, "res/textures/Lanes/Train/LaneTrain_train_6.png");
+    textures.load(TextureID::LaneTrain_train_7, "res/textures/Lanes/Train/LaneTrain_train_7.png");
+    textures.load(TextureID::LaneTrain_train_8, "res/textures/Lanes/Train/LaneTrain_train_8.png");
+    textures.load(TextureID::LaneTrain_train_coal, "res/textures/Lanes/Train/LaneTrain_train_coal.png");
+    textures.load(TextureID::LaneTrain_train_log, "res/textures/Lanes/Train/LaneTrain_train_log.png");
+    textures.load(TextureID::LaneTrain_train_empty, "res/textures/Lanes/Train/LaneTrain_train_empty.png");
+    textures.load(TextureID::LaneCar_background_1, "res/textures/Lanes/Car/LaneCar_background_1.png");
+    textures.load(TextureID::LaneCar_background_2, "res/textures/Lanes/Car/LaneCar_background_2.png");
 }
 
 void Backend::loadFonts(FontHolder& fonts) {
