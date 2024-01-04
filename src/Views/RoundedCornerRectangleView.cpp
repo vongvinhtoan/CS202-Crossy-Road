@@ -123,3 +123,8 @@ sf::Vector2f RoundedCornerRectangleView::getSize() const
 {
     return m_rounded_rectangle.getSize();
 }
+
+void RoundedCornerRectangleView::setPosition(sf::Vector2f position)
+{
+    RoundedCornerRectangleView::setPosition(position);
+}

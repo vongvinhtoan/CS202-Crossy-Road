@@ -78,6 +78,8 @@ public:
 	sf::Vector2f getPosition() const;
 	sf::Vector2f getSize() const;
 
+	void setPosition(sf::Vector2f position);
+
 protected:
 	RoundedCornerRectangleShape m_rounded_rectangle;
 };

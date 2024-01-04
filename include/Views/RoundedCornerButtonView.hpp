@@ -29,6 +29,7 @@ public:
 	sf::Vector2f getPosition() const;
 	sf::Vector2f getSize() const;
 
+	RoundedCornerRectangleShape& get();
 private:
 	sf::RectangleShape 		m_tmpRectangle;
 };

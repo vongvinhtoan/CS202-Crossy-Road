@@ -36,3 +36,9 @@ sf::Vector2f RoundedCornerButtonView::getSize() const
 {
     return RoundedCornerRectangleView::getSize();
 }
+
+RoundedCornerRectangleShape& RoundedCornerButtonView::get()
+{
+    m_tmpRectangle.setPosition(getPosition());
+    return m_rounded_rectangle;
+}
