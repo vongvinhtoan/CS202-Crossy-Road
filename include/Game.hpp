@@ -59,7 +59,6 @@ private:
     void playerMoveUp();
     void playerMoveDown();
     Lane* getCurrentLane();
-    int getCurrentLaneIndex();
 
 private:
     void updateLanes(int l, int r, sf::Time dt);

@@ -13,7 +13,7 @@ enum ID {
     SelectCharacter,
     ShortcutPicture,
     CloseButton,
-    CloseButtonHover,,
+    CloseButtonHover,
     LaneLand_tile_0,
     LaneLand_tile_1,
     LaneLand_tile_2,
