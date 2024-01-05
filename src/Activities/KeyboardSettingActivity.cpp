@@ -52,7 +52,6 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
     home_button->setPosition(sf::Vector2f(64.f, 64.f));
     home_button->setOnClick([this](ViewNode &view)
     {
-        std::cout << "Home button clicked" << std::endl;
         finishActivity(); 
     });
 
@@ -62,7 +61,6 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
     keyboard_button->get().setTexture(&getContext()->getTextures()->get(TextureID::KeyboardButton));
     keyboard_button->setPosition(sf::Vector2f(1414.f, 70.f));
     keyboard_button->setOnClick([this](ViewNode& view) {
-        std::cout << "Keyboard button clicked" << std::endl;
         if(m_shortcutPicture->isHidden()) {
             m_shortcutPicture->show();
             m_shortcutView->hide();
@@ -91,7 +89,8 @@ bool KeyboardSettingActivity::handleRealtimeInput()
 
 bool KeyboardSettingActivity::update(sf::Time dt)
 {
-    return Activity::update(dt);
+    Activity::update(dt);
+    return 0;
 }
 
 bool KeyboardSettingActivity::draw()
