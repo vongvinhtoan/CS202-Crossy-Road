@@ -24,6 +24,7 @@ public:
     std::deque<float> getCars() const;
     int getCarSize() const;
     int getCarSpace() const;
+    int getDirection() const;
 
 private:
     void removeOldCars();

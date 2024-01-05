@@ -21,7 +21,10 @@ void LaneMovingWaterView::draw(sf::RenderTarget& target, sf::RenderStates states
 	}
 	for(auto wood : m_woods)
 	{
-		target.draw(wood, states);
+		for(auto w : wood)
+		{
+			target.draw(w, states);
+		}
 	}
 }
 
@@ -53,11 +56,28 @@ void LaneMovingWaterView::bind(Lane* _lane, PlaygroundCamera* camera)
 	m_woods.resize(woodPositions.size());
 	for(int i = 0; i < woodPositions.size(); ++i)
 	{
-		m_woods[i].setSize(sf::Vector2f(woodPositions[i].second - woodPositions[i].first, 100));
+		m_woods[i].clear();
+		for(float j = woodPositions[i].first; j < woodPositions[i].second - 50.f; j += 100.f)
+		{
+			m_woods[i].emplace_back(sf::Vector2f(100, 100));
+			m_woods[i].back().setPosition(sf::Vector2f(j, pos));
+		}
+	}
 
-
-		m_woods[i].setPosition(sf::Vector2f(woodPositions[i].first, pos));
-		m_woods[i].setFillColor(sf::Color(139, 69, 19));
+	for(auto& woods : m_woods)
+	{
+		woods[0].setTexture(&getContext()->getTextures()->get(TextureID::LaneMovingWater_log_head));
+		woods.back().setTexture(&getContext()->getTextures()->get(TextureID::LaneMovingWater_log_tail));
+		for(int i = 1; i < woods.size() - 1; ++i)
+		{
+			woods[i].setTexture(&getContext()->getTextures()->get(TextureID::LaneMovingWater_log_body));
+		}
+		for(auto wood : woods)
+		{
+			wood.setTextureRect(sf::IntRect(0, 0, wood.getSize().x, wood.getSize().y));
+			wood.setOrigin(0, wood.getSize().y / 2.f);
+			wood.move(0.f, 50.f);
+		}
 	}
 }
 

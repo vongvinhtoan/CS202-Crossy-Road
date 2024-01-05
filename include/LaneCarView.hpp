@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Views/LaneView.hpp>
+#include <AnimatedSprite.hpp>
 
 class LaneCarView : public LaneView
 {
@@ -21,7 +22,14 @@ public:
     virtual void bind(Lane* lane, PlaygroundCamera* camera) override;
 
 private:
+	void resetTexture();
+	void setCarsTexture();
+
+private:
+	Lane* 							m_lastLane;
 	sf::RectangleShape 				m_background;
-	std::vector<sf::RectangleShape>	m_cars;
+	std::vector<AnimatedSprite> 	m_cars;
 	int 							m_carSize;
+	int 							m_carTextureIndex;
+	int 							m_direction;
 };
