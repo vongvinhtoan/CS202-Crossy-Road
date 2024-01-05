@@ -4,8 +4,7 @@
 MainActivity::MainActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	: Activity(stack, requestCode, intent)
 {
-	std::cout << "MainActivity::MainActivity()" << std::endl;
-	requestActivity(ActivityID::Setting);
+	requestActivity(ActivityID::Home);
 }
 
 MainActivity::~MainActivity()
@@ -24,7 +23,8 @@ bool MainActivity::handleRealtimeInput()
 
 bool MainActivity::update(sf::Time dt)
 {
-	return Activity::update(dt);
+	Activity::update(dt);
+	return 0;
 }
 
 bool MainActivity::draw()
@@ -34,5 +34,4 @@ bool MainActivity::draw()
 
 void MainActivity::onActivityResult(int resultCode, Extra* extra)
 {
-	requestActivity(ActivityID::Playground);
 }

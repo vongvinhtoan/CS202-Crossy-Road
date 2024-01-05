@@ -16,6 +16,9 @@ public:
     void accelerate(sf::Vector2f velocity);
     void setInvincible(bool isInvincible);
     bool isInvincible() const;
+    void setPosition(sf::Vector2f position);
+    void setTexture(sf::Texture* texture);
+    sf::Texture* getTexture() const;
 
 public:
     sf::FloatRect getBounds() const;
@@ -28,4 +31,5 @@ private:
     sf::FloatRect m_bounds;
     sf::Vector2f m_velocity;
     bool m_isInvincible;
+    sf::Texture* m_texture;
 };

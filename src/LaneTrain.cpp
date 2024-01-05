@@ -26,7 +26,6 @@ void LaneTrain::update(sf::Time dt)
 
     if(utils::random(0.0, 1.0) > stoppingProbability && !m_isTriggered)
     {
-        std::cout << "Train triggered" << std::endl;
         m_isTriggered = true;
         m_elapsedTime = sf::Time::Zero;
         m_position = m_direction == Direction::Left ? Context::getInstance().getWindow()->getSize().x : (-100.f * m_size);
@@ -129,4 +128,30 @@ float LaneTrain::getPosition() const
 int LaneTrain::getSize() const
 {
     return m_size;
+}
+
+void LaneTrain::loadFromFile(std::istream& in)
+{
+    Lane::loadFromFile(in);
+    int size;
+    in >> size;
+    m_size = size;
+    int direction;
+    in >> direction;
+    m_direction = static_cast<Direction>(direction);
+
+    in >> m_isTriggered;
+    float elapsedTime;
+    in >> elapsedTime;
+    m_elapsedTime = sf::seconds(elapsedTime);
+}
+
+std::ostream& LaneTrain::saveToFile(std::ostream& out) const
+{
+    Lane::saveToFile(out);
+    out << m_size << " ";
+    out << static_cast<int>(m_direction) << " ";
+    out << m_isTriggered << " ";
+    out << m_elapsedTime.asSeconds() << " ";
+    return out;
 }

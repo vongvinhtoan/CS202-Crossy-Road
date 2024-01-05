@@ -17,12 +17,5 @@ public:
     virtual void onActivityResult(int resultCode, Extra* extra) final override;
 
 private:
-	RectangleView* rect;
-	sf::Vector2f dest = sf::Vector2f(0, 0);
-	sf::Vector2f pos_cur = sf::Vector2f(0, 0);
-	sf::Vector2f pos_old = sf::Vector2f(0, 0);
-	ArrowView* m_velocity_arrow;
-	ArrowView* m_acceleration_arrow;
-	ArrowView* m_spring_force_arrow;
-	ArrowView* m_damping_force_arrow;
+	sf::Time m_time = sf::Time::Zero;
 };

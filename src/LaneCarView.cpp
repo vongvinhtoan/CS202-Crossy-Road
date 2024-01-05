@@ -5,6 +5,7 @@
 
 LaneCarView::LaneCarView(LaneType laneType)
 	: LaneView(laneType)
+    , m_lastLane(nullptr)
 {
     float winsizex = getContext()->getWindow()->getSize().x;
     m_background.setSize({winsizex, 100.f});
@@ -135,6 +136,9 @@ void LaneCarView::setCarsTexture()
             m_cars[i].setTimePerFrame(sf::seconds(0.1f));
         }
     }
+
+    for(auto& car: m_cars)
+        car.setScale(1.f, 1.f);
 
     if(m_direction > 0)
     {

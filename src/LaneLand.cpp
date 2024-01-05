@@ -99,3 +99,26 @@ GameOverStategy* LaneLand::enter(Player* player)
     }
     return nullptr;
 }
+
+void LaneLand::loadFromFile(std::istream& in)
+{
+    Lane::loadFromFile(in);
+    int obstacleCount;
+    in >> obstacleCount;
+    mObstacles.resize(obstacleCount);
+    for(int i=0; i<obstacleCount; ++i)
+    {
+        in >> mObstacles[i];
+    }
+}
+
+std::ostream& LaneLand::saveToFile(std::ostream& out) const
+{
+    Lane::saveToFile(out);
+    out << mObstacles.size() << " ";
+    for(auto& obstacle : mObstacles)
+    {
+        out << obstacle << " ";
+    }
+    return out;
+}

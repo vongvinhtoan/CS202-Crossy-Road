@@ -13,6 +13,7 @@ public:
 	float getScrollPosition() const;
 	std::tuple<int, int> getVisibleRange() const;
 	void stop();
+	void setScrollPosition(float scrollPosition);
 private:
 	float   									mScrollSpeed;
 	float   									mScrollPositionTarget;

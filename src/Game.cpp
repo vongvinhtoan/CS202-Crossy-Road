@@ -1,5 +1,6 @@
 #include <Game.hpp>
 #include <GameOver_TooSlowFromCamera.hpp>
+#include <GameOver_HitObstacleOnLand.hpp>
 #include <iostream>
 #include <PlaygroundAdapter.hpp>
 #include <fstream>
@@ -14,10 +15,9 @@ Game::Game(int bufferRange)
     , m_isDone(false)
     , m_laneCount(0)
     , m_playgroundAdapter(nullptr)
+    , m_lanes(2 * bufferRange)
+    , m_player(std::make_unique<Player>())
 {
-    m_lanes.resize(2 * bufferRange);
-    m_player = std::make_unique<Player>();
-
     auto& lane_probability = (*Context::getInstance().getConfigs())["lane_probability"];
     std::vector<std::vector<double>> probabilities;
     for(int i = 0; i < lane_probability.size(); ++i)
@@ -32,6 +32,7 @@ Game::Game(int bufferRange)
 
     initializeCommandMap();
 
+    m_player->setPosition({0.f, 0.f});
 }
 
 Game::~Game()
@@ -87,7 +88,7 @@ void Game::checkPlayerPosition()
 {
     if(m_player->getPosition().y - 100.f < m_camera->getScrollPosition() - Context::getInstance().getWindow()->getSize().y / 2.f)
     {
-        setGameOverStrategy(new GameOver_TooSlowFromCamera(this));
+        setGameOverStrategy(new GameOver_HitObstacleOnLand(this));
         m_player->setInvincible(true);
     }
 }
@@ -276,4 +277,49 @@ Lane* Game::getCurrentLane()
 int Game::getCurrentLaneIndex()
 {
     return m_player->getPosition().y / 100.f;
+}
+
+void Game::loadFromFile(std::string filename)
+{
+    auto cin = std::ifstream(filename);
+    
+    cin >> m_bufferRange;
+    
+    float cameraPosition;
+    cin >> cameraPosition;
+    m_camera->setScrollPosition(cameraPosition);
+
+    cin >> m_laneCount;
+
+    int l, r;
+    cin >> l >> r;
+    for(int id = l; id < r; ++id)
+    {
+        int i = id % (2 * m_bufferRange);
+        m_lanes[i] = m_laneFactory->createFromFile(cin, id, this);
+    }
+}
+
+void Game::saveToFile(std::string filename)
+{
+    auto cout = std::ofstream(filename);
+
+    cout << m_bufferRange << std::endl;
+
+    cout << m_camera->getScrollPosition() << std::endl;
+
+    cout << m_laneCount << std::endl;
+
+    auto [l, r] = m_camera->getVisibleRange();
+    cout << l << " " << r << std::endl;
+    for(int id = l; id < r; ++id)
+    {
+        int i = id % (2 * m_bufferRange);
+        m_lanes[i]->saveToFile(cout);
+    }
+}
+
+void Game::setPlayerTexture(sf::Texture* texture)
+{
+    m_player->setTexture(texture);
 }

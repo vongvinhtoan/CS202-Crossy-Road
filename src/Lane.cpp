@@ -32,6 +32,10 @@ std::vector<bool> Lane::getSafeIndexes() const
 std::vector<bool> Lane::calculateSafeIndexes(std::vector<bool> allowedIndexes, std::vector<bool> lastSafeIndexes)
 {
     std::vector<bool> safeIndexes(allowedIndexes.size(), false);
+    if(lastSafeIndexes.size() == 0)
+    {
+        return safeIndexes;
+    }
 
     std::function<void(int, std::vector<bool>&)> DFS = [&](int index, std::vector<bool>& safeIndexes)
     {
@@ -65,4 +69,28 @@ bool Lane::isLegitIndexes(std::vector<bool> indexes) const
             return true;
     }
     return false;
+}
+
+void Lane::loadFromFile(std::istream& in)
+{
+    int size;
+    in >> size;
+    m_safeIndexes.resize(size);
+    for(int i=0; i<size; ++i)
+    {
+        int safe;
+        in >> safe;
+        m_safeIndexes[i] = safe;
+    }
+}
+
+std::ostream& Lane::saveToFile(std::ostream& out) const
+{
+    out << m_safeIndexes.size() << "\n";
+    for(auto safe : m_safeIndexes)
+    {
+        out << safe << " ";
+    }
+    out << "\n";
+    return out;
 }

@@ -20,6 +20,7 @@ public:
 	sf::RectangleShape& get() { return m_characterSprite; }
 	virtual bool contains(sf::Vector2f point) const final override;
 	void setSize(const sf::Vector2f& size);
+	CharacterHolder getCharacter() const;
 	
 private:
 	CharacterHolder 	m_character;

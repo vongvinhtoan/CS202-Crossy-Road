@@ -174,3 +174,20 @@ std::tuple<int, int, int, int> CharacterPickerView::getCharacterIds(float T) con
     int f_id = (m_id + 2) % m_characters.size();
     return std::make_tuple(l_id, m_id, r_id, f_id);
 }
+
+CharacterHolder CharacterPickerView::getSelectedCharacter() const
+{
+    int id = m_currentCharacter % int(m_characters.size());
+    if (id < 0)
+        id += m_characters.size();
+    std::cout << id << std::endl;
+    return m_characters[id]->getCharacter();
+}
+
+void CharacterPickerView::setSelectedCharacter(int index)
+{
+    m_currentCharacter = index;
+    m_currentViewCharacter = index;
+    resetAnimFunction();
+    m_animElapsedTime = m_animTime;
+}

@@ -13,4 +13,5 @@ void Application::registerActivities()
 	m_activityStack->registerActivity<PlaygroundActivity>(ActivityID::Playground);
 	m_activityStack->registerActivity<PauseActivity>(ActivityID::Pause);
 	m_activityStack->registerActivity<GameOverActivity>(ActivityID::GameOver);
+	m_activityStack->registerActivity<SavedGameActivity>(ActivityID::SavedGame);
 }

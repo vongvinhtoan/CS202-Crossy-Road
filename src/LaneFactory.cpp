@@ -59,3 +59,33 @@ std::unique_ptr<Lane> LaneFactory::createAfter(Lane* lastLane, int id, Game* gam
     }
     return create(LaneType::Land, id, game, lastLane->getSafeIndexes());
 }
+
+std::unique_ptr<Lane> LaneFactory::createFromFile(std::istream& in, int id, Game* game)
+{
+    std::string laneType;
+    in >> laneType;
+    LaneType type = LaneType::Land;
+    if(laneType == "Land")
+    {
+        type = LaneType::Land;
+    }
+    else if(laneType == "MovingWater")
+    {
+        type = LaneType::MovingWater;
+    }
+    else if(laneType == "StillWater")
+    {
+        type = LaneType::StillWater;
+    }
+    else if(laneType == "Car")
+    {
+        type = LaneType::Car;
+    }
+    else if(laneType == "Train")
+    {
+        type = LaneType::Train;
+    }
+    auto lane = create(type, id, game, std::vector<bool>());
+    lane->loadFromFile(in);
+    return lane;
+}

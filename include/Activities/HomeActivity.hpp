@@ -12,4 +12,7 @@ public:
 	virtual bool update(sf::Time dt) final override;
 	virtual bool draw() final override;
     virtual void onActivityResult(int resultCode, Extra* extra) final override;
+
+private:
+	sf::Texture*	m_playerTextureID;
 };

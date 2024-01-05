@@ -26,6 +26,8 @@ public:
 public:
     void setAdapter(PlaygroundAdapter *playgroundAdapter);
     void setDone(bool isDone);
+	void loadFromFile(std::string filename);
+    void saveToFile(std::string filename);
 
 public:
     Lane *getLane(int index);
@@ -37,6 +39,7 @@ public:
     int getLaneCount() const;
     PlaygroundAdapter* getAdapter() const;
     int getCurrentLaneIndex();
+    void setPlayerTexture(sf::Texture* texture);
 
 private:
     enum class Command

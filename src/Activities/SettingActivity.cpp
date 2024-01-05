@@ -4,7 +4,6 @@
 SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &intent)
 	: Activity(stack, requestCode, intent)
 {
-	std::cout << "SettingActivity::SettingActivity()" << std::endl;
 
 	ViewNode *background_layer = getLayer(0);
 	ViewNode *text_layer = getLayer(1);
@@ -13,9 +12,6 @@ SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &i
 
 	auto window = getContext()->getWindow();
 	sf::Vector2f window_size(window->getSize());
-
-	std::cout << "window_size: " << window_size.x << " " << window_size.y << std::endl;
-
 	// background_layer
 
 	auto background = std::make_unique<RectangleView>(window_size);
@@ -51,14 +47,22 @@ SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &i
 	m_background_music_bar = background_music_bar.get();
 	ui_layer->attachChild(std::move(background_music_bar));
 
-	auto home_button = std::make_unique<RectangleView>(sf::Vector2f(128, 128));
+	auto home_button = std::make_unique<RectangleButtonView>(sf::Vector2f(128, 128));
     home_button->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
     home_button->setPosition(sf::Vector2f(64.f, 64.f));
     home_button->setOnClick([this](ViewNode& view) {
         finishActivity();
     });
-
 	ui_layer->attachChild(std::move(home_button));
+
+	auto key_binding_button = std::make_unique<RectangleButtonView>(sf::Vector2f(200, 200));
+    key_binding_button->get().setTexture(&getContext()->getTextures()->get(TextureID::KeyBinding));
+    key_binding_button->setPosition(sf::Vector2f(1270.f, 280.f));
+    key_binding_button->setOnClick([this](ViewNode& view) {
+        requestActivity(ActivityID::KeyboardSetting);
+    });
+	ui_layer->attachChild(std::move(key_binding_button));
+
     getContext()->getMusic()->play(Music::BackGroundMusic);
 }
 

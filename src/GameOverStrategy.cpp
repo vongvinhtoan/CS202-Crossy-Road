@@ -8,7 +8,6 @@ GameOverStategy::GameOverStategy(Game* game)
 
 void GameOverStategy::done()
 {
-    std::cout << "Game Over" << std::endl;
     m_game->setDone(true);
 }
 

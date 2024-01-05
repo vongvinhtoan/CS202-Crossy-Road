@@ -14,25 +14,25 @@ Activity::~Activity()
 bool Activity::handleEvent(sf::Event &event)
 {
     m_viewTree->handleEvent(event);
-    return true;
+    return 0;
 }
 
 bool Activity::handleRealtimeInput()
 {
     m_viewTree->handleRealtimeInput();
-    return true;
+    return 0;
 }
 
 bool Activity::update(sf::Time dt)
 {
     m_viewTree->update(dt);
-    return true;
+    return 0;
 }
 
 bool Activity::draw()
 {
     m_context->getWindow()->draw(*m_viewTree);
-    return true;
+    return 0;
 }
 
 ViewNode *Activity::getLayer(int layer)

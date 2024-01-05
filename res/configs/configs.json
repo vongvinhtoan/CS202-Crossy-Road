@@ -9,6 +9,7 @@
 		},
 		"animation_time" : 0.10000000000000001
 	},
+	"count_down_time" : 3,
 	"fps" : 60,
 	"hide_statistic" : true,
 	"keyBinding" : 
@@ -66,14 +67,14 @@
 		"bufferRange" : 9,
 		"camera" : 
 		{
-			"acceleration" : 0,
+			"acceleration" : 0.001,
 			"dynamic" : 
 			{
 				"f" : 3,
 				"r" : 0,
 				"z" : 0.75
 			},
-			"initialScrollSpeed" : 0
+			"initialScrollSpeed" : 10
 		},
 		"tileSize" : 75
 	},

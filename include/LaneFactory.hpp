@@ -34,4 +34,5 @@ public:
 
     std::unique_ptr<Lane> create(LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes);
     std::unique_ptr<Lane> createAfter(Lane* lastLane, int id, Game* game);
+    std::unique_ptr<Lane> createFromFile(std::istream& in, int id, Game* game);
 };

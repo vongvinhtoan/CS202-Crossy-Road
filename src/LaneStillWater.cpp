@@ -37,7 +37,6 @@ LaneStillWater::LaneStillWater(LaneType laneType, int id, Game* game, std::vecto
     }
 
     auto capLeaf = utils::random(2, maxIndex / 2);
-    std::cout << "capLeaf: " << capLeaf << std::endl;
     while(tmpLeafs.size() < capLeaf)
     {
         auto index = utils::random(0, maxIndex - 1);
@@ -53,12 +52,6 @@ LaneStillWater::LaneStillWater(LaneType laneType, int id, Game* game, std::vecto
         lastSafeIndexes
     );
     m_leafs = std::vector<int>(tmpLeafs.begin(), tmpLeafs.end());
-    std::cout << "m_safeIndexes: ";
-    for(auto index : m_safeIndexes)
-    {
-        std::cout << index << " ";
-    }
-    std::cout << std::endl;
 }
 
 void LaneStillWater::update(sf::Time dt)
@@ -110,4 +103,27 @@ GameOverStategy* LaneStillWater::enter(Player* player)
 std::vector<int> LaneStillWater::getLeafs() const
 {
     return m_leafs;
+}
+
+void LaneStillWater::loadFromFile(std::istream& in)
+{
+    Lane::loadFromFile(in);
+    int leafsCount;
+    in >> leafsCount;
+    m_leafs.resize(leafsCount);
+    for(int i = 0; i < leafsCount; ++i)
+    {
+        in >> m_leafs[i];
+    }
+}
+
+std::ostream& LaneStillWater::saveToFile(std::ostream& out) const
+{
+    Lane::saveToFile(out);
+    out << m_leafs.size() << std::endl;
+    for(auto& leaf : m_leafs)
+    {
+        out << leaf << std::endl;
+    }
+    return out;
 }
