@@ -11,7 +11,7 @@ PlaygroundActivity::PlaygroundActivity(ActivityStack& stack, int requestCode, Ex
 	ViewNode* playgroundLayer = getLayer(0);
 	std::unique_ptr<PlaygroundView> playgroundView = std::make_unique<PlaygroundView>(*mPlaygroundAdapter);
 	playgroundLayer->attachChild(std::move(playgroundView));
-
+    getContext()->getMusic()->play(Music::BackGroundMusic);
 }
 
 PlaygroundActivity::~PlaygroundActivity() 

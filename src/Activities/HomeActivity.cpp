@@ -36,6 +36,8 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
     ui_layer->attachChild(std::move(select_character_button));
 
     //requestActivity(ActivityID::Character);
+    // music
+    getContext()->getMusic()->play(Music::BackGroundMusic);
 }
 
 HomeActivity::~HomeActivity() {}

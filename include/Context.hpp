@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <ResourceHolder.hpp>
+#include <MusicPlayer.hpp>
 #include <Backend.hpp>
 
 class Context
@@ -19,12 +20,14 @@ public:
     sf::RenderWindow*  getWindow();
     TextureHolder*     getTextures();
     FontHolder*        getFonts();
+    MusicPlayer*       getMusic();
     Backend*           getBackend();
     Json::Value*       getConfigs();
 
     void setWindow(sf::RenderWindow* window);
     void setTextures(TextureHolder* textures);
     void setFonts(FontHolder* fonts);
+    void setMusic(MusicPlayer* music);
     void setBackend(Backend* backend);
     void setConfigs(Json::Value* configs);
 
@@ -32,6 +35,7 @@ private:
     sf::RenderWindow*  window;
     TextureHolder*     textures;
     FontHolder*        fonts;
+    MusicPlayer*       music;
     Backend*           backend;
     Json::Value*       configs;
 };

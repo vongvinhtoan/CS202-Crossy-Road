@@ -53,6 +53,7 @@ SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &i
     });
 
 	ui_layer->attachChild(std::move(home_button));
+    getContext()->getMusic()->play(Music::BackGroundMusic);
 }
 
 SettingActivity::~SettingActivity()

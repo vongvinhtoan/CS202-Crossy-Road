@@ -3,6 +3,7 @@
 InstructionActivity::InstructionActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	: Activity(stack, requestCode, intent)
 {
+    getContext()->getMusic()->play(Music::BackGroundMusic);
 }
 
 InstructionActivity::~InstructionActivity()
