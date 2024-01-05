@@ -161,5 +161,33 @@ int LaneCar::getDirection() const
 
 void LaneCar::loadFromFile(std::istream& in)
 {
+    Lane::loadFromFile(in);
+    in >> m_carSize;
+    in >> m_carSpace;
+    in >> m_carSpeed;
 
+    float firstCarPosition;
+    in >> firstCarPosition;
+    m_cars.push_back(firstCarPosition);
+    while(m_cars.back() + m_carSize * 100.f < Context::getInstance().getWindow()->getSize().x)
+    {
+        m_cars.push_back(m_cars.back() + (m_carSize + m_carSpace) * 100.f);
+    }
+
+    in >> m_isStopping;
+    float elapsedTime;
+    in >> elapsedTime;
+    m_elapsedTime = sf::seconds(elapsedTime);
+}
+
+std::ostream& LaneCar::saveToFile(std::ostream& out) const
+{
+    Lane::saveToFile(out);
+    out << m_carSize << " ";
+    out << m_carSpace << " ";
+    out << m_carSpeed << " ";
+    out << m_cars.front() << " ";
+    out << m_isStopping << " ";
+    out << m_elapsedTime.asSeconds() << " ";
+    return out;
 }
