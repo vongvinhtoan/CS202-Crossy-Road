@@ -66,6 +66,7 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
     setting_button->get().setTexture(&getContext()->getTextures()->get(TextureID::Setting));
     setting_button->setPosition(sf::Vector2f(132, 675));
     setting_button->setOnClick([this](ViewNode& view) {
+        requestActivity(ActivityID::Setting);
     });
 
     //instruction_button
