@@ -4,7 +4,7 @@
 MainActivity::MainActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	: Activity(stack, requestCode, intent)
 {
-	requestActivity(ActivityID::Home);
+	requestActivity(ActivityID::Loading);
 }
 
 MainActivity::~MainActivity()
