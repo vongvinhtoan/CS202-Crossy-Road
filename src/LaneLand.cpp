@@ -3,42 +3,48 @@
 #include <Utils.hpp>
 #include <Context.hpp>
 #include <GameOver_HitObstacleOnLand.hpp>
+#include <set>
 
-LaneLand::LaneLand(LaneType laneType, int id, Game* game)
+LaneLand::LaneLand(LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes)
     : Lane(laneType, id, game)
-    , mElapsedTime(sf::Time::Zero)
 {
     int obstacleCount = utils::random(1, 3);
     if(id == 0)
         obstacleCount = 0;
     int maxIndex = (*Context::getInstance().getWindow()).getSize().x / 100.f;
-    for (int i = 0; i < obstacleCount; i++)
+    
+    std::set<int> tmpObstacles;
+    for(int i=0; i<obstacleCount; ++i)
     {
-        int obstacle = utils::random(0, maxIndex-1);
-        mOriginalObstacles.push_back(obstacle);
-        mObstacles.push_back(obstacle);
+        int index = utils::random(0, maxIndex - 1);
+        while(tmpObstacles.find(index) != tmpObstacles.end())
+        {
+            index = utils::random(0, maxIndex - 1);
+        }
+        tmpObstacles.insert(index);
     }
+    mObstacles = std::vector<int>(tmpObstacles.begin(), tmpObstacles.end());
+
+    std::vector<bool> allowedIndexes;
+    allowedIndexes.resize(maxIndex, true);
+    for(auto& index : tmpObstacles)
+    {
+        allowedIndexes[index] = false;
+    }
+    m_safeIndexes = calculateSafeIndexes(allowedIndexes, lastSafeIndexes);
 }
 
-std::vector<float> LaneLand::getObstacles() const
+std::vector<int> LaneLand::getObstacles() const
 {
     return mObstacles;
 }
 
 void LaneLand::update(sf::Time dt)
 {
-    mElapsedTime += dt;
-    while (mElapsedTime.asSeconds() > 2.f)
-        mElapsedTime -= sf::seconds(2.f);
-    for(int i=0; i<mObstacles.size(); ++i)
-    {
-        auto& obstacle = mObstacles[i];
-        auto& originalObstacle = mOriginalObstacles[i];
-        obstacle = originalObstacle + mElapsedTime.asSeconds();
-    }
+
 }
 
-GameOverStategy* LaneLand::checkCollision(Player* player, bool& isDone)
+GameOverStategy* LaneLand::updatePlayer(Player* player, sf::Time dt)
 {
     sf::FloatRect playerRect = player->getBounds();
     for (int i = 0; i < mObstacles.size(); i++)
@@ -52,10 +58,13 @@ GameOverStategy* LaneLand::checkCollision(Player* player, bool& isDone)
     return nullptr;
 }
 
-GameOverStategy* LaneLand::moveLeft(Player* player, bool& isDone)
+GameOverStategy* LaneLand::moveLeft(Player* player)
 {
+    if(player->getPosition().x <= 0.f) 
+        return nullptr;
+
     player->moveLeft();
-    auto* gameOverStrategy = checkCollision(player, isDone);
+    auto* gameOverStrategy = updatePlayer(player, sf::Time::Zero);
     if (gameOverStrategy)
     {
         return gameOverStrategy;
@@ -63,10 +72,13 @@ GameOverStategy* LaneLand::moveLeft(Player* player, bool& isDone)
     return nullptr;
 }
 
-GameOverStategy* LaneLand::moveRight(Player* player, bool& isDone)
+GameOverStategy* LaneLand::moveRight(Player* player)
 {
+    if(player->getPosition().x + 100.f >= Context::getInstance().getWindow()->getSize().x) 
+        return nullptr;
+    
     player->moveRight();
-    auto* gameOverStrategy = checkCollision(player, isDone);
+    auto* gameOverStrategy = updatePlayer(player, sf::Time::Zero);
     if (gameOverStrategy)
     {
         return gameOverStrategy;
@@ -74,13 +86,13 @@ GameOverStategy* LaneLand::moveRight(Player* player, bool& isDone)
     return nullptr;
 }
 
-GameOverStategy* LaneLand::enter(Player* player, bool& isDone)
+GameOverStategy* LaneLand::enter(Player* player)
 {
     sf::FloatRect playerRect = player->getBounds();
     playerRect.top = getIndex() * 100.f;
     playerRect.left = std::round(playerRect.left / 100.f) * 100.f;
     player->moveTo({playerRect.left, playerRect.top});
-    auto* gameOverStrategy = checkCollision(player, isDone);
+    auto* gameOverStrategy = updatePlayer(player, sf::Time::Zero);
     if (gameOverStrategy)
     {
         return gameOverStrategy;

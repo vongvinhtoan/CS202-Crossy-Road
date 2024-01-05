@@ -5,11 +5,15 @@
 #include <GameOverStrategy.hpp>
 
 class Game;
+class PlaygroundCamera;
 
 enum class LaneType
 {
     Land,
-    Water,
+    MovingWater,
+    StillWater,
+    Car,
+    Train,
     Count
 };
 
@@ -20,22 +24,30 @@ public:
 
 public:
     virtual void update(sf::Time dt) = 0;
-    virtual GameOverStategy* checkCollision(Player* player, bool& isDone) = 0;
 
 public:
     LaneType getLaneType() const;
     int getIndex() const;
 
 public:
-    virtual GameOverStategy* moveLeft(Player* player, bool& isDone) = 0;
-    virtual GameOverStategy* moveRight(Player* player, bool& isDone) = 0;
-    virtual GameOverStategy* enter(Player* player, bool& isDone) = 0;
+    virtual GameOverStategy* moveLeft(Player* player) = 0;
+    virtual GameOverStategy* moveRight(Player* player) = 0;
+    virtual GameOverStategy* enter(Player* player) = 0;
+    virtual GameOverStategy* updatePlayer(Player* player, sf::Time dt) = 0;
+
+public:
+    std::vector<bool> getSafeIndexes() const;
+    std::vector<bool> calculateSafeIndexes(std::vector<bool> allowedIndexes, std::vector<bool> lastSafeIndexes);
+    bool isLegitIndexes(std::vector<bool> indexes) const;
 
 public:
     Game* getGame() const;
 
 private:
-    int         m_index;
-    LaneType    m_laneType;
-    Game*       m_game;
+    int                 m_index;
+    LaneType            m_laneType;
+    Game*               m_game;
+
+protected:
+    std::vector<bool>   m_safeIndexes;
 };

@@ -23,6 +23,9 @@ public:
 	LaneType getLaneType() const;
 	virtual void bind(Lane* lane, PlaygroundCamera* camera) = 0;
 
+protected:
+	float absolutePositionTransformation(float pos, PlaygroundCamera* camera) const;
+
 private:
 	LaneType m_laneType;
 };

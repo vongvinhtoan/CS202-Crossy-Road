@@ -20,8 +20,13 @@ int PlaygroundAdapter::getBufferRange() const
     return m_game->getBufferRange();
 }
 
+
 LaneView* PlaygroundAdapter::getLane(int index)
 {
+    auto bufferRange = m_game->getBufferRange();
+    index = index % (bufferRange * 2);
+    if(index < 0) index += (bufferRange * 2);
+
     Lane* lane = m_game->getLane(index);
     if(lane == nullptr) {
         return nullptr;
@@ -50,4 +55,16 @@ TextView* PlaygroundAdapter::getScoreView()
 Game* PlaygroundAdapter::getGame() const
 {
     return m_game;
+}
+
+std::tuple<int, int> PlaygroundAdapter::getDrawRange() const
+{
+    auto camera_pos = m_game->getCamera()->getScrollPosition();
+    auto int_pos = camera_pos;
+    auto index = int_pos / 100;
+    auto window_height = Context::getInstance().getWindow()->getSize().y;
+    auto height_index_count = window_height / 100 + 4;
+    auto start_index = index - height_index_count / 2;
+    auto end_index = index + height_index_count / 2;
+    return std::make_tuple(start_index, end_index); 
 }

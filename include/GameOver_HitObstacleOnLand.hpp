@@ -20,5 +20,6 @@ private:
     sf::Time                    m_elapsedTime;
     sf::RectangleShape          m_overlay;
     sf::Vector2f                m_velocity;
+    float                       m_rotation_velocity;
     const static sf::Vector2f   m_acceleration;
 };
