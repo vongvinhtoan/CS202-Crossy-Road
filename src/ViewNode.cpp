@@ -17,6 +17,7 @@ void ViewNode::hide() { m_hidden = true; }
 void ViewNode::show() { m_hidden = false; }
 
 bool ViewNode::isHidden() const { return m_hidden; }
+bool ViewNode::isEnabled() { return m_enabled; }
 
 void ViewNode::attachChild(std::unique_ptr<ViewNode> child)
 {

@@ -27,5 +27,5 @@ public:
 	void setButtonColor(const sf::Color &color);
 
 private:
-	sf::RectangleShape 					m_tmpRectangle;
+	sf::RectangleShape 		m_tmpRectangle;
 };

@@ -56,6 +56,7 @@ public:
     void hide();
     void show();
     bool isHidden() const;
+    bool isEnabled();
 
 private:
     ViewNode*                               m_parent = nullptr;

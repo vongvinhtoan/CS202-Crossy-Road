@@ -2,17 +2,15 @@
 
 #include <Activity.hpp>
 
-class PauseActivity : public Activity
+class SavedGameActivity : public Activity
 {
 public:
-	PauseActivity(ActivityStack& stack, int requestCode, Extra& intent);
-	virtual ~PauseActivity() final override;
+	SavedGameActivity(ActivityStack& stack, int requestCode, Extra& intent);
+	virtual ~SavedGameActivity() final override;
 	virtual bool handleEvent(sf::Event& event) final override;
 	virtual bool handleRealtimeInput() final override;
 	virtual bool update(sf::Time dt) final override;
 	virtual bool draw() final override;
 private:
-	sf::Time 					m_elapsedTime = sf::Time::Zero;
-	RectangleView* 				m_background = nullptr;
-	
+	std::vector<RoundedCornerButtonView*> m_slots;
 };

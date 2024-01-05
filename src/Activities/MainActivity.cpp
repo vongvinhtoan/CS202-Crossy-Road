@@ -24,7 +24,18 @@ bool MainActivity::handleRealtimeInput()
 
 bool MainActivity::update(sf::Time dt)
 {
-	return Activity::update(dt);
+	Activity::update(dt);
+	//Game-over
+	static const sf::Time m_duration = sf::seconds(1.f);
+	m_time += dt;
+	if (m_time >= m_duration)
+	{
+		//requestActivity(ActivityID::GameOver);
+		requestActivity(ActivityID::Home);
+		m_time = sf::Time::Zero;
+	}
+
+	return 0;
 }
 
 bool MainActivity::draw()
