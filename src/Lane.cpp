@@ -70,3 +70,27 @@ bool Lane::isLegitIndexes(std::vector<bool> indexes) const
     }
     return false;
 }
+
+void Lane::loadFromFile(std::istream& in)
+{
+    int size;
+    in >> size;
+    m_safeIndexes.resize(size);
+    for(int i=0; i<size; ++i)
+    {
+        int safe;
+        in >> safe;
+        m_safeIndexes[i] = safe;
+    }
+}
+
+std::ostream& Lane::saveToFile(std::ostream& out) const
+{
+    out << m_safeIndexes.size() << "\n";
+    for(auto safe : m_safeIndexes)
+    {
+        out << safe << " ";
+    }
+    out << "\n";
+    return out;
+}

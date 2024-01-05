@@ -114,5 +114,23 @@ std::vector<int> LaneStillWater::getLeafs() const
 
 void LaneStillWater::loadFromFile(std::istream& in)
 {
+    Lane::loadFromFile(in);
+    int leafsCount;
+    in >> leafsCount;
+    m_leafs.resize(leafsCount);
+    for(int i = 0; i < leafsCount; ++i)
+    {
+        in >> m_leafs[i];
+    }
+}
 
+std::ostream& LaneStillWater::saveToFile(std::ostream& out) const
+{
+    Lane::saveToFile(out);
+    out << m_leafs.size() << std::endl;
+    for(auto& leaf : m_leafs)
+    {
+        out << leaf << std::endl;
+    }
+    return out;
 }

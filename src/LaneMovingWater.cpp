@@ -9,7 +9,6 @@
 LaneMovingWater::LaneMovingWater(LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes)
     : Lane(laneType, id, game)
     , m_speed(utils::random(100.f, 200.f))
-    , m_elapsedTime(sf::Time::Zero)
     , m_woodPositions()
 {
     m_safeIndexes.clear();
@@ -35,8 +34,6 @@ LaneMovingWater::LaneMovingWater(LaneType laneType, int id, Game* game, std::vec
 
 void LaneMovingWater::update(sf::Time dt)
 {
-    m_elapsedTime += dt;
-
     removeOldWoods();
     createNewWoods();
 
@@ -149,5 +146,31 @@ std::deque<std::pair<float, float>> LaneMovingWater::getWoodPositions()
 
 void LaneMovingWater::loadFromFile(std::istream& in)
 {
+    Lane::loadFromFile(in);
 
+    int woodCount;
+    in >> woodCount;
+    for(int i = 0; i < woodCount; ++i)
+    {
+        std::pair<float, float> wood;
+        in >> wood.first >> wood.second;
+        m_woodPositions.push_back(wood);
+    }
+
+    in >> m_speed;
+}
+
+std::ostream& LaneMovingWater::saveToFile(std::ostream& out) const
+{
+    Lane::saveToFile(out);
+
+    out << m_woodPositions.size() << std::endl;
+    for(auto& wood : m_woodPositions)
+    {
+        out << wood.first << " " << wood.second << std::endl;
+    }
+
+    out << m_speed << std::endl;
+
+    return out;
 }
