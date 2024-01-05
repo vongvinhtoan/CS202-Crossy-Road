@@ -23,7 +23,9 @@ void Backend::loadTextures(TextureHolder &textures)
     textures.load(TextureID::PlayAgainArrow, "res/textures/PlayAgainArrow.png");
     textures.load(TextureID::BackGroundScreen, "res/textures/BackgroundScreen.png");
     textures.load(TextureID::HomeButton, "res/textures/HomeButton.png");
+    textures.load(TextureID::KeyBinding, "res/textures/KeyBinding.png");
     textures.load(TextureID::Home, "res/textures/Home.png");
+    textures.load(TextureID::HighScore, "res/textures/HighScore.png");
     textures.load(TextureID::KeyboardButton, "res/textures/KeyboardButton.png");
     textures.load(TextureID::Setting, "res/textures/Setting.png");
     textures.load(TextureID::Instruction, "res/textures/Instruction.png");

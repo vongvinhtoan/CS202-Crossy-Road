@@ -17,6 +17,11 @@ CharacterActivity::CharacterActivity(ActivityStack &stack, int requestCode, Extr
     background_layer->attachChild(std::move(background));
 
     // ui_layer
+    //text_view
+	auto text = std::make_unique<TextView>(sf::Text("SELECT CHARACTER", getContext()->getFonts()->get(FontID::Tourney_Bold), 125));
+	text->setPosition(sf::Vector2f((window_size.x - text->get().getLocalBounds().width) / 2, 56));
+
+    //character_picker_view
     std::vector<CharacterHolder> characters(6);
     characters[0].m_texture = &getContext()->getTextures()->get(TextureID::CharacterChicken);
     characters[1].m_texture = &getContext()->getTextures()->get(TextureID::CharacterMonkey);
@@ -32,11 +37,12 @@ CharacterActivity::CharacterActivity(ActivityStack &stack, int requestCode, Extr
     homeButton->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
     homeButton->setPosition(sf::Vector2f(64.f, 64.f));
     homeButton->setOnClick([this](ViewNode& view) {
-        finishActivity();
+        finishActivity(BACK_TO_HOME, new Extra());
     });
 
     ui_layer->attachChild(std::move(homeButton));
     ui_layer->attachChild(std::move(character_picker_view));
+    ui_layer->attachChild(std::move(text));
 }
 
 CharacterActivity::~CharacterActivity() 
