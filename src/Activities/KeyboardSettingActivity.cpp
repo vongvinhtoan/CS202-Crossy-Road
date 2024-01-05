@@ -47,7 +47,7 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
     text->setPosition(sf::Vector2f(1149, 616));
     text_layer->attachChild(std::move(text));
 
-    auto home_button = std::make_unique<RectangleView>(sf::Vector2f(128, 128));
+    auto home_button = std::make_unique<RectangleButtonView>(sf::Vector2f(128, 128));
     home_button->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
     home_button->setPosition(sf::Vector2f(64.f, 64.f));
     home_button->setOnClick([this](ViewNode &view)
@@ -57,7 +57,7 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
 
     ui_layer->attachChild(std::move(home_button));
 
-    auto keyboard_button = std::make_unique<RectangleView>(sf::Vector2f(128, 128));
+    auto keyboard_button = std::make_unique<RectangleButtonView>(sf::Vector2f(128, 128));
     keyboard_button->get().setTexture(&getContext()->getTextures()->get(TextureID::KeyboardButton));
     keyboard_button->setPosition(sf::Vector2f(1414.f, 70.f));
     keyboard_button->setOnClick([this](ViewNode& view) {
