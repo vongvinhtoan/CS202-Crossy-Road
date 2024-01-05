@@ -28,7 +28,7 @@ PauseActivity::PauseActivity(ActivityStack& stack, int requestCode, Extra& inten
 	resume_button->get().setFillColor(utils::hexToColor("000000"));
 	resume_button->get().setPosition(sf::Vector2f(580, 240));
 	resume_button->setOnClick([this](ViewNode& view) {
-		//requestActivity(ActivityID::Playground);
+		finishActivity();
 	});
 
 	auto resume_text = std::make_unique<TextView>("Resume game", font,50);
