@@ -27,6 +27,8 @@ void LaneTrain::update(sf::Time dt)
     if(utils::random(0.0, 1.0) > stoppingProbability && !m_isTriggered)
     {
         m_isTriggered = true;
+        std::cout << "Train triggered" << std::endl;
+        Context::getInstance().getSounds()->play(SoundEffect::TrainHorn);
         m_elapsedTime = sf::Time::Zero;
         m_position = m_direction == Direction::Left ? Context::getInstance().getWindow()->getSize().x : (-100.f * m_size);
     }
@@ -49,22 +51,11 @@ void LaneTrain::update(sf::Time dt)
         }
     }
 
-    if (!m_isTriggered && trainIsVisibleOnScreen()) 
-    {
-        Context::getInstance().getSounds()->play(SoundEffect::TrainHorn);
-        m_isTriggered = false;
-    }
 }
 
 bool LaneTrain::trainMovedOutOfWindow() const
 {
     return m_direction == Direction::Left ? m_position + 100.f * m_size < 0.f : m_position > Context::getInstance().getWindow()->getSize().x;
-}
-
-bool LaneTrain::trainIsVisibleOnScreen() const
-{
-    float windowWidth = Context::getInstance().getWindow()->getSize().x;
-    return m_position >= 0 && m_position <= windowWidth;
 }
 
 bool LaneTrain::isWarning() const

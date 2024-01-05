@@ -37,7 +37,6 @@ public:
 
 private:
     bool trainMovedOutOfWindow() const;
-    bool trainIsVisibleOnScreen() const;
     bool isHit(float pos);
 
 private:

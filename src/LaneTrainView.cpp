@@ -52,6 +52,7 @@ void LaneTrainView::update(sf::Time dt)
     {
         stepTexture();
     }
+
 }
 
 void LaneTrainView::stepTexture()

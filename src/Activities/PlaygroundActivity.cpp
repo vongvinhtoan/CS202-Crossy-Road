@@ -52,6 +52,7 @@ bool PlaygroundActivity::update(sf::Time dt)
 
 	if(mGame->isDone()) {
 		requestActivity(ActivityID::GameOver);
+		getContext()->getMusic()->stop();
 	}
 
 	return 0;
