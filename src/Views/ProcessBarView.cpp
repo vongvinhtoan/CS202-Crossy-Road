@@ -127,6 +127,9 @@ void ProcessBarView::setProgress(float progress)
         progress = 1.0f;
         
     m_progressValue = progress;
+
+    if (m_onValueChange)
+        m_onValueChange(m_progressValue);
 }
 
 float ProcessBarView::getProgress() const
@@ -143,4 +146,9 @@ void ProcessBarView::setTextFont(const sf::Font &font, unsigned int characterSiz
 {
     m_text.setFont(font);
     m_text.setCharacterSize(characterSize);
+}
+
+void ProcessBarView::onValueChange(std::function<void(float)> callback)
+{
+    m_onValueChange = callback;
 }

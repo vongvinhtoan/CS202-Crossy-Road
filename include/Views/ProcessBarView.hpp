@@ -27,6 +27,7 @@ public:
     float getProgress() const;
     sf::Vector2f getSize() const;
     void setTextFont(const sf::Font &font, unsigned int characterSize = 30);
+    void onValueChange(std::function<void(float)> callback);
 
     template <typename... Args>
     void setName(Args &&...args)
@@ -42,5 +43,8 @@ private:
     sf::Text m_name;
     VertexArrayView *m_left_arrow;
     VertexArrayView *m_right_arrow;
+
+private:
+    std::function<void(float)> m_onValueChange;
     float m_progressValue;
 };

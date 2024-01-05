@@ -34,6 +34,9 @@ SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &i
 	effect_sound_bar->setPosition(sf::Vector2f(window_size.x / 2.f, 390));
 	effect_sound_bar->setName("Effect Sound", getContext()->getFonts()->get(FontID::Tourney_Bold), 69);
 	effect_sound_bar->setTextFont(getContext()->getFonts()->get(FontID::Tourney_Bold), 69);
+	effect_sound_bar->onValueChange([this](float value) {
+		getContext()->getSounds()->setVolume(value * 100.f);
+	});
 	m_effect_sound_bar = effect_sound_bar.get();
 	ui_layer->attachChild(std::move(effect_sound_bar));
 
@@ -42,6 +45,9 @@ SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &i
 	background_music_bar->setPosition(sf::Vector2f(window_size.x / 2.f, 608));
 	background_music_bar->setName("Background Music", getContext()->getFonts()->get(FontID::Tourney_Bold), 69);
 	background_music_bar->setTextFont(getContext()->getFonts()->get(FontID::Tourney_Bold), 69);
+	background_music_bar->onValueChange([this](float value) {
+		getContext()->getMusic()->setVolume(value * 100.f);
+	});
 	m_background_music_bar = background_music_bar.get();
 	ui_layer->attachChild(std::move(background_music_bar));
 
