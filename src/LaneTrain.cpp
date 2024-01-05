@@ -73,6 +73,11 @@ bool LaneTrain::isWarning() const
     return m_elapsedTime < warningStamp;
 }
 
+bool LaneTrain::isTriggered() const
+{
+    return m_isTriggered;
+}
+
 GameOverStategy* LaneTrain::updatePlayer(Player* player, sf::Time dt)
 {
     if(isHit(player->getPosition().x))

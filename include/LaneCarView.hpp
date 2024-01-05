@@ -28,6 +28,7 @@ private:
 private:
 	Lane* 							m_lastLane;
 	sf::RectangleShape 				m_background;
+	sf::RectangleShape 				m_trafficLight;
 	std::vector<AnimatedSprite> 	m_cars;
 	int 							m_carSize;
 	int 							m_carTextureIndex;

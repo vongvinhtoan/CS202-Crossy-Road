@@ -30,6 +30,7 @@ public:
 
 public:
     bool isWarning() const;
+    bool isTriggered() const;
     Direction getDirection() const;
     float getPosition() const;
     int getSize() const;

@@ -191,3 +191,13 @@ std::ostream& LaneCar::saveToFile(std::ostream& out) const
     out << m_elapsedTime.asSeconds() << " ";
     return out;
 }
+
+bool LaneCar::isStopping() const
+{
+    return m_isStopping;
+}
+
+bool LaneCar::isStopped() const
+{
+    return m_isStopping && m_elapsedTime > m_prepareTime;
+}

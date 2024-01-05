@@ -9,6 +9,10 @@ LaneCarView::LaneCarView(LaneType laneType)
 {
     float winsizex = getContext()->getWindow()->getSize().x;
     m_background.setSize({winsizex, 100.f});
+    auto &texture = getContext()->getTextures()->get(TextureID::LaneCar_traffic_light_0);
+    m_trafficLight.setTexture(&texture);
+    m_trafficLight.setSize({float(texture.getSize().x), float(texture.getSize().y)});
+    m_trafficLight.setOrigin({texture.getSize().x / 2.f, float(texture.getSize().y)});
 }
 
 void LaneCarView::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -16,6 +20,7 @@ void LaneCarView::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(m_background, states);
     for(auto& car : m_cars)
         target.draw(car, states);
+    target.draw(m_trafficLight, states);
 }
 
 void LaneCarView::update(sf::Time dt)
@@ -56,12 +61,24 @@ void LaneCarView::bind(Lane* _lane, PlaygroundCamera* camera)
         resetTexture();
     }
 
-    pos = absolutePositionTransformation(lane->getIndex() * 100, camera);
     for(int i = 0; i < cars.size(); ++i)
     {
         m_cars[i].setSize({m_carSize * 100.f, 100.f});
         m_cars[i].setPosition(cars[i], pos); 
     }
+
+    auto winsizex = getContext()->getWindow()->getSize().x;
+    m_trafficLight.setPosition({50.f, pos + 100.f});
+    if(m_direction > 0)
+        m_trafficLight.setPosition({winsizex - 50.f, pos + 100.f});
+
+    if(lane->isStopped())
+        m_trafficLight.setTexture(&getContext()->getTextures()->get(TextureID::LaneCar_traffic_light_2));
+    else if(lane->isStopping())
+        m_trafficLight.setTexture(&getContext()->getTextures()->get(TextureID::LaneCar_traffic_light_1));
+    else
+        m_trafficLight.setTexture(&getContext()->getTextures()->get(TextureID::LaneCar_traffic_light_0));
+    
     setCarsTexture();
 }
 

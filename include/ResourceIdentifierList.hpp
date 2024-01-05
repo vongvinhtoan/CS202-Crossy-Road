@@ -61,6 +61,11 @@ namespace TextureID
         LaneMovingWater_log_head,
         LaneMovingWater_log_body,
         LaneMovingWater_log_tail,
+        LaneCar_traffic_light_0,
+        LaneCar_traffic_light_1,
+        LaneCar_traffic_light_2,
+        LaneTrain_traffic_light_0,
+        LaneTrain_traffic_light_1
     };
 } // namespace TextureID
 
