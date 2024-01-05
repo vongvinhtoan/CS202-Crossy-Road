@@ -29,6 +29,9 @@ PauseActivity::PauseActivity(ActivityStack& stack, int requestCode, Extra& inten
 	auto resume_button = std::make_unique<RoundedCornerButtonView>(sf::Vector2f(440, 90));
 	resume_button->get().setFillColor(utils::hexToColor("000000"));
 	resume_button->get().setPosition(sf::Vector2f(580, 240));
+	resume_button->setOnClick([this](ViewNode& view) {
+		//requestActivity(ActivityID::Playground);
+	});
 
 	auto resume_text = std::make_unique<TextView>("Resume game", font,50);
 	resume_text->get().setFillColor(utils::hexToColor("FFFFFF"));
@@ -42,6 +45,9 @@ PauseActivity::PauseActivity(ActivityStack& stack, int requestCode, Extra& inten
 	auto save_button = std::make_unique<RoundedCornerButtonView>(sf::Vector2f(440, 90));
 	save_button->get().setFillColor(utils::hexToColor("FFFFF0000"));
 	save_button->get().setPosition(sf::Vector2f(580, 360));
+	save_button->setOnClick([this](ViewNode& view) {
+		requestActivity(ActivityID::SavedGame);
+	});
 
 	auto save_text = std::make_unique<TextView>("Save game", font,50);
 	save_text->get().setFillColor(utils::hexToColor("FFFFFF"));
@@ -55,6 +61,9 @@ PauseActivity::PauseActivity(ActivityStack& stack, int requestCode, Extra& inten
 	auto load_button = std::make_unique<RoundedCornerButtonView>(sf::Vector2f(440, 90));
 	load_button->get().setFillColor(utils::hexToColor("FFFFF0000"));
 	load_button->get().setPosition(sf::Vector2f(580, 480));
+	load_button->setOnClick([this](ViewNode& view) {
+		requestActivity(ActivityID::SavedGame);
+	});
 
 	auto load_text = std::make_unique<TextView>("Load game", font,50);
 	load_text->get().setFillColor(utils::hexToColor("FFFFFF"));
@@ -68,6 +77,9 @@ PauseActivity::PauseActivity(ActivityStack& stack, int requestCode, Extra& inten
 	auto quit_button = std::make_unique<RoundedCornerButtonView>(sf::Vector2f(440, 90));
 	quit_button->get().setFillColor(utils::hexToColor("FFFFF0000"));
 	quit_button->get().setPosition(sf::Vector2f(580, 600));
+	quit_button->setOnClick([this](ViewNode& view) {
+		//quit
+	});
 
 	auto quit_text = std::make_unique<TextView>("Quit game", font,50);
 	quit_text->get().setFillColor(utils::hexToColor("FFFFFF"));
