@@ -27,6 +27,8 @@ void LaneTrain::update(sf::Time dt)
     if(utils::random(0.0, 1.0) > stoppingProbability && !m_isTriggered)
     {
         m_isTriggered = true;
+        std::cout << "Train triggered" << std::endl;
+        Context::getInstance().getSounds()->play(SoundEffect::TrainHorn);
         m_elapsedTime = sf::Time::Zero;
         m_position = m_direction == Direction::Left ? Context::getInstance().getWindow()->getSize().x : (-100.f * m_size);
     }

@@ -49,12 +49,6 @@ void LaneTrainView::update(sf::Time dt)
         stepTexture();
     }
 
-    // if train is inside the screen, play TrainHorn sound only one time, if train out of screen, stop the sound
-    if(m_trains[0].getPosition().x > 0 && m_trains[0].getPosition().x < getContext()->getWindow()->getSize().x)
-    {
-        std::cout << "play sound" << std::endl;
-        getContext()->getSounds()->play(SoundEffect::TrainHorn);
-    }
 }
 
 void LaneTrainView::stepTexture()
