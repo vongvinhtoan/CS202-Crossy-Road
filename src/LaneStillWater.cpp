@@ -111,3 +111,8 @@ std::vector<int> LaneStillWater::getLeafs() const
 {
     return m_leafs;
 }
+
+void LaneStillWater::loadFromFile(std::istream& in)
+{
+
+}

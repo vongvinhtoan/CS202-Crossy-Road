@@ -93,6 +93,7 @@
         "stop_token": "cpp",
         "syncstream": "cpp",
         "cassert": "cpp",
-        "queue": "cpp"
+        "format": "cpp",
+        "stdfloat": "cpp"
     }
 }

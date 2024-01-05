@@ -4,7 +4,7 @@
 #include <Context.hpp>
 #include <GameOver_HitObstacleOnLand.hpp>
 
-const float LaneTrain::m_speed = 2000.f;
+const float LaneTrain::m_speed = 1500.f;
 
 LaneTrain::LaneTrain(LaneType laneType, int id, Game* game, std::vector<bool> lastSafeIndexes)
     : Lane(laneType, id, game)
@@ -16,7 +16,6 @@ LaneTrain::LaneTrain(LaneType laneType, int id, Game* game, std::vector<bool> la
 {
     m_safeIndexes.clear();
     m_safeIndexes.resize(Context::getInstance().getWindow()->getSize().x / 100.f, true);
-
 }
 
 void LaneTrain::update(sf::Time dt)
@@ -118,4 +117,9 @@ float LaneTrain::getPosition() const
 int LaneTrain::getSize() const
 {
     return m_size;
+}
+
+void LaneTrain::loadFromFile(std::istream& in)
+{
+
 }

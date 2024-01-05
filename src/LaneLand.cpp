@@ -99,3 +99,8 @@ GameOverStategy* LaneLand::enter(Player* player)
     }
     return nullptr;
 }
+
+void LaneLand::loadFromFile(std::istream& in)
+{
+
+}

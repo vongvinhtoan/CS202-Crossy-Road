@@ -53,6 +53,7 @@ void LaneLandView::bind(Lane* _lane, PlaygroundCamera* camera)
 		renew_obstacles();
 	}
 
+
 	auto pos = absolutePositionTransformation(lane->getIndex() * 100, camera);
 	for(int i = 0; i < mTiles.size(); ++i)
 	{

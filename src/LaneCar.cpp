@@ -153,3 +153,13 @@ int LaneCar::getCarSpace() const
 {
     return m_carSpace;
 }
+
+int LaneCar::getDirection() const
+{
+    return m_carSpeed > 0 ? 1 : -1;
+}
+
+void LaneCar::loadFromFile(std::istream& in)
+{
+
+}

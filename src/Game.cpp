@@ -2,6 +2,9 @@
 #include <GameOver_TooSlowFromCamera.hpp>
 #include <iostream>
 #include <PlaygroundAdapter.hpp>
+#include <fstream>
+#include <Context.hpp>
+#include <ConfigManager.hpp>
 
 Game::Game(int bufferRange)
     : m_bufferRange(bufferRange)
@@ -11,10 +14,9 @@ Game::Game(int bufferRange)
     , m_isDone(false)
     , m_laneCount(0)
     , m_playgroundAdapter(nullptr)
+    , m_lanes(2 * bufferRange)
+    , m_player(std::make_unique<Player>())
 {
-    m_lanes.resize(2 * bufferRange);
-    m_player = std::make_unique<Player>();
-
     auto& lane_probability = (*Context::getInstance().getConfigs())["lane_probability"];
     std::vector<std::vector<double>> probabilities;
     for(int i = 0; i < lane_probability.size(); ++i)
@@ -28,7 +30,6 @@ Game::Game(int bufferRange)
     m_laneFactory = std::make_unique<LaneFactory>(probabilities);
 
     initializeCommandMap();
-
 }
 
 Game::~Game()
@@ -202,6 +203,21 @@ PlaygroundAdapter* Game::getAdapter() const
     return m_playgroundAdapter;
 }
 
+void Game::updateKeyBinding(Command command, const sf::Keyboard::Key newKey)
+{
+    for(auto& [key, cmd] : *mCommandMap)
+    {
+        if(cmd == command)
+        {
+            (*mCommandMap)[newKey] = command;
+            mCommandMap->erase(key);
+            updateConfigFile(command == Command::MoveLeft ? "moveLeft" : command == Command::MoveRight ? "moveRight" : command == Command::MoveUp ? "moveUp" : "moveDown", newKey);
+            return;
+        }
+    }
+
+}
+
 void Game::playerMoveLeft()
 {
     Lane* lane = getCurrentLane();
@@ -259,3 +275,33 @@ int Game::getCurrentLaneIndex()
 {
     return m_player->getPosition().y / 100.f;
 }
+
+void Game::loadFromFile(std::string filename)
+{
+    auto cin = std::ifstream(filename);
+    
+    cin >> m_bufferRange;
+    
+    float cameraPosition;
+    cin >> cameraPosition;
+    m_camera->setScrollPosition(cameraPosition);
+
+    cin >> m_laneCount;
+
+    int l, r;
+    cin >> l >> r;
+    for(int id = l; id < r; ++id)
+    {
+        int i = id % (2 * m_bufferRange);
+        m_lanes[i] = m_laneFactory->createFromFile(cin, id, this);
+    }
+}
+// : m_bufferRange(bufferRange)
+// , m_laneFactory()
+// , m_camera(std::make_unique<PlaygroundCamera>(Context::getInstance().getWindow()->getSize().y / 2.f - 100.f))
+// , m_gameOverStrategy(nullptr)
+// , m_isDone(false)
+// , m_laneCount(0)
+// , m_playgroundAdapter(nullptr)
+// , m_lanes(2 * bufferRange)
+// , m_player(std::make_unique<Player>())

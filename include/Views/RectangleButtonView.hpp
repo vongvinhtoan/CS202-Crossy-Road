@@ -24,6 +24,7 @@ private:
 
 public:
 	void setHoverEffect(sf::Color hoverColor = utils::hexToColor("D9D9D9"));
+	void setButtonColor(const sf::Color &color);
 
 private:
 	sf::RectangleShape 		m_tmpRectangle;

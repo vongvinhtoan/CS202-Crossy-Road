@@ -32,6 +32,10 @@ std::vector<bool> Lane::getSafeIndexes() const
 std::vector<bool> Lane::calculateSafeIndexes(std::vector<bool> allowedIndexes, std::vector<bool> lastSafeIndexes)
 {
     std::vector<bool> safeIndexes(allowedIndexes.size(), false);
+    if(lastSafeIndexes.size() == 0)
+    {
+        return safeIndexes;
+    }
 
     std::function<void(int, std::vector<bool>&)> DFS = [&](int index, std::vector<bool>& safeIndexes)
     {

@@ -1,10 +1,14 @@
 #include <Activities/PlaygroundActivity.hpp>
+#include <RequestCode.hpp>
 
 PlaygroundActivity::PlaygroundActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	: Activity(stack, requestCode, intent)
 {
-	
 	mGame = std::make_unique<Game>((*getContext()->getConfigs())["playground"]["bufferRange"].asInt());
+	if(requestCode == LOAD_SAVE) 
+	{
+		mGame->loadFromFile(intent.getExtra<std::string>("filename"));
+	}
 	mPlaygroundAdapter = std::make_unique<PlaygroundAdapter>(*mGame);
 	mGame->setAdapter(mPlaygroundAdapter.get());
 

@@ -34,6 +34,7 @@ public:
     virtual GameOverStategy* moveRight(Player* player) = 0;
     virtual GameOverStategy* enter(Player* player) = 0;
     virtual GameOverStategy* updatePlayer(Player* player, sf::Time dt) = 0;
+    virtual void loadFromFile(std::istream& in) = 0;
 
 public:
     std::vector<bool> getSafeIndexes() const;

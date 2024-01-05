@@ -8,7 +8,7 @@ TextView::~TextView()
 {
 }
 
-sf::Text& TextView::get()
+sf::Text &TextView::get()
 {
     return m_text;
 }
@@ -22,7 +22,7 @@ void TextView::update(sf::Time dt)
 {
 }
 
-void TextView::handleEvent(sf::Event& event)
+void TextView::handleEvent(sf::Event &event)
 {
 }
 
@@ -30,7 +30,7 @@ void TextView::handleRealtimeInput()
 {
 }
 
-void TextView::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void TextView::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(m_text, states);
 }

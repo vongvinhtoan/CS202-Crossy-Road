@@ -13,6 +13,7 @@ public:
     GameOverStategy* moveRight(Player* player) override;
     GameOverStategy* enter(Player* player) override;
     GameOverStategy* updatePlayer(Player* player, sf::Time dt) override;
+    void loadFromFile(std::istream& in) override;
 
 public:
     void update(sf::Time dt) override;
