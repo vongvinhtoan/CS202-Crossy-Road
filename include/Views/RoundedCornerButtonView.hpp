@@ -10,13 +10,8 @@ public:
 	RoundedCornerButtonView();
 	template <typename ...Args>
 	RoundedCornerButtonView(Args&& ...args)
-		: RoundedCornerRectangleView(std::forward<Args>(args)...),
-		  m_tmpRectangle(std::forward<Args>(args)...)
+		: RoundedCornerRectangleView(std::forward<Args>(args)...)
 	{
-		m_tmpRectangle.setOutlineColor(sf::Color::Transparent);
-		m_tmpRectangle.setOutlineThickness(0);
-		m_tmpRectangle.setPosition(RoundedCornerButtonView::getPosition());
-
 		setHoverEffect();
 	}
 	virtual ~RoundedCornerButtonView() final;
@@ -30,6 +25,4 @@ public:
 	sf::Vector2f getSize() const;
 
 	RoundedCornerRectangleShape& get();
-private:
-	sf::RectangleShape 		m_tmpRectangle;
 };
