@@ -14,7 +14,7 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
 
     // background_layer
     auto background = std::make_unique<RectangleView>(window_size);
-    background->get().setTexture(&getContext()->getTextures()->get(TextureID::BackGroundScreen));
+    background->get().setTexture(&getContext()->getTextures()->get(TextureID::Background));
     
     background_layer->attachChild(std::move(background));
 
@@ -39,6 +39,9 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	auto new_game_button = std::make_unique<RoundedCornerButtonView>(sf::Vector2f(650, 180));
 	new_game_button->get().setFillColor(utils::hexToColor("D9D9D9"));
 	new_game_button->get().setPosition(sf::Vector2f(487, 320));
+    new_game_button->setOnClick([this](ViewNode& view) {
+        requestActivity(ActivityID::Playground);
+    });
 
 	auto new_game_text = std::make_unique<TextView>("New game", font,100);
 	new_game_text->get().setFillColor(utils::hexToColor("FFFFFF"));
@@ -52,6 +55,9 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
     auto continue_button = std::make_unique<RoundedCornerButtonView>(sf::Vector2f(650, 180));
     continue_button->get().setFillColor(utils::hexToColor("D9D9D9"));
     continue_button->get().setPosition(sf::Vector2f(487, 560));
+    continue_button->setOnClick([this](ViewNode& view) {
+        requestActivity(ActivityID::SavedGame);
+    });
     
     auto continue_text = std::make_unique<TextView>("Continue", font,100);
     continue_text->get().setFillColor(utils::hexToColor("FFFFFF"));
@@ -73,6 +79,9 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
     auto instruction_button = std::make_unique<RectangleButtonView>(sf::Vector2f(225, 225));
     instruction_button->get().setTexture(&getContext()->getTextures()->get(TextureID::Instruction));
     instruction_button->setPosition(sf::Vector2f(95, 379));
+    instruction_button->setOnClick([this](ViewNode& view) {
+        requestActivity(ActivityID::Instruction);
+    });
 
     ui_layer->attachChild(std::move(select_character_button));
     ui_layer->attachChild(std::move(new_game_button));
