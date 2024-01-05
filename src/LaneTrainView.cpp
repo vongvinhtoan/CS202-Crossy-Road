@@ -48,6 +48,12 @@ void LaneTrainView::update(sf::Time dt)
     {
         stepTexture();
     }
+
+    // If train appears, play TrainHorn sound
+    if(m_animElapsedTime < sf::seconds(TRAIN_ANIMATION_TIME) && m_trainTextureIndex == 0)
+    {
+        getContext()->getSounds()->play(SoundEffect::TrainHorn);
+    }
 }
 
 void LaneTrainView::stepTexture()
