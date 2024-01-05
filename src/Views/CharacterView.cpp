@@ -40,3 +40,8 @@ void CharacterView::setSize(const sf::Vector2f& size)
     m_characterSprite.setSize(size);
     m_characterSprite.setOrigin(size / 2.f);
 }
+
+CharacterHolder CharacterView::getCharacter() const
+{
+    return m_character;
+}

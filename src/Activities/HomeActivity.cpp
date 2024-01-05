@@ -1,8 +1,10 @@
 #include <Activities/HomeActivity.hpp>
+#include <RequestCode.hpp>
 
 HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
-    : Activity(stack, requestCode, intent) {
-
+    : Activity(stack, requestCode, intent) 
+    , m_playerTextureID(&getContext()->getTextures()->get(TextureID::CharacterChicken))
+{
     sf::Font& font = getContext()->getFonts()->get(FontID::Tourney);
     ViewNode *background_layer = getLayer(0);
     ViewNode* textLayer = getLayer(1);
@@ -31,7 +33,9 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
     select_character_button->get().setTexture(&getContext()->getTextures()->get(TextureID::SelectCharacter));
     select_character_button->setPosition(sf::Vector2f(1216, 554));
     select_character_button->setOnClick([this](ViewNode& view) {
-        requestActivity(ActivityID::Character);
+        auto intent = new Extra();
+        intent->putExtra<sf::Texture*>("characterID", m_playerTextureID);
+        requestActivity(ActivityID::Character, CHARACTER, intent);
     });
 
     //new_game_button
@@ -39,7 +43,9 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	new_game_button->get().setFillColor(utils::hexToColor("D9D9D9"));
 	new_game_button->get().setPosition(sf::Vector2f(487, 320));
     new_game_button->setOnClick([this](ViewNode& view) {
-        requestActivity(ActivityID::Playground);
+        auto intent = new Extra();
+        intent->putExtra<sf::Texture*>("characterTexture", m_playerTextureID);
+        requestActivity(ActivityID::Playground, NEW_GAME, intent);
     });
 
 	auto new_game_text = std::make_unique<TextView>("New game", font,100);
@@ -117,5 +123,7 @@ bool HomeActivity::update(sf::Time dt) {
 bool HomeActivity::draw() { return Activity::draw(); }
 
 void HomeActivity::onActivityResult(int resultCode, Extra* extra) {
-    
+    if (resultCode == RESET_CHARACTER) {
+        m_playerTextureID = extra->getExtra<sf::Texture*>("characterTexture");
+    }
 }

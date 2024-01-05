@@ -5,6 +5,7 @@
 
 LaneCarView::LaneCarView(LaneType laneType)
 	: LaneView(laneType)
+    , m_lastLane(nullptr)
 {
     float winsizex = getContext()->getWindow()->getSize().x;
     m_background.setSize({winsizex, 100.f});

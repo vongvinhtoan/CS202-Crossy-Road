@@ -9,6 +9,10 @@ PlaygroundActivity::PlaygroundActivity(ActivityStack& stack, int requestCode, Ex
 	{
 		mGame->loadFromFile(intent.getExtra<std::string>("filename"));
 	}
+	else if(requestCode == NEW_GAME) 
+	{
+		mGame->setPlayerTexture(intent.getExtra<sf::Texture*>("characterTexture"));
+	}
 	mPlaygroundAdapter = std::make_unique<PlaygroundAdapter>(*mGame);
 	mGame->setAdapter(mPlaygroundAdapter.get());
 
@@ -66,6 +70,8 @@ void PlaygroundActivity::onActivityResult(int resultCode, Extra* extra)
 	}
 	else if(resultCode == PLAY_AGAIN) {
 		finishActivity();
-		requestActivity(ActivityID::Playground);
+		auto intent = new Extra();
+		intent->putExtra("characterTexture", mGame->getPlayer()->getTexture());
+		requestActivity(ActivityID::Playground, NEW_GAME, intent);
 	}
 }
