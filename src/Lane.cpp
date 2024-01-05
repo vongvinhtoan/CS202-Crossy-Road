@@ -86,6 +86,15 @@ void Lane::loadFromFile(std::istream& in)
 
 std::ostream& Lane::saveToFile(std::ostream& out) const
 {
+    std::map<LaneType, std::string> laneTypeToString = {
+        {LaneType::Land, "Land"},
+        {LaneType::MovingWater, "MovingWater"},
+        {LaneType::StillWater, "StillWater"},
+        {LaneType::Car, "Car"},
+        {LaneType::Train, "Train"}
+    };
+    out << laneTypeToString[m_laneType] << "\n";
+
     out << m_safeIndexes.size() << "\n";
     for(auto safe : m_safeIndexes)
     {
