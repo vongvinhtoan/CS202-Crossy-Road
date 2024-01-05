@@ -22,6 +22,7 @@ void Backend::loadTextures(TextureHolder &textures)
     textures.load(TextureID::RightArrow, "res/textures/RightArrow.png");
     textures.load(TextureID::PlayAgainArrow, "res/textures/PlayAgainArrow.png");
     textures.load(TextureID::BackGroundScreen, "res/textures/BackgroundScreen.png");
+    textures.load(TextureID::Background, "res/textures/BackgroundScreen.png");
     textures.load(TextureID::HomeButton, "res/textures/HomeButton.png");
     textures.load(TextureID::KeyBinding, "res/textures/KeyBinding.png");
     textures.load(TextureID::Home, "res/textures/Home.png");
@@ -73,6 +74,11 @@ void Backend::loadTextures(TextureHolder &textures)
     textures.load(TextureID::LaneMovingWater_log_head, "res/textures/Lanes/MovingWater/LaneMovingWater_log_head.png");
     textures.load(TextureID::LaneMovingWater_log_body, "res/textures/Lanes/MovingWater/LaneMovingWater_log_body.png");
     textures.load(TextureID::LaneMovingWater_log_tail, "res/textures/Lanes/MovingWater/LaneMovingWater_log_tail.png");
+    textures.load(TextureID::LaneCar_traffic_light_0, "res/textures/Lanes/Car/LaneCar_traffic_light_0.png");
+    textures.load(TextureID::LaneCar_traffic_light_1, "res/textures/Lanes/Car/LaneCar_traffic_light_1.png");
+    textures.load(TextureID::LaneCar_traffic_light_2, "res/textures/Lanes/Car/LaneCar_traffic_light_2.png");
+    textures.load(TextureID::LaneTrain_traffic_light_0, "res/textures/Lanes/Train/LaneTrain_traffic_light_0.png");
+    textures.load(TextureID::LaneTrain_traffic_light_1, "res/textures/Lanes/Train/LaneTrain_traffic_light_1.png");
 }
 
 void Backend::loadFonts(FontHolder &fonts)

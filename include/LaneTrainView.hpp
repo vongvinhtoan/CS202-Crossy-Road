@@ -36,6 +36,7 @@ private:
 
 private:
 	sf::RectangleShape 				m_background;
+	sf::RectangleShape 				m_trafficLight;
 	std::vector<sf::RectangleShape>	m_trains;
 	std::vector<sf::Texture*>		m_trainTextures;
 	sf::Time						m_animElapsedTime;

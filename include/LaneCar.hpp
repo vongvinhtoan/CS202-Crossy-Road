@@ -27,6 +27,8 @@ public:
     int getCarSize() const;
     int getCarSpace() const;
     int getDirection() const;
+    bool isStopping() const;
+    bool isStopped() const;
 
 private:
     void removeOldCars();
