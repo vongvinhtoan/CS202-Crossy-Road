@@ -51,7 +51,7 @@ void LaneCarView::bind(Lane* _lane, PlaygroundCamera* camera)
     auto cars = lane->getCars();
     m_carSize = lane->getCarSize();
     if(m_carSize == 2)
-        m_carTextureIndex = 3;
+        m_carTextureIndex = 8;
     m_direction = lane->getDirection();
     m_cars.resize(cars.size());
 
@@ -92,7 +92,7 @@ void LaneCarView::resetTexture()
     m_background.setTexture(texture);
     m_background.setTextureRect({0, 0, int(m_background.getSize().x), int(m_background.getSize().y)});
 
-    m_carTextureIndex = utils::random(0, 2);
+    m_carTextureIndex = utils::random(0, 7);
 }
 
 void LaneCarView::setCarsTexture()
@@ -109,6 +109,18 @@ void LaneCarView::setCarsTexture()
         &getContext()->getTextures()->get(TextureID::LaneCar_walking_car_4)
     };
 
+    const static std::vector<sf::Texture*> vroomCars = {
+        &getContext()->getTextures()->get(TextureID::LaneCar_vroom_car_1),
+        &getContext()->getTextures()->get(TextureID::LaneCar_vroom_car_2),
+        &getContext()->getTextures()->get(TextureID::LaneCar_vroom_car_3)
+    };
+
+    const static std::vector<sf::Texture*> icecreamCars = {
+        &getContext()->getTextures()->get(TextureID::LaneCar_icescream_van_1),
+        &getContext()->getTextures()->get(TextureID::LaneCar_icescream_van_2),
+        &getContext()->getTextures()->get(TextureID::LaneCar_icescream_van_3)
+    };
+
     const static std::vector<sf::Texture*> runningCats = {
         &getContext()->getTextures()->get(TextureID::LaneCar_running_cat_1),
         &getContext()->getTextures()->get(TextureID::LaneCar_running_cat_2),
@@ -119,10 +131,40 @@ void LaneCarView::setCarsTexture()
         &getContext()->getTextures()->get(TextureID::LaneCar_running_cat_7)
     };
 
-    const static std::vector<sf::Texture*> vroomCars = {
-        &getContext()->getTextures()->get(TextureID::LaneCar_vroom_car_1),
-        &getContext()->getTextures()->get(TextureID::LaneCar_vroom_car_2),
-        &getContext()->getTextures()->get(TextureID::LaneCar_vroom_car_3)
+    const static std::vector<sf::Texture*> blackDogs = {
+        &getContext()->getTextures()->get(TextureID::LaneCar_black_dog_1),
+        &getContext()->getTextures()->get(TextureID::LaneCar_black_dog_2),
+        &getContext()->getTextures()->get(TextureID::LaneCar_black_dog_3),
+        &getContext()->getTextures()->get(TextureID::LaneCar_black_dog_4),
+        &getContext()->getTextures()->get(TextureID::LaneCar_black_dog_5),
+        &getContext()->getTextures()->get(TextureID::LaneCar_black_dog_6)
+    };
+
+    const static std::vector<sf::Texture*> yellowDogs = {
+        &getContext()->getTextures()->get(TextureID::LaneCar_yellow_dog_1),
+        &getContext()->getTextures()->get(TextureID::LaneCar_yellow_dog_2),
+        &getContext()->getTextures()->get(TextureID::LaneCar_yellow_dog_3),
+        &getContext()->getTextures()->get(TextureID::LaneCar_yellow_dog_4),
+        &getContext()->getTextures()->get(TextureID::LaneCar_yellow_dog_5),
+        &getContext()->getTextures()->get(TextureID::LaneCar_yellow_dog_6)
+    };
+
+    const static std::vector<sf::Texture*> bugs = {
+        &getContext()->getTextures()->get(TextureID::LaneCar_bug_1),
+        &getContext()->getTextures()->get(TextureID::LaneCar_bug_2),
+        &getContext()->getTextures()->get(TextureID::LaneCar_bug_3),
+        &getContext()->getTextures()->get(TextureID::LaneCar_bug_4),
+        &getContext()->getTextures()->get(TextureID::LaneCar_bug_5),
+        &getContext()->getTextures()->get(TextureID::LaneCar_bug_6)
+    };
+
+    const static std::vector<sf::Texture*> crows = {
+        &getContext()->getTextures()->get(TextureID::LaneCar_crow_1),
+        &getContext()->getTextures()->get(TextureID::LaneCar_crow_2),
+        &getContext()->getTextures()->get(TextureID::LaneCar_crow_3),
+        &getContext()->getTextures()->get(TextureID::LaneCar_crow_4),
+        &getContext()->getTextures()->get(TextureID::LaneCar_crow_5),
+        &getContext()->getTextures()->get(TextureID::LaneCar_crow_6)
     };
 
     auto pick = m_carTextureIndex;
@@ -131,22 +173,38 @@ void LaneCarView::setCarsTexture()
         if(pick == 0)
         {
             m_cars[i].setTextures(normalCars);
-            m_cars[i].setTimePerFrame(sf::seconds(0.5f));
-            m_cars[i].setTextureRect({0, 0, 100, 100});
         }
         else if(pick == 1)
         {
             m_cars[i].setTextures(walkingCars);
-            m_cars[i].setTimePerFrame(sf::seconds(0.2f));
-            m_cars[i].setTextureRect({0, 0, 100, 100});
         }
         else if(pick == 2)
         {
             m_cars[i].setTextures(runningCats);
-            m_cars[i].setTimePerFrame(sf::seconds(0.1f));
-            m_cars[i].setTextureRect({0, 0, 100, 100});
         }
         else if(pick == 3)
+        {
+            m_cars[i].setTextures(blackDogs);
+        }
+        else if(pick == 4)
+        {
+            m_cars[i].setTextures(yellowDogs);
+        }
+        else if(pick == 5)
+        {
+            m_cars[i].setTextures(bugs);
+        }
+        else if(pick == 6)
+        {
+            m_cars[i].setTextures(crows);
+        }
+        else if(pick == 7)
+        {
+            m_cars[i].setTextures(icecreamCars);
+        }
+        m_cars[i].setTimePerFrame(sf::seconds(0.2f));
+        m_cars[i].setTextureRect({0, 0, 100, 100});
+        if(pick == 8)
         {
             m_cars[i].setTextures(vroomCars);
             m_cars[i].setTextureRect({0, 0, 200, 100});

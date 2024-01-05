@@ -128,8 +128,8 @@ GameOverStategy* LaneMovingWater::updatePlayer(Player* player, sf::Time dt)
     }
     if(!isOnWood)
     {
-        for(auto& wood : m_woodPositions)
-        return new GameOver_HitObstacleOnLand(getGame());
+        if(player->getTexture() != &Context::getInstance().getTextures()->get(TextureID::CharacterPenguin))
+            return new GameOver_HitObstacleOnLand(getGame());
     }
 
     if(player->getPosition().x < - 50.f || player->getPosition().x + 50.f > Context::getInstance().getWindow()->getSize().x)

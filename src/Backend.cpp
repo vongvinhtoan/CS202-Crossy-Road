@@ -79,6 +79,33 @@ void Backend::loadTextures(TextureHolder &textures)
     textures.load(TextureID::LaneCar_traffic_light_2, "res/textures/Lanes/Car/LaneCar_traffic_light_2.png");
     textures.load(TextureID::LaneTrain_traffic_light_0, "res/textures/Lanes/Train/LaneTrain_traffic_light_0.png");
     textures.load(TextureID::LaneTrain_traffic_light_1, "res/textures/Lanes/Train/LaneTrain_traffic_light_1.png");
+    textures.load(TextureID::LaneCar_black_dog_1, "res/textures/Lanes/Car/LaneCar_black_dog_1.png");
+    textures.load(TextureID::LaneCar_black_dog_2, "res/textures/Lanes/Car/LaneCar_black_dog_2.png");
+    textures.load(TextureID::LaneCar_black_dog_3, "res/textures/Lanes/Car/LaneCar_black_dog_3.png");
+    textures.load(TextureID::LaneCar_black_dog_4, "res/textures/Lanes/Car/LaneCar_black_dog_4.png");
+    textures.load(TextureID::LaneCar_black_dog_5, "res/textures/Lanes/Car/LaneCar_black_dog_5.png");
+    textures.load(TextureID::LaneCar_black_dog_6, "res/textures/Lanes/Car/LaneCar_black_dog_6.png");
+    textures.load(TextureID::LaneCar_bug_1, "res/textures/Lanes/Car/LaneCar_bug_1.png");
+    textures.load(TextureID::LaneCar_bug_2, "res/textures/Lanes/Car/LaneCar_bug_2.png");
+    textures.load(TextureID::LaneCar_bug_3, "res/textures/Lanes/Car/LaneCar_bug_3.png");
+    textures.load(TextureID::LaneCar_bug_4, "res/textures/Lanes/Car/LaneCar_bug_4.png");
+    textures.load(TextureID::LaneCar_bug_5, "res/textures/Lanes/Car/LaneCar_bug_5.png");
+    textures.load(TextureID::LaneCar_bug_6, "res/textures/Lanes/Car/LaneCar_bug_6.png");
+    textures.load(TextureID::LaneCar_crow_1, "res/textures/Lanes/Car/LaneCar_crow_1.png");
+    textures.load(TextureID::LaneCar_crow_2, "res/textures/Lanes/Car/LaneCar_crow_2.png");
+    textures.load(TextureID::LaneCar_crow_3, "res/textures/Lanes/Car/LaneCar_crow_3.png");
+    textures.load(TextureID::LaneCar_crow_4, "res/textures/Lanes/Car/LaneCar_crow_4.png");
+    textures.load(TextureID::LaneCar_crow_5, "res/textures/Lanes/Car/LaneCar_crow_5.png");
+    textures.load(TextureID::LaneCar_crow_6, "res/textures/Lanes/Car/LaneCar_crow_6.png");
+    textures.load(TextureID::LaneCar_icescream_van_1, "res/textures/Lanes/Car/LaneCar_icescream_van_1.png");
+    textures.load(TextureID::LaneCar_icescream_van_2, "res/textures/Lanes/Car/LaneCar_icescream_van_2.png");
+    textures.load(TextureID::LaneCar_icescream_van_3, "res/textures/Lanes/Car/LaneCar_icescream_van_3.png");
+    textures.load(TextureID::LaneCar_yellow_dog_1, "res/textures/Lanes/Car/LaneCar_yellow_dog_1.png");
+    textures.load(TextureID::LaneCar_yellow_dog_2, "res/textures/Lanes/Car/LaneCar_yellow_dog_2.png");
+    textures.load(TextureID::LaneCar_yellow_dog_3, "res/textures/Lanes/Car/LaneCar_yellow_dog_3.png");
+    textures.load(TextureID::LaneCar_yellow_dog_4, "res/textures/Lanes/Car/LaneCar_yellow_dog_4.png");
+    textures.load(TextureID::LaneCar_yellow_dog_5, "res/textures/Lanes/Car/LaneCar_yellow_dog_5.png");
+    textures.load(TextureID::LaneCar_yellow_dog_6, "res/textures/Lanes/Car/LaneCar_yellow_dog_6.png");
 }
 
 void Backend::loadFonts(FontHolder &fonts)

@@ -70,6 +70,8 @@ GameOverStategy* LaneStillWater::updatePlayer(Player* player, sf::Time dt)
             return nullptr;
         }
     }
+    if(player->getTexture() == &Context::getInstance().getTextures()->get(TextureID::CharacterPenguin))
+        return nullptr;
     return new GameOver_HitObstacleOnLand(getGame());
 }
 
