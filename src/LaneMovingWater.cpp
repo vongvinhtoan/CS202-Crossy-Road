@@ -146,3 +146,8 @@ std::deque<std::pair<float, float>> LaneMovingWater::getWoodPositions()
 {
     return m_woodPositions;
 }
+
+void LaneMovingWater::loadFromFile(std::istream& in)
+{
+
+}

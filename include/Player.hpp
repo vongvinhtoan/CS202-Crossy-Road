@@ -16,6 +16,7 @@ public:
     void accelerate(sf::Vector2f velocity);
     void setInvincible(bool isInvincible);
     bool isInvincible() const;
+    void setPosition(sf::Vector2f position);
 
 public:
     sf::FloatRect getBounds() const;

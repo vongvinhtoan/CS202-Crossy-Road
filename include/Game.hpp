@@ -26,6 +26,9 @@ public:
 public:
     void setAdapter(PlaygroundAdapter *playgroundAdapter);
     void setDone(bool isDone);
+	void loadFromFile(std::string filename);
+    std::string saveToString();
+    std::string saveToFile(std::string filename);
 
 public:
     Lane *getLane(int index);

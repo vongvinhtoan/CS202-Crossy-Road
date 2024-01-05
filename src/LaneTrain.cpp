@@ -118,3 +118,8 @@ int LaneTrain::getSize() const
 {
     return m_size;
 }
+
+void LaneTrain::loadFromFile(std::istream& in)
+{
+
+}

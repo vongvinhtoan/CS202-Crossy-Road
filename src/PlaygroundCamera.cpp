@@ -59,3 +59,9 @@ void PlaygroundCamera::stop()
 {
     mIsStopped = true;
 }
+
+void PlaygroundCamera::setScrollPosition(float scrollPosition)
+{
+    mScrollPosition = scrollPosition;
+    mScrollPositionTarget = scrollPosition;
+}
