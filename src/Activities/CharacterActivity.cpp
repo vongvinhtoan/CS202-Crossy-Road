@@ -22,10 +22,13 @@ CharacterActivity::CharacterActivity(ActivityStack &stack, int requestCode, Extr
 	text->setPosition(sf::Vector2f((window_size.x - text->get().getLocalBounds().width) / 2, 56));
 
     //character_picker_view
-    std::vector<CharacterHolder> characters(3);
+    std::vector<CharacterHolder> characters(6);
     characters[0].m_texture = &getContext()->getTextures()->get(TextureID::CharacterChicken);
     characters[1].m_texture = &getContext()->getTextures()->get(TextureID::CharacterMonkey);
     characters[2].m_texture = &getContext()->getTextures()->get(TextureID::CharacterPenguin);
+    characters[3+0].m_texture = &getContext()->getTextures()->get(TextureID::CharacterChicken);
+    characters[3+1].m_texture = &getContext()->getTextures()->get(TextureID::CharacterMonkey);
+    characters[3+2].m_texture = &getContext()->getTextures()->get(TextureID::CharacterPenguin);
 
     auto character_picker_view = std::make_unique<CharacterPickerView>(characters);
     mCharacterPickerView = character_picker_view.get();
