@@ -20,6 +20,10 @@ private:
 	virtual void handleRealtimeInput() final override;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const final override;
 
+public:
+	CharacterHolder getSelectedCharacter() const;
+	void setSelectedCharacter(int index);
+
 private:
 	virtual bool contains(sf::Vector2f point) const final override;
 

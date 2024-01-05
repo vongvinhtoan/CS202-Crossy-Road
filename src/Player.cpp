@@ -85,3 +85,13 @@ void Player::setPosition(sf::Vector2f position)
     m_bounds.left = position.x;
     m_bounds.top = position.y;
 }
+
+void Player::setTexture(sf::Texture* texture)
+{
+    m_texture = texture;
+}
+
+sf::Texture* Player::getTexture() const
+{
+    return m_texture;
+}

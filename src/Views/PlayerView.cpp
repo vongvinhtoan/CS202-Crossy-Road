@@ -5,7 +5,6 @@ PlayerView::PlayerView()
 {
 	auto tileSize = (*getContext()->getConfigs())["playground"]["tileSize"].asInt();
 	mShape.setSize(sf::Vector2f(tileSize, tileSize));
-	mShape.setFillColor(sf::Color::Red);
 }
 
 PlayerView::~PlayerView()
@@ -54,6 +53,8 @@ void PlayerView::bind(Player* player, PlaygroundCamera* camera)
 	mShape.setSize(sf::Vector2f(rect.width, rect.height));
 	rect.top = (*getContext()->getWindow()).getSize().y - rect.top;
 	setPosition(rect.left, rect.top);
+
+	mShape.setTexture(player->getTexture());
 
 	if(player->isInvincible())
 	{
