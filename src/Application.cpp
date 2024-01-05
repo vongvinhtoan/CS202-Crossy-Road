@@ -8,6 +8,7 @@ Application::Application()
 , m_fontHolder(std::make_unique<FontHolder>())
 , m_textureHolder(std::make_unique<TextureHolder>())
 , m_musicPlayer(std::make_unique<MusicPlayer>())
+, m_soundPlayer(std::make_unique<SoundPlayer>())
 {
     loadData();
 
@@ -31,6 +32,7 @@ Application::Application()
     m_context->setTextures(m_textureHolder.get());
     m_context->setFonts(m_fontHolder.get());
     m_context->setMusic(m_musicPlayer.get());
+    m_context->setSounds(m_soundPlayer.get());
     m_context->setBackend(m_backend);
     m_context->setConfigs(&m_configs);
     

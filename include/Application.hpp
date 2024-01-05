@@ -46,6 +46,7 @@ private:
     std::unique_ptr<FontHolder>         m_fontHolder;
     std::unique_ptr<TextureHolder>      m_textureHolder;
     std::unique_ptr<MusicPlayer>        m_musicPlayer;
+    std::unique_ptr<SoundPlayer>        m_soundPlayer;
     Context*                            m_context;
     Json::Value                         m_configs;
     StatisticsView*                     m_statisticsView = nullptr;

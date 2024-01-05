@@ -5,6 +5,7 @@ Context::Context()
     , textures(nullptr)
     , fonts(nullptr)
     , music(nullptr)
+    , sounds(nullptr)
     , backend(nullptr)
 {
 }
@@ -39,6 +40,11 @@ MusicPlayer* Context::getMusic()
     return music;
 }
 
+SoundPlayer* Context::getSounds()
+{
+    return sounds;
+}
+
 Backend* Context::getBackend()
 {
     return backend;
@@ -67,6 +73,11 @@ void Context::setFonts(FontHolder* fonts)
 void Context::setMusic(MusicPlayer* music)
 {
     this->music = music;
+}
+
+void Context::setSounds(SoundPlayer* sounds)
+{
+    this->sounds = sounds;
 }
 
 void Context::setBackend(Backend* backend)
