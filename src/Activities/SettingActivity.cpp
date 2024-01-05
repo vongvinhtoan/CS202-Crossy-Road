@@ -4,7 +4,6 @@
 SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &intent)
 	: Activity(stack, requestCode, intent)
 {
-	std::cout << "SettingActivity::SettingActivity()" << std::endl;
 
 	ViewNode *background_layer = getLayer(0);
 	ViewNode *text_layer = getLayer(1);
@@ -13,9 +12,6 @@ SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &i
 
 	auto window = getContext()->getWindow();
 	sf::Vector2f window_size(window->getSize());
-
-	std::cout << "window_size: " << window_size.x << " " << window_size.y << std::endl;
-
 	// background_layer
 
 	auto background = std::make_unique<RectangleView>(window_size);

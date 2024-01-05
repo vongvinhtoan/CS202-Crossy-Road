@@ -3,8 +3,6 @@
 GameOverActivity::GameOverActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	: Activity(stack, requestCode, intent)
 {
-	std::cout << "GameOverActivity::GameOverActivity()" << std::endl;
-
 	auto window = getContext()->getWindow();
 	sf::Vector2f window_size(window->getSize());
 
@@ -54,8 +52,7 @@ GameOverActivity::GameOverActivity(ActivityStack& stack, int requestCode, Extra&
 	auto playAgainButton = std::make_unique<RectangleButtonView>(sf::Vector2f(204, 204));
     playAgainButton->setPosition(sf::Vector2f(444.f, 324.f));
 	playAgainButton->setOnClick([&](ViewNode& view) {
-		m_isAnimationFinished = true;
-		replay();
+		finishActivity(PLAY_AGAIN, new Extra());
     });
 	playAgainButton->disable();
 	m_playAgainButton = playAgainButton.get();
@@ -71,12 +68,14 @@ GameOverActivity::~GameOverActivity()
 
 bool GameOverActivity::handleEvent(sf::Event& event)
 {
-	return Activity::handleEvent(event);
+	Activity::handleEvent(event);
+	return 0;
 }
 
 bool GameOverActivity::handleRealtimeInput()
 {
-	return Activity::handleRealtimeInput();
+	Activity::handleRealtimeInput();
+	return 0;
 }
 
 bool GameOverActivity::update(sf::Time dt)
@@ -124,8 +123,6 @@ bool GameOverActivity::draw()
 
 void GameOverActivity::replay()
 {
-	std::cout<<"GameOverActivity::replay()"<<std::endl;
-	
 	//make game over text visible
 	auto color = m_gameOverText->get().getFillColor();
 	color.a = 255;

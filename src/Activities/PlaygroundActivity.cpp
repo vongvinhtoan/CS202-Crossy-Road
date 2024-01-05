@@ -65,4 +65,8 @@ void PlaygroundActivity::onActivityResult(int resultCode, Extra* extra)
 		finishActivity();
 		requestActivity(ActivityID::Home);
 	}
+	else if(resultCode == PLAY_AGAIN) {
+		finishActivity();
+		requestActivity(ActivityID::Playground);
+	}
 }

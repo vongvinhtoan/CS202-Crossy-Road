@@ -296,12 +296,3 @@ void Game::loadFromFile(std::string filename)
         m_lanes[i] = m_laneFactory->createFromFile(cin, id, this);
     }
 }
-// : m_bufferRange(bufferRange)
-// , m_laneFactory()
-// , m_camera(std::make_unique<PlaygroundCamera>(Context::getInstance().getWindow()->getSize().y / 2.f - 100.f))
-// , m_gameOverStrategy(nullptr)
-// , m_isDone(false)
-// , m_laneCount(0)
-// , m_playgroundAdapter(nullptr)
-// , m_lanes(2 * bufferRange)
-// , m_player(std::make_unique<Player>())

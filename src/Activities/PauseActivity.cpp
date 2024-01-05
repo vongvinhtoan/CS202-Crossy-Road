@@ -3,8 +3,6 @@
 PauseActivity::PauseActivity(ActivityStack& stack, int requestCode, Extra& intent)
 	: Activity(stack, requestCode, intent)
 {
-	std::cout << "PauseActivity::PauseActivity()" << std::endl;
-
 	auto window = getContext()->getWindow();
 	sf::Vector2f window_size(window->getSize());
 

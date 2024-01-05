@@ -37,7 +37,6 @@ LaneStillWater::LaneStillWater(LaneType laneType, int id, Game* game, std::vecto
     }
 
     auto capLeaf = utils::random(2, maxIndex / 2);
-    std::cout << "capLeaf: " << capLeaf << std::endl;
     while(tmpLeafs.size() < capLeaf)
     {
         auto index = utils::random(0, maxIndex - 1);
@@ -53,12 +52,6 @@ LaneStillWater::LaneStillWater(LaneType laneType, int id, Game* game, std::vecto
         lastSafeIndexes
     );
     m_leafs = std::vector<int>(tmpLeafs.begin(), tmpLeafs.end());
-    std::cout << "m_safeIndexes: ";
-    for(auto index : m_safeIndexes)
-    {
-        std::cout << index << " ";
-    }
-    std::cout << std::endl;
 }
 
 void LaneStillWater::update(sf::Time dt)

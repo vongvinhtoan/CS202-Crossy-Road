@@ -10,7 +10,6 @@ GameOver_HitObstacleOnLand::GameOver_HitObstacleOnLand(Game* game)
 , m_velocity(sf::Vector2f(100.f, -300.f))
 , m_rotation_velocity(100.f)
 {
-    std::cout << "GameOver_HitObstacleOnLand" << std::endl;
     auto* player = getGame()->getPlayer();
     auto* adapter = getGame()->getAdapter();
     auto playerRect = adapter->getPlayer()->getTransformed();
