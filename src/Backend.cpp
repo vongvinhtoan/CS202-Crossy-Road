@@ -30,6 +30,7 @@ void Backend::loadTextures(TextureHolder &textures)
     textures.load(TextureID::KeyboardButton, "res/textures/KeyboardButton.png");
     textures.load(TextureID::Setting, "res/textures/Setting.png");
     textures.load(TextureID::Instruction, "res/textures/Instruction.png");
+    textures.load(TextureID::InstructionText, "res/textures/InstructionText.png");
     textures.load(TextureID::SelectCharacter, "res/textures/SelectCharacter.png");
     textures.load(TextureID::ShortcutPicture, "res/textures/ShortcutPicture.png");
     textures.load(TextureID::CloseButton, "res/textures/CloseButton.png");
