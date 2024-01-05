@@ -30,6 +30,9 @@ LaneTrainView::LaneTrainView(LaneType laneType)
     m_trainTextures.push_back(&getContext()->getTextures()->get(TextureID::LaneTrain_train_7));
     m_trainTextures.push_back(&getContext()->getTextures()->get(TextureID::LaneTrain_train_8));
 
+    m_trafficLight.setTexture(&getContext()->getTextures()->get(TextureID::LaneTrain_traffic_light_0));
+    m_trafficLight.setSize({float(m_trafficLight.getTexture()->getSize().x), float(m_trafficLight.getTexture()->getSize().y)});
+    m_trafficLight.setOrigin({m_trafficLight.getSize().x / 2.f, m_trafficLight.getSize().y});
 }
 
 void LaneTrainView::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -39,6 +42,7 @@ void LaneTrainView::draw(sf::RenderTarget& target, sf::RenderStates states) cons
     {
         target.draw(train, states);
     }
+    target.draw(m_trafficLight, states);
 }
 
 void LaneTrainView::update(sf::Time dt)
@@ -114,6 +118,16 @@ void LaneTrainView::bind(Lane* _lane, PlaygroundCamera* camera)
         m_trains[0].move({100.f, 0.f});
         m_trains.back().move({200.f, 0.f});
     }
+
+    auto winsizex = getContext()->getWindow()->getSize().x;
+    m_trafficLight.setPosition({50.f, pos + 100.f});
+    if(m_direction > 0)
+        m_trafficLight.setPosition({winsizex - 50.f, pos + 100.f});
+
+    if(lane->isTriggered())
+        m_trafficLight.setTexture(&getContext()->getTextures()->get(TextureID::LaneTrain_traffic_light_0));
+    else
+        m_trafficLight.setTexture(&getContext()->getTextures()->get(TextureID::LaneTrain_traffic_light_1));
 }
 
 void LaneTrainView::resetTexture()
