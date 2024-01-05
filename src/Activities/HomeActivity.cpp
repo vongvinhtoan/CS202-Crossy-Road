@@ -14,7 +14,7 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
 
     // background_layer
     auto background = std::make_unique<RectangleView>(window_size);
-    background->get().setTexture(&getContext()->getTextures()->get(TextureID::Background));
+    background->get().setTexture(&getContext()->getTextures()->get(TextureID::BackGroundScreen));
     
     background_layer->attachChild(std::move(background));
 
@@ -83,6 +83,14 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
         requestActivity(ActivityID::Instruction);
     });
 
+    //high_score_button
+    auto high_score_button = std::make_unique<RectangleButtonView>(sf::Vector2f(170, 170));
+    high_score_button->get().setTexture(&getContext()->getTextures()->get(TextureID::HighScore));
+    high_score_button->setPosition(sf::Vector2f(1290, 280));
+    high_score_button->setOnClick([this](ViewNode& view) {
+        //requestActivity(ActivityID::HighScore);
+    });
+
     ui_layer->attachChild(std::move(select_character_button));
     ui_layer->attachChild(std::move(new_game_button));
     ui_layer->attachChild(std::move(new_game_text));
@@ -92,6 +100,7 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
 
     ui_layer->attachChild(std::move(setting_button));
     ui_layer->attachChild(std::move(instruction_button));
+    ui_layer->attachChild(std::move(high_score_button));
 }
 
 HomeActivity::~HomeActivity() {}
