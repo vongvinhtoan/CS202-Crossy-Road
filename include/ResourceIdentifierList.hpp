@@ -5,6 +5,7 @@ enum ID {
     HomeButton,
     Setting,
     Instruction,
+    InstructionText,
     Background,
     CharacterPenguin,
     CharacterChicken,
