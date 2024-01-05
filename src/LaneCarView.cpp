@@ -136,6 +136,9 @@ void LaneCarView::setCarsTexture()
         }
     }
 
+    for(auto& car: m_cars)
+        car.setScale(1.f, 1.f);
+
     if(m_direction > 0)
     {
         for(int i = 0; i < m_cars.size(); ++i)

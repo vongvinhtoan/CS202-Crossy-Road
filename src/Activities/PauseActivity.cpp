@@ -94,12 +94,21 @@ PauseActivity::~PauseActivity()
 
 bool PauseActivity::handleEvent(sf::Event& event)
 {
-	return Activity::handleEvent(event);
+	Activity::handleEvent(event);
+	if(event.type == sf::Event::KeyPressed)
+	{
+		if(event.key.code == sf::Keyboard::Escape)
+		{
+			finishActivity();
+		}
+	}
+	return 0;
 }
 
 bool PauseActivity::handleRealtimeInput()
 {
-	return Activity::handleRealtimeInput();
+	Activity::handleRealtimeInput();
+	return 0;
 }
 
 bool PauseActivity::update(sf::Time dt)

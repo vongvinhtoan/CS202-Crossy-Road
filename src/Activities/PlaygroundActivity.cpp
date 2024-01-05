@@ -25,6 +25,11 @@ PlaygroundActivity::~PlaygroundActivity()
 bool PlaygroundActivity::handleEvent(sf::Event& event)
 {
 	Activity::handleEvent(event);
+	if(event.type == sf::Event::KeyPressed) {
+		if(event.key.code == sf::Keyboard::Escape) {
+			requestActivity(ActivityID::Pause);
+		}
+	}
 	mGame->handleEvent(event);
 	return 0;
 }
@@ -42,8 +47,7 @@ bool PlaygroundActivity::update(sf::Time dt)
 	mGame->update(dt);
 
 	if(mGame->isDone()) {
-
-		finishActivity();
+		requestActivity(ActivityID::GameOver);
 	}
 
 	return 0;
@@ -53,4 +57,12 @@ bool PlaygroundActivity::draw()
 {
 	Activity::draw();
 	return true;
+}
+
+void PlaygroundActivity::onActivityResult(int resultCode, Extra* extra)
+{
+	if(resultCode == BACK_TO_HOME) {
+		finishActivity();
+		requestActivity(ActivityID::Home);
+	}
 }

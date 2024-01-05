@@ -45,7 +45,7 @@ GameOverActivity::GameOverActivity(ActivityStack& stack, int requestCode, Extra&
     homeButton->setPosition(sf::Vector2f(925.f, 318.f));
     homeButton->setOnClick([this](ViewNode& view) {
 		m_isAnimationFinished = true;
-		requestActivity(ActivityID::Home);
+		finishActivity(BACK_TO_HOME, new Extra());
     });
 	m_homeButton = homeButton.get();
 	homeButton->disable();

@@ -9,6 +9,7 @@
 #include <ActivityIdentifiers.hpp>
 #include <iostream>
 #include <ViewList.hpp>
+#include <RequestCode.hpp>
 
 class ActivityStack;
 
