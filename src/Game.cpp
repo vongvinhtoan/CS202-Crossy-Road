@@ -31,11 +31,11 @@ Game::Game(int bufferRange)
     m_laneFactory = std::make_unique<LaneFactory>(probabilities);
 
     initializeCommandMap();
+
 }
 
 Game::~Game()
 {
-    std::cout << "Game::~Game()" << std::endl;
 }
 
 void Game::setAdapter(PlaygroundAdapter* playgroundAdapter)
@@ -62,7 +62,7 @@ void Game::update(sf::Time dt)
 
     if(m_gameOverStrategy.get()) return;
     auto* curLane = getCurrentLane();
-    auto* result = curLane->checkCollision(m_player.get(), m_isDone);
+    auto* result = curLane->updatePlayer(m_player.get(), dt);
     if(result)
         setGameOverStrategy(result);
     checkPlayerPosition();
@@ -105,16 +105,20 @@ void Game::handleEvent(sf::Event& event)
 {
     if(m_gameOverStrategy.get())
     {
+
         m_gameOverStrategy->handleEvent(event);
+
         return;
     }
     if(event.type == sf::Event::KeyPressed)
     {
+
         auto command = mCommandMap->find(event.key.code);
         if(command != mCommandMap->end())
         {
             solveCommand(command->second);
         }
+
     }
 }
 
@@ -218,20 +222,20 @@ void Game::updateKeyBinding(Command command, const sf::Keyboard::Key newKey)
 
 void Game::playerMoveLeft()
 {
-    if(m_player->getPosition().x <= 0.f) return;
-
     Lane* lane = getCurrentLane();
-    auto* result = lane->moveLeft(m_player.get(), m_isDone);
+    if(!lane) return;
+
+    auto* result = lane->moveLeft(m_player.get());
     if(result)
         setGameOverStrategy(result);
 }
 
 void Game::playerMoveRight()
 {
-    if(m_player->getPosition().x + 100.f >= Context::getInstance().getWindow()->getSize().x) return;
-    
     Lane* lane = getCurrentLane();
-    auto* result = lane->moveRight(m_player.get(), m_isDone);
+    if(!lane) return;
+
+    auto* result = lane->moveRight(m_player.get());
     if(result)
         setGameOverStrategy(result);
 }
@@ -241,7 +245,9 @@ void Game::playerMoveUp()
     int index = getCurrentLaneIndex();
     index = (index + 1) % (2 * m_bufferRange);
     Lane* lane = m_lanes[index].get();
-    auto* result = lane->enter(m_player.get(), m_isDone);
+    if(!lane) return;
+
+    auto* result = lane->enter(m_player.get());
     if(result)
         setGameOverStrategy(result);
 }
@@ -253,7 +259,9 @@ void Game::playerMoveDown()
     int index = getCurrentLaneIndex();
     index = (index - 1 + 2 * m_bufferRange) % (2 * m_bufferRange);
     Lane* lane = m_lanes[index].get();
-    auto* result = lane->enter(m_player.get(), m_isDone);
+    if(!lane) return;
+
+    auto* result = lane->enter(m_player.get());
     if(result)
         setGameOverStrategy(result);
 }

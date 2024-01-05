@@ -35,7 +35,8 @@ public:
     GameOverStategy *gameOver();
     bool isDone() const;
     int getLaneCount() const;
-    PlaygroundAdapter *getAdapter() const;
+    PlaygroundAdapter* getAdapter() const;
+    int getCurrentLaneIndex();
 
 private:
     enum class Command
@@ -57,7 +58,7 @@ private:
     void playerMoveRight();
     void playerMoveUp();
     void playerMoveDown();
-    Lane *getCurrentLane();
+    Lane* getCurrentLane();
     int getCurrentLaneIndex();
 
 private:
