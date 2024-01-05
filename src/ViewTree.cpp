@@ -50,8 +50,9 @@ void ViewTree::handleRealtimeInput()
 void ViewTree::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     if (!m_root) return;
-
-    draw(target, states, *m_root);
+    if(!m_root->m_hidden) {
+        draw(target, states, *m_root);
+    }
 }
 
 void ViewTree::update(sf::Time dt, ViewNode& node)
@@ -86,6 +87,9 @@ void ViewTree::draw(sf::RenderTarget& target, sf::RenderStates states, const Vie
     
     node.drawIfEnabled(target, states);
 
-    for (auto& child : node.m_children)
-        draw(target, states, *child);
+    for (auto& child : node.m_children) {
+        if(!child->m_hidden) {
+            draw(target, states, *child);
+        }
+    }
 }

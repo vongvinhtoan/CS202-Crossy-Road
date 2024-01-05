@@ -53,6 +53,9 @@ public:
     void toggle();
     void enable();
     void disable();
+    void hide();
+    void show();
+    bool isHidden() const;
 
 private:
     ViewNode*                               m_parent = nullptr;
@@ -61,6 +64,9 @@ private:
     sf::Clock                               m_holdClock;
     sf::Time                                m_holdRequiredTime = sf::seconds(0.15f);
     std::vector<std::unique_ptr<ViewNode>>  m_children;
+    
+protected:
+    bool                                    m_hidden = false;
 
 protected:
     std::function<void(ViewNode&)>          m_onClick;

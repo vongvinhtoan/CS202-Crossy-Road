@@ -2,6 +2,9 @@
 #include <GameOver_TooSlowFromCamera.hpp>
 #include <iostream>
 #include <PlaygroundAdapter.hpp>
+#include <fstream>
+#include <Context.hpp>
+#include <ConfigManager.hpp>
 
 Game::Game(int bufferRange)
     : m_bufferRange(bufferRange)
@@ -200,6 +203,21 @@ int Game::getLaneCount() const
 PlaygroundAdapter* Game::getAdapter() const
 {
     return m_playgroundAdapter;
+}
+
+void Game::updateKeyBinding(Command command, const sf::Keyboard::Key newKey)
+{
+    for(auto& [key, cmd] : *mCommandMap)
+    {
+        if(cmd == command)
+        {
+            (*mCommandMap)[newKey] = command;
+            mCommandMap->erase(key);
+            updateConfigFile(command == Command::MoveLeft ? "moveLeft" : command == Command::MoveRight ? "moveRight" : command == Command::MoveUp ? "moveUp" : "moveDown", newKey);
+            return;
+        }
+    }
+
 }
 
 void Game::playerMoveLeft()

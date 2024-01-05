@@ -45,13 +45,13 @@ SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &i
 	m_background_music_bar = background_music_bar.get();
 	ui_layer->attachChild(std::move(background_music_bar));
 
-	auto home_button = std::make_unique<RectangleView>(sf::Vector2f(109, 139));
-	home_button->get().setTexture(&getContext()->getTextures()->get(TextureID::HomeButton));
-	home_button->get().setPosition(sf::Vector2f(67.f, 56.f));
-	home_button->setOnClick([this](ViewNode &view) {
-		finishActivity();
-		requestActivity(ActivityID::Home);
-	});
+	auto home_button = std::make_unique<RectangleView>(sf::Vector2f(128, 128));
+    home_button->get().setTexture(&getContext()->getTextures()->get(TextureID::Home));
+    home_button->setPosition(sf::Vector2f(64.f, 64.f));
+    home_button->setOnClick([this](ViewNode& view) {
+        finishActivity();
+    });
+
 	ui_layer->attachChild(std::move(home_button));
 }
 
@@ -76,6 +76,5 @@ bool SettingActivity::update(sf::Time dt)
 
 bool SettingActivity::draw()
 {
-	getContext()->getWindow()->clear(utils::hexToColor("#9ae0a8"));
 	return Activity::draw();
 }
