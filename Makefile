@@ -7,7 +7,7 @@ INCLUDES := -I".\libs\SFML-2.5.1\include" -I".\libs\jsoncpp" -I".\include"
 # Library directories
 LFLAGS := -L"./libs/SFML-2.5.1/lib"
 # Libraries
-LIBS := -lsfml-graphics -lsfml-window -lsfml-system -lcomdlg32
+LIBS := -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lcomdlg32
 # Source files
 SRCS := $(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
 # Library cpp files

@@ -55,6 +55,7 @@ CharacterActivity::CharacterActivity(ActivityStack &stack, int requestCode, Extr
     ui_layer->attachChild(std::move(homeButton));
     ui_layer->attachChild(std::move(character_picker_view));
     ui_layer->attachChild(std::move(text));
+    getContext()->getMusic()->play(Music::BackGroundMusic);    
 }
 
 CharacterActivity::~CharacterActivity() 

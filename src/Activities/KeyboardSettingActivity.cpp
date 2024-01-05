@@ -71,6 +71,7 @@ KeyboardSettingActivity::KeyboardSettingActivity(ActivityStack &stack, int reque
     });
 
     ui_layer->attachChild(std::move(keyboard_button));
+    getContext()->getMusic()->play(Music::BackGroundMusic);
 }
 
 KeyboardSettingActivity::~KeyboardSettingActivity()

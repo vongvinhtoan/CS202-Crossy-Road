@@ -106,6 +106,8 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
     ui_layer->attachChild(std::move(setting_button));
     ui_layer->attachChild(std::move(instruction_button));
     ui_layer->attachChild(std::move(high_score_button));
+    // music
+    getContext()->getMusic()->play(Music::BackGroundMusic);
 }
 
 HomeActivity::~HomeActivity() {}
