@@ -3,6 +3,8 @@ enum ID {
     LoadingScreen,
     BackGroundScreen,
     HomeButton,
+    Setting,
+    Instruction,
     Background,
     CharacterPenguin,
     CharacterChicken,

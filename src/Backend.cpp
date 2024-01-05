@@ -23,6 +23,8 @@ void Backend::loadTextures(TextureHolder& textures) {
     textures.load(TextureID::BackGroundScreen, "res/textures/BackgroundScreen.png");
     textures.load(TextureID::HomeButton, "res/textures/HomeButton.png");
     textures.load(TextureID::Home, "res/textures/Home.png");
+    textures.load(TextureID::Setting, "res/textures/Setting.png");
+    textures.load(TextureID::Instruction, "res/textures/Instruction.png");
     textures.load(TextureID::SelectCharacter, "res/textures/SelectCharacter.png");
     textures.load(TextureID::LaneLand_tile_0, "res/textures/Lanes/Land/LaneLand_tile_0.png");
     textures.load(TextureID::LaneLand_tile_1, "res/textures/Lanes/Land/LaneLand_tile_1.png");

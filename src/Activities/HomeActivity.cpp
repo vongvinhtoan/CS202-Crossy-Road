@@ -60,6 +60,18 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
     continue_text_ref.setOrigin(textRect.left + textRect.width/2.0f, textRect.top  + textRect.height/2.0f);
     continue_text_ref.setPosition(window_size.x/2.0f,
                      continue_button->getPosition().y + continue_button->get().getSize().y/2.0f);
+    
+    //setting_button
+    auto setting_button = std::make_unique<RectangleButtonView>(sf::Vector2f(152, 152));
+    setting_button->get().setTexture(&getContext()->getTextures()->get(TextureID::Setting));
+    setting_button->setPosition(sf::Vector2f(132, 675));
+    setting_button->setOnClick([this](ViewNode& view) {
+    });
+
+    //instruction_button
+    auto instruction_button = std::make_unique<RectangleButtonView>(sf::Vector2f(225, 225));
+    instruction_button->get().setTexture(&getContext()->getTextures()->get(TextureID::Instruction));
+    instruction_button->setPosition(sf::Vector2f(95, 379));
 
     ui_layer->attachChild(std::move(select_character_button));
     ui_layer->attachChild(std::move(new_game_button));
@@ -67,6 +79,9 @@ HomeActivity::HomeActivity(ActivityStack& stack, int requestCode, Extra& intent)
 
     ui_layer->attachChild(std::move(continue_button));
     ui_layer->attachChild(std::move(continue_text));
+
+    ui_layer->attachChild(std::move(setting_button));
+    ui_layer->attachChild(std::move(instruction_button));
 }
 
 HomeActivity::~HomeActivity() {}
