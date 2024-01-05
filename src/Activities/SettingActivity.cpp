@@ -32,10 +32,10 @@ SettingActivity::SettingActivity(ActivityStack &stack, int requestCode, Extra &i
 	auto effect_sound_bar = std::make_unique<ProcessBarView>(sf::Vector2f(729.05, 82.8));
 	effect_sound_bar->setOrigin(effect_sound_bar->getSize() / 2.f);
 	effect_sound_bar->setPosition(sf::Vector2f(window_size.x / 2.f, 390));
-	effect_sound_bar->setName("Effect Sound", getContext()->getFonts()->get(FontID::Tourney_Bold), 69);
+	effect_sound_bar->setName("Playground Music", getContext()->getFonts()->get(FontID::Tourney_Bold), 69);
 	effect_sound_bar->setTextFont(getContext()->getFonts()->get(FontID::Tourney_Bold), 69);
 	effect_sound_bar->onValueChange([this](float value) {
-		getContext()->getSounds()->setVolume(value * 100.f);
+		getContext()->getMusic()->setVolume(value * 100.f);
 	});
 	m_effect_sound_bar = effect_sound_bar.get();
 	ui_layer->attachChild(std::move(effect_sound_bar));

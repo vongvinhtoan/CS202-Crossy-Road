@@ -5,6 +5,7 @@ MusicPlayer::MusicPlayer()
     : mMusic(), mFilenames(), mVolume(100.f)
 {
     mFilenames[Music::BackGroundMusic] = "res/sounds/BackGroundMusic.ogg";
+    mFilenames[Music::PlayGroundMusic] = "res/sounds/PlayGroundMusic.ogg";
 }
 
 void MusicPlayer::play(Music::ID theme)

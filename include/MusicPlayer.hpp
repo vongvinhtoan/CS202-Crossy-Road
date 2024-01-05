@@ -8,6 +8,7 @@ namespace Music
     enum ID
     {
         BackGroundMusic,
+        PlayGroundMusic,
     };
 }
 
